@@ -1,0 +1,41 @@
+{
+  "name": "grunt-browserify",
+  "description": "Grunt task for node-browserify",
+  "version": "0.1.0",
+  "homepage": "https://github.com/pix/grunt-browserify",
+  "author": {
+    "name": "Camille Moncelier",
+    "email": "camille@moncelier.fr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pix/grunt-browserify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pix/grunt-browserify/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/pix/grunt-browserify/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "grunt.js",
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "grunt": "~0.3.11",
+    "browserify": "1.13.x"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.11",
+    "grunt-beautify": "0.1.x"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
