@@ -25,7 +25,8 @@ module.exports = function (grunt) {
 
     (this.data.aliases || []).forEach(function (alias) {
       grunt.verbose.writeln('Adding "' + alias + '" to the aliases list');
-      b(JSON.parse("{" + alias + "}"));
+
+      b.alias.apply(b, alias.split(":"));
     });
 
     grunt.file.expandFiles(this.data.entries || []).forEach(function (filepath) {
