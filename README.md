@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/pix/grunt-browserify.png)](http://travis-ci.org/pix/grunt-browserify)
 # grunt-browserify
 
 Grunt task for node-browserify
