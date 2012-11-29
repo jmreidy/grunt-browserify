@@ -22,10 +22,12 @@ var grunt = require('grunt');
 
 exports['browserify'] = {
   setUp: function (done) {
+    'use strict';
     // setup here
     done();
   },
   'dummy': function (test) {
+    'use strict';
     test.expect(0);
     test.done();
   }
