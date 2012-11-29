@@ -14,13 +14,19 @@ module.exports = function (grunt) {
   // TASKS
   // ==========================================================================
   grunt.registerMultiTask('browserify', 'Your task description goes here.', function () {
-    var browserify = require('browserify');
-
-    var b = browserify(this.data.options || {});
+    var browserify = require('browserify'),
+      b = browserify(this.data.options || {}),
+      files, src;
 
     (this.data.requires || []).forEach(function (req) {
       grunt.verbose.writeln('Adding "' + req + '" to the required module list');
       b.require(req);
+    });
+
+    (this.data.aliases || []).forEach(function (alias) {
+      grunt.verbose.writeln('Adding "' + alias + '" to the aliases list');
+
+      b.alias.apply(b, alias.split(":"));
     });
 
     grunt.file.expandFiles(this.data.entries || []).forEach(function (filepath) {
@@ -28,8 +34,8 @@ module.exports = function (grunt) {
       b.addEntry(filepath);
     });
 
-    var files = grunt.file.expandFiles(this.data.prepend || []);
-    var src = grunt.helper('concat', files, {
+    files = grunt.file.expandFiles(this.data.prepend || []);
+    src = grunt.helper('concat', files, {
       separator: ''
     });
     b.prepend(src);

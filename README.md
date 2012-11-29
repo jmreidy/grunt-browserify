@@ -27,6 +27,7 @@ Add this to ```grunt.initConfig()```
     browserify: {
       "dist/bundle.js": {
         requires: ['traverse'],
+        aliases: ['jquery:jquery-browserify'],
         entries: ['src/**/*.js'],
         prepend: ['<banner:meta.banner>'],
         append: [],
