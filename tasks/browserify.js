@@ -18,6 +18,11 @@ module.exports = function (grunt) {
 
     var b = browserify(this.data.options || {});
 
+    (this.data.ignore || []).forEach(function (filepath) {
+      grunt.verbose.writeln('Ignoring "' + filepath + '"');
+      b.ignore(filepath);
+    });
+
     (this.data.requires || []).forEach(function (req) {
       grunt.verbose.writeln('Adding "' + req + '" to the required module list');
       b.require(req);
@@ -26,11 +31,6 @@ module.exports = function (grunt) {
     grunt.file.expandFiles(this.data.entries || []).forEach(function (filepath) {
       grunt.verbose.writeln('Adding "' + filepath + '" to the entry file list');
       b.addEntry(filepath);
-    });
-
-    grunt.file.expandFiles(this.data.ignores || []).forEach(function (filepath) {
-      grunt.verbose.writeln('Ignoring "' + filepath + '"');
-      b.ignore(filepath);
     });
 
     var files = grunt.file.expandFiles(this.data.prepend || []);
