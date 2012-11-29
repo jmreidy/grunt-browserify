@@ -7,7 +7,7 @@
  */
 
 module.exports = function (grunt) {
-
+  'use strict';
   // Please see the grunt documentation for more information regarding task and
   // helper creation: https://github.com/cowboy/grunt/blob/master/docs/toc.md
   // ==========================================================================
@@ -26,6 +26,11 @@ module.exports = function (grunt) {
     grunt.file.expandFiles(this.data.entries || []).forEach(function (filepath) {
       grunt.verbose.writeln('Adding "' + filepath + '" to the entry file list');
       b.addEntry(filepath);
+    });
+
+    grunt.file.expandFiles(this.data.ignores || []).forEach(function (filepath) {
+      grunt.verbose.writeln('Ignoring "' + filepath + '"');
+      b.ignore(filepath);
     });
 
     var files = grunt.file.expandFiles(this.data.prepend || []);
