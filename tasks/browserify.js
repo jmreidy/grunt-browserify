@@ -21,6 +21,10 @@ module.exports = function (grunt) {
         b = browserify(this.data.options || {}),
         files, src;
 
+    if (this.data.beforeHook) {
+      this.data.beforeHook.call(this, b);
+    }
+
     (this.data.ignore || []).forEach(function (filepath) {
       grunt.verbose.writeln('Ignoring "' + filepath + '"');
       b.ignore(filepath);

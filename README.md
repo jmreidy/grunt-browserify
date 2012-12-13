@@ -54,12 +54,50 @@ Example with all settings:
         dest: 'dist/bundle.<%= pkg.version %>.js'
         prepend: ['<banner:meta.banner>'],
         append: [],
+        beforeHook: function(bundle) {
+          // Do something with bundle before anything else
+        },
         hook: function (bundle) {
           // Do something with bundle
         }
       }
     }
 ```
+
+## Using Browserify Plugins
+
+You can use Browserify plugins by using the `beforeHook` option. This hook is called before anything else and is passed the newly created
+bundle. You can use this hook at enable plugins:
+
+```javascript
+     browserify: {
+      "dist/bundle.js": {
+        entries: ['src/**/*.js'],
+        beforeHook: function(bundle) {
+          var stringify = require('stringify');
+          bundle.use(stringify(['.hjs', '.html', '.whatever']));
+        }
+      }
+    }
+```
+
+## Using Browserify Plugins
+
+You can use Browserify plugins by using the `beforeHook` option. This hook is called before anything else and is passed the newly created
+bundle. You can use this hook at enable plugins:
+
+```javascript
+browserify: {
+  "dist/bundle.js": {
+    entries: ['src/**/*.js'],
+    beforeHook: function(bundle) {
+      var stringify = require('stringify');
+      bundle.use(stringify(['.hjs', '.html', '.whatever']));
+    }
+  }
+}
+```
+
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].
