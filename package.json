@@ -1,7 +1,7 @@
 {
   "name": "grunt-browserify",
   "description": "Grunt task for node-browserify",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/pix/grunt-browserify",
   "author": {
     "name": "Camille Moncelier",
@@ -28,14 +28,23 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "grunt": "~0.3.11",
-    "browserify": "1.16.x"
+    "grunt": "~0.4.0",
+    "browserify": "1.16.x",
+    "grunt-contrib-jshint": "0.1.x",
+    "grunt-contrib-nodeunit": "0.1.x",
+    "grunt-lib-legacyhelpers": "0.1.x"
   },
   "devDependencies": {
-    "grunt": "~0.3.11",
+    "grunt": "~0.4.0",
     "grunt-beautify": "0.1.x"
   },
   "keywords": [
     "gruntplugin"
-  ]
+  ],
+  "readme": "[![build status](https://secure.travis-ci.org/pix/grunt-browserify.png)](http://travis-ci.org/pix/grunt-browserify)\n# grunt-browserify\n\nGrunt task for node-browserify\n\n## Getting Started\nInstall this grunt plugin next to your project's [grunt.js gruntfile][getting_started] with: `npm install grunt-browserify`\n\nThen add this line to your project's `grunt.js` gruntfile:\n\n```javascript\ngrunt.loadNpmTasks('grunt-browserify');\n```\n\n[grunt]: https://github.com/cowboy/grunt\n[getting_started]: https://github.com/cowboy/grunt/blob/master/docs/getting_started.md\n\n## Documentation\nAdd this to ```grunt.initConfig()```\n```javascript\n    pkg: '<json:package.json>',\n    meta: {\n      banner: '\\n/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +\n        '<%= grunt.template.today(\"yyyy-mm-dd\") %>\\n ' + '<%= pkg.homepage ? \"* \" + pkg.homepage + \"\\n *\\n \" : \"\" %>' +\n        '* Copyright (c) <%= grunt.template.today(\"yyyy\") %> <%= pkg.author.name %>;\\n' +\n        ' * Licensed under the <%= _.pluck(pkg.licenses, \"type\").join(\", \") %> license */'\n    },\n    browserify: {\n      \"dist/bundle.js\": {\n        requires: ['traverse'],\n        aliases: ['jquery:jquery-browserify'],\n        entries: ['src/**/*.js'],\n        prepend: ['<banner:meta.banner>'],\n        append: [],\n        hook: function (bundle) {\n          // Do something with bundle\n        }\n      }\n    }\n```\n\n## Contributing\nIn lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].\n\n## Release History\nv0.1.0\n\t- Initial release\n\n## License\nCopyright (c) 2012 Camille Moncelier\nLicensed under the MIT license.\n",
+  "_id": "grunt-browserify@0.1.1",
+  "dist": {
+    "shasum": "0b7faefe1646ee890b230e56ff2e918d220edc9d"
+  },
+  "_from": "grunt-browserify@git://github.com/Aratramba/grunt-browserify.git"
 }

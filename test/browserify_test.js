@@ -20,15 +20,11 @@ var grunt = require('grunt');
     test.ifError(value)
 */
 
-exports['browserify'] = {
-  setUp: function (done) {
+exports.browserify = {
+  dummy: function(test){
     'use strict';
-    // setup here
-    done();
-  },
-  'dummy': function (test) {
-    'use strict';
-    test.expect(0);
+    test.expect(1);
+    test.ok(true);
     test.done();
   }
 };

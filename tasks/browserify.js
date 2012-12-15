@@ -9,11 +9,14 @@
 module.exports = function (grunt) {
   'use strict';
   // Please see the grunt documentation for more information regarding task and
-  // helper creation: https://github.com/cowboy/grunt/blob/master/docs/toc.md
+  // helper creation: https://github.com/gruntjs/grunt/wiki/Creating-tasks
   // ==========================================================================
   // TASKS
   // ==========================================================================
   grunt.registerMultiTask('browserify', 'Your task description goes here.', function () {
+
+    var helpers = require('grunt-lib-legacyhelpers').init(grunt);
+
     var browserify = require('browserify'),
       b = browserify(this.data.options || {}),
       files, src;
@@ -39,14 +42,14 @@ module.exports = function (grunt) {
       b.addEntry(filepath);
     });
 
-    var files = grunt.file.expandFiles(this.data.prepend || []);
-    var src = grunt.helper('concat', files, {
+    files = grunt.file.expandFiles(this.data.prepend || []);
+    src = helpers.concat(files, {
       separator: ''
     });
     b.prepend(src);
 
     files = grunt.file.expandFiles(this.data.append || []);
-    src = grunt.helper('concat', files, {
+    src = helpers.concat(files, {
       separator: ''
     });
     b.append(src);
