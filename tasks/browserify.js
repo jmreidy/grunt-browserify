@@ -37,6 +37,11 @@ module.exports = function (grunt) {
       b.alias.apply(b, alias.split(":"));
     });
 
+    grunt.file.expandFiles(this.file.src || []).forEach(function (filepath) {
+      grunt.verbose.writeln('Adding "' + filepath + '" to the entry file list');
+      b.addEntry(filepath);
+    });
+
     grunt.file.expandFiles(this.data.entries || []).forEach(function (filepath) {
       grunt.verbose.writeln('Adding "' + filepath + '" to the entry file list');
       b.addEntry(filepath);
@@ -58,7 +63,7 @@ module.exports = function (grunt) {
       this.data.hook.call(this, b);
     }
 
-    grunt.file.write(this.target, b.bundle());
+    grunt.file.write(this.file.dest || this.target, b.bundle());
   });
 
 };

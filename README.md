@@ -16,7 +16,28 @@ grunt.loadNpmTasks('grunt-browserify');
 [getting_started]: https://github.com/cowboy/grunt/blob/master/docs/getting_started.md
 
 ## Documentation
-Add this to ```grunt.initConfig()```
+
+### Settings
+
+* <tt>ignore</tt> - array, optional - files to [ignore](https://github.com/substack/node-browserify/blob/master/doc/methods.markdown#bignorefile)
+* <tt>requires</tt> - array, optional - modules to [require](https://github.com/substack/node-browserify/blob/master/doc/methods.markdown#brequirefile)
+* <tt>aliases</tt> - array, optional - aliases in form <tt>to:from1:from2</tt>, see [bundle.alias](https://github.com/substack/node-browserify/blob/master/doc/methods.markdown#baliasto-from)
+* <tt>src</tt> - array - files or file patterns to browserify. Alias <tt>entries</tt>
+* <tt>prepend</tt> - array, optional - files or file patterns to [prepend](https://github.com/substack/node-browserify/blob/master/doc/methods.markdown#bprependcontent)
+* <tt>append</tt> - array, optional - files or file patterns to [append](https://github.com/substack/node-browserify/blob/master/doc/methods.markdown#bappendcontent)
+* <tt>hook</tt> - function, optional - receives bundle as argument, could to be used further modify bundle.
+
+
+For simplest usecase, add this to ```grunt.initConfig()```
+
+```javascript
+    browserify: {
+	'dist/bundle.js': "src/**/*.js"
+    }
+```
+
+Example with all settings:
+
 ```javascript
     pkg: '<json:package.json>',
     meta: {
@@ -26,10 +47,11 @@ Add this to ```grunt.initConfig()```
         ' * Licensed under the <%= _.pluck(pkg.licenses, "type").join(", ") %> license */'
     },
     browserify: {
-      "dist/bundle.js": {
+      'full-example': {
         requires: ['traverse'],
         aliases: ['jquery:jquery-browserify'],
-        entries: ['src/**/*.js'],
+        src: ['src/**/*.js'],
+        dest: 'dist/bundle.<%= pkg.version %>.js'
         prepend: ['<banner:meta.banner>'],
         append: [],
         hook: function (bundle) {
@@ -43,8 +65,12 @@ Add this to ```grunt.initConfig()```
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [grunt][grunt].
 
 ## Release History
-v0.1.0
-	- Initial release
+
+### v0.1.0
+  - Initial release
+
+### v0.1.1
+  - Properly support compact and full grunt task syntax
 
 ## License
 Copyright (c) 2012 Camille Moncelier
