@@ -18,8 +18,8 @@ module.exports = function (grunt) {
     var helpers = require('grunt-lib-legacyhelpers').init(grunt);
 
     var browserify = require('browserify'),
-      b = browserify(this.data.options || {}),
-      files, src;
+        b = browserify(this.data.options || {}),
+        files, src;
 
     (this.data.ignore || []).forEach(function (filepath) {
       grunt.verbose.writeln('Ignoring "' + filepath + '"');
