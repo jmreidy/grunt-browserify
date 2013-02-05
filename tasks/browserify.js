@@ -41,23 +41,18 @@ module.exports = function (grunt) {
       b.alias.apply(b, alias.split(":"));
     });
 
-    grunt.file.expandFiles(this.file.src || []).forEach(function (filepath) {
+    grunt.file.expand({filter: 'isFile'}, this.data.src || []).forEach(function (filepath) {
       grunt.verbose.writeln('Adding "' + filepath + '" to the entry file list');
       b.addEntry(filepath);
     });
 
-    grunt.file.expandFiles(this.data.entries || []).forEach(function (filepath) {
-      grunt.verbose.writeln('Adding "' + filepath + '" to the entry file list');
-      b.addEntry(filepath);
-    });
-
-    files = grunt.file.expandFiles(this.data.prepend || []);
+    files = grunt.file.expand({filter: 'isFile'}, this.data.prepend || []);
     src = helpers.concat(files, {
       separator: ''
     });
     b.prepend(src);
 
-    files = grunt.file.expandFiles(this.data.append || []);
+    files = grunt.file.expand({filter: 'isFile'}, this.data.append || []);
     src = helpers.concat(files, {
       separator: ''
     });
@@ -67,7 +62,7 @@ module.exports = function (grunt) {
       this.data.hook.call(this, b);
     }
 
-    grunt.file.write(this.file.dest || this.target, b.bundle());
+    grunt.file.write(this.data.dest || this.target, b.bundle());
   });
 
 };
