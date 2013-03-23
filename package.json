@@ -31,7 +31,7 @@
     "node": "*"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt nodeunit"
   },
   "dependencies": {
     "grunt": "0.4.x",
