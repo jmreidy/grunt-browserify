@@ -2,9 +2,6 @@ module.exports = function (grunt) {
   'use strict';
   // Project configuration.
   grunt.initConfig({
-    beautify: {
-      files: '<config:lint.files>'
-    },
     nodeunit: {
       all: ['test/**/*.js']
     },
@@ -34,11 +31,10 @@ module.exports = function (grunt) {
 
   // Load local tasks.
   grunt.loadTasks('tasks');
-  grunt.loadNpmTasks('grunt-beautify');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task.
-  grunt.registerTask('default', ['beautify', 'jshint', 'nodeunit']);
+  grunt.registerTask('default', ['jshint', 'nodeunit']);
 
 };

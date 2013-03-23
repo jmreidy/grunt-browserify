@@ -41,8 +41,7 @@
     "grunt-lib-legacyhelpers": "0.1.x"
   },
   "devDependencies": {
-    "grunt": "0.4.x",
-    "grunt-beautify": "0.1.x"
+    "grunt": "0.4.x"
   },
   "keywords": [
     "gruntplugin"
