@@ -5,10 +5,6 @@ module.exports = function (grunt) {
     nodeunit: {
       all: ['test/**/*.js']
     },
-    watch: {
-      files: '<config:lint.files>',
-      tasks: 'default'
-    },
     jshint: {
       all: ['grunt.js', 'tasks/**/*.js', 'test/**/*.js'],
       options: {
