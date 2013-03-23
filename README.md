@@ -1,4 +1,4 @@
-[![build status](https://secure.travis-ci.org/pix/grunt-browserify.png)](http://travis-ci.org/pix/grunt-browserify)
+[![build status](https://secure.travis-ci.org/jmreidy/grunt-browserify.png)](http://travis-ci.org/jmreidy/grunt-browserify)
 # grunt-browserify
 
 Grunt task for node-browserify
