@@ -2,12 +2,8 @@
   "name": "grunt-browserify",
   "description": "Grunt task for node-browserify",
   "version": "0.2.0",
-  "homepage": "https://github.com/pix/grunt-browserify",
+  "homepage": "https://github.com/jmreidy/grunt-browserify",
   "contributors": [
-    {
-      "name": "Camille Moncelier",
-      "email": "camille@moncelier.fr"
-    },
     {
       "name": "Justin Reidy",
       "email": "jmreidy@rzrsharp.net"
@@ -15,15 +11,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/pix/grunt-browserify.git"
+    "url": "git://github.com/jmreidy/grunt-browserify.git"
   },
   "bugs": {
-    "url": "https://github.com/pix/grunt-browserify/issues"
+    "url": "https://github.com/jmreidy/grunt-browserify/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/pix/grunt-browserify/blob/master/LICENSE-MIT"
+      "url": "https://github.com/jmreidy/grunt-browserify/blob/master/LICENSE-MIT"
     }
   ],
   "main": "grunt.js",
@@ -45,6 +41,8 @@
     "grunt": "~0.4.0"
   },
   "keywords": [
-    "gruntplugin"
+    "gruntplugin",
+    "browserify",
+    "grunt"
   ]
 }
