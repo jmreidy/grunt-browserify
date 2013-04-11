@@ -1,68 +1,78 @@
+'use strict';
+
+var fs = require('fs');
+var path = require('path');
 /*
  * grunt-browserify
- * https://github.com/pix/grunt-browserify
+ * https://github.com/jmreidy/grunt-browserify
  *
- * Copyright (c) 2012 Camille Moncelier
+ * Copyright (c) 2013 Justin Reidy
  * Licensed under the MIT license.
  */
+var browserify = require('browserify');
 
 module.exports = function (grunt) {
-  'use strict';
-  // Please see the grunt documentation for more information regarding task and
-  // helper creation: https://github.com/gruntjs/grunt/wiki/Creating-tasks
-  // ==========================================================================
-  // TASKS
-  // ==========================================================================
-  grunt.registerMultiTask('browserify', 'Your task description goes here.', function () {
+  grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
+    var done = this.async();
 
-    var helpers = require('grunt-lib-legacyhelpers').init(grunt);
+    var files = this.filesSrc.map(function (file) {
+      return path.resolve(file);
+    });
 
-    var browserify = require('browserify'),
-        b = browserify(this.data.options || {}),
-        files, src;
+    var b = browserify(files);
+    b.on('error', function (err) {
+      grunt.fail.warn(err);
+    });
 
-    if (this.data.beforeHook) {
-      this.data.beforeHook.call(this, b);
+    if (this.data.ignore) {
+      grunt.file.expand({filter: 'isFile'}, this.data.ignore)
+        .forEach(function (file) {
+
+          b.ignore(path.resolve(file));
+        });
     }
 
-    (this.data.ignore || []).forEach(function (filepath) {
-      grunt.verbose.writeln('Ignoring "' + filepath + '"');
-      b.ignore(filepath);
-    });
+    if (this.data.alias) {
+      var aliases = this.data.alias;
+      if (aliases.split) {
+        aliases = aliases.split(',');
+      }
+      aliases.forEach(function (alias) {
+        alias = alias.split(':');
+        grunt.file.expand({filter: 'isFile'}, alias[0])
+          .forEach(function (file) {
+            b.require(path.resolve(file), {expose: alias[1]});
+          });
 
-    (this.data.requires || []).forEach(function (req) {
-      grunt.verbose.writeln('Adding "' + req + '" to the required module list');
-      b.require(req);
-    });
-
-    (this.data.aliases || []).forEach(function (alias) {
-      grunt.verbose.writeln('Adding "' + alias + '" to the aliases list');
-
-      b.alias.apply(b, alias.split(":"));
-    });
-
-    grunt.file.expand({filter: 'isFile'}, this.data.src || []).forEach(function (filepath) {
-      grunt.verbose.writeln('Adding "' + filepath + '" to the entry file list');
-      b.addEntry(filepath);
-    });
-
-    files = grunt.file.expand({filter: 'isFile'}, this.data.prepend || []);
-    src = helpers.concat(files, {
-      separator: ''
-    });
-    b.prepend(src);
-
-    files = grunt.file.expand({filter: 'isFile'}, this.data.append || []);
-    src = helpers.concat(files, {
-      separator: ''
-    });
-    b.append(src);
-
-    if (this.data.hook) {
-      this.data.hook.call(this, b);
+      });
     }
 
-    grunt.file.write(this.data.dest || this.target, b.bundle());
+    if (this.data.external) {
+      grunt.file.expand({filter: 'isFile'}, this.data.external)
+        .forEach(function (file) {
+          b.external(path.resolve(file));
+        });
+    }
+
+    if (this.data.transform) {
+      this.data.transform.forEach(function (transform) {
+        b.transform(transform);
+      });
+    }
+
+    var opts = grunt.util._.extend(this.data.options, {});
+    var bundle = b.bundle(opts);
+    bundle.on('error', function (err) {
+      grunt.fail.warn(err);
+    });
+
+    var destPath = path.dirname(path.resolve(this.data.dest));
+    if (!fs.existsSync(destPath)) {
+      fs.mkdirSync(destPath);
+    }
+
+    bundle
+      .pipe(fs.createWriteStream(this.data.dest))
+      .on('finish', done);
   });
-
 };
