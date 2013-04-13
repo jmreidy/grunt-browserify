@@ -19,6 +19,7 @@ grunt.loadNpmTasks('grunt-browserify');
 ```
 
 
+
 ## Documentation
 Run this task with the `grunt browserify` command. As with other Grunt plugins, the `src` and `dest` properties are most important: `src` will use the Grunt glob pattern to specify files for inclusion in the browserified package, and `dest` will specify the outfile for the compiled module.
 
@@ -72,4 +73,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ## License
 Copyright (c) 2013 Justin Reidy
 Licensed under the MIT license.
+
 
