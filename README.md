@@ -4,7 +4,7 @@
 Grunt task for node-browserify. Current version: 0.2.x.
 
 ## Getting Started
-This plugin requires [Grunt](https://gruntjs.com) `~0.4.0`.
+This plugin requires [Grunt](https://gruntjs.com) `~0.4.0` and Node `>=0.10.x`.
 
 Install this grunt plugin with:
 
@@ -17,6 +17,7 @@ Then add this line to your project's `grunt.js` Gruntfile:
 ```javascript
 grunt.loadNpmTasks('grunt-browserify');
 ```
+
 
 ## Documentation
 Run this task with the `grunt browserify` command. As with other Grunt plugins, the `src` and `dest` properties are most important: `src` will use the Grunt glob pattern to specify files for inclusion in the browserified package, and `dest` will specify the outfile for the compiled module.
@@ -64,10 +65,11 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v0.1.1
   - Properly support compact and full grunt task syntax
-  
+
 ### v0.2.0
   - Add support for Browserify 2
 
 ## License
 Copyright (c) 2013 Justin Reidy
 Licensed under the MIT license.
+
