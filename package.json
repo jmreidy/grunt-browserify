@@ -27,7 +27,7 @@
     "node": ">= 0.10.0"
   },
   "scripts": {
-    "test": "grunt nodeunit"
+    "test": "grunt test"
   },
   "dependencies": {
     "browserify": "~2.12.0"
