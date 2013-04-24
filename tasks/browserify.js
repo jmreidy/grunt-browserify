@@ -14,7 +14,7 @@ var browserify = require('browserify');
 
 module.exports = function (grunt) {
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
-    
+
     var opts = this.options();
 
     grunt.util.async.forEachSeries(this.files, function (file, next) {
@@ -70,8 +70,8 @@ module.exports = function (grunt) {
       });
 
       var destPath = path.dirname(path.resolve(file.dest));
-      if (!fs.existsSync(destPath)) {
-        fs.mkdirSync(destPath);
+      if (!grunt.file.exists(destPath)) {
+        grunt.file.mkdir(destPath);
       }
 
       bundle
