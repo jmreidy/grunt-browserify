@@ -11,6 +11,7 @@ var path = require('path');
  * Licensed under the MIT license.
  */
 var browserify = require('browserify');
+var shim = require('browserify-shim');
 
 module.exports = function (grunt) {
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
@@ -47,8 +48,17 @@ module.exports = function (grunt) {
             .forEach(function (file) {
               b.require(path.resolve(file), {expose: alias[1]});
             });
-
+            
         });
+      }
+
+      if (opts.shim) {
+        var shims = opts.shim;
+        Object.keys(opts.shim)
+          .forEach(function(alias) {
+            shims[alias].path = path.resolve(shims[alias].path);
+          });
+        b = shim(b, shims);
       }
 
       if (opts.external) {

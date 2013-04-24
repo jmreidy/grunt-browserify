@@ -30,7 +30,8 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "browserify": "~2.12.0"
+    "browserify": "~2.12.0",
+    "browserify-shim": "~2.0.3"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "0.1.x",
