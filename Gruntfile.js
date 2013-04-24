@@ -33,26 +33,34 @@ module.exports = function (grunt) {
 
       ignores: {
         src: ['test/fixtures/*.js'],
-        ignore: ['test/fixtures/ignore.js'],
-        dest: 'tmp/ignores.js'
+        dest: 'tmp/ignores.js',
+        options: {
+          ignore: ['test/fixtures/ignore.js']
+        }
       },
 
       alias: {
         src: ['test/fixtures/alias/*.js'],
-        alias: ['test/fixtures/alias/toBeAliased.js:alias'],
-        dest: 'tmp/alias.js'
+        dest: 'tmp/alias.js', 
+        options: {
+          alias: ['test/fixtures/alias/toBeAliased.js:alias']
+        }
       },
 
       aliasString: {
         src: ['test/fixtures/alias/*.js'],
-        alias: 'test/fixtures/alias/toBeAliased.js:alias',
-        dest: 'tmp/aliasString.js'
+        dest: 'tmp/aliasString.js',
+        options: {
+          alias: 'test/fixtures/alias/toBeAliased.js:alias',
+        }
       },
 
       external: {
         src: ['test/fixtures/*.js'],
-        external: ['test/fixtures/a.js'],
-        dest: 'tmp/external.js'
+        dest: 'tmp/external.js',
+        options: {
+          external: ['test/fixtures/a.js']
+        }
       },
 
       sourceMaps: {
