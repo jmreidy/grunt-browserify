@@ -39,7 +39,12 @@ Type: `[String]`
 
 Specifies files to be loaded from a previously loaded, “common” bundle.
 
-#### options:debug
+#### externalize
+Type: `[String]`
+
+Specifies files that should be able to be loaded from another module. Basically, provides the source modules for consumption from `external` above.
+
+#### debug
 Type: `Boolean`
 
 Enable source map support.
