@@ -39,7 +39,12 @@ Type: `[String]`
 
 Specifies files to be loaded from a previously loaded, “common” bundle.
 
-#### options:debug
+#### externalize
+Type: `[String]`
+
+Specifies modules(s) to be exposed outside of a bundle, which is necessary for building “common” bundles which can be loaded via the `external` option above. Basically, it's a list of files which are supplied to browserify via its `require` or `-r` command.
+
+#### debug
 Type: `Boolean`
 
 Enable source map support.
