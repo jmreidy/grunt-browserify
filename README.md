@@ -39,7 +39,6 @@ Type: `[String]`
 
 Specifies files to be loaded from a previously loaded, “common” bundle.
 
-<<<<<<< HEAD
 #### externalize
 Type: `[String]`
 
