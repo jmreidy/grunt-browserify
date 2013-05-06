@@ -44,6 +44,21 @@ Type: `[String]`
 
 Specifies modules(s) to be exposed outside of a bundle, which is necessary for building “common” bundles which can be loaded via the `external` option above. Basically, it's a list of files which are supplied to browserify via its `require` or `-r` command.
 
+#### transform
+Type: `[String || Function]`
+
+Specifies a pipeline of functions (or modules) through which the browserified bundle will be run. The [browserify docs themselves](https://github.com/substack/node-browserify#btransformtr) explain transform well, but below is an example of transform used with `grunt-browserify` to automatically compile coffeescript files for use in a bundle:
+
+```javascript
+    browserify: {
+      src: ['client/scripts/**/*.js', 'client/scripts/**/*.coffee'],
+      dest: ‘build/module.js’,
+      options: {
+        transform: ['coffeeify']
+      }
+    }
+```
+
 #### debug
 Type: `Boolean`
 
