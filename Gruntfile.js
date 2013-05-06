@@ -27,15 +27,15 @@ module.exports = function (grunt) {
 
     browserify: {
       basic: {
-        src: ['test/fixtures/*.js'],
+        src: ['test/fixtures/basic/*.js'],
         dest: 'tmp/basic.js'
       },
 
       ignores: {
-        src: ['test/fixtures/*.js'],
+        src: ['test/fixtures/ignore/*.js'],
         dest: 'tmp/ignores.js',
         options: {
-          ignore: ['test/fixtures/ignore.js']
+          ignore: ['test/fixtures/ignore/ignore.js']
         }
       },
 
@@ -56,15 +56,23 @@ module.exports = function (grunt) {
       },
 
       external: {
-        src: ['test/fixtures/*.js'],
+        src: ['test/fixtures/external/*.js'],
         dest: 'tmp/external.js',
         options: {
-          external: ['test/fixtures/a.js']
+          external: ['test/fixtures/external/a.js']
+        }
+      },
+
+      externalize: {
+        src: ['test/fixtures/externalize/b.js'],
+        dest: 'tmp/externalize.js',
+        options: {
+          externalize: ['test/fixtures/externalize/a.js']
         }
       },
 
       sourceMaps: {
-        src: ['test/fixtures/*.js'],
+        src: ['test/fixtures/basic/*.js'],
         dest: 'tmp/sourceMaps.js',
         options: {
           debug: true

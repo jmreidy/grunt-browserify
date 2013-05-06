@@ -58,6 +58,13 @@ module.exports = function (grunt) {
           });
       }
 
+      if (opts.externalize) {
+        grunt.file.expand({filter: 'isFile'}, opts.externalize)
+          .forEach(function (file) {
+            b.require(path.resolve(file), {expose: true});
+          });
+      }
+
       if (opts.transform) {
         opts.transform.forEach(function (transform) {
           b.transform(transform);
