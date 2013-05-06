@@ -9,7 +9,7 @@ This plugin requires [Grunt](https://gruntjs.com) `~0.4.0` and Node `>=0.10.x`.
 Install this grunt plugin with:
 
 ```shell
-npm install grunt-browserify —save-dev
+npm install grunt-browserify —-save-dev
 ```
 
 Then add this line to your project's `grunt.js` Gruntfile:
