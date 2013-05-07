@@ -64,6 +64,11 @@ Type: `Boolean`
 
 Enable source map support.
 
+#### shim
+Type: `Object`
+
+Provide a config object to be used with [browserify-shim](https://github.com/thlorenz/browserify-shim)
+
 ###Usage
 To get things running, add the following entry to `grunt.initConfig()`:
 

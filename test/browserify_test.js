@@ -3,6 +3,7 @@
 var grunt = require('grunt');
 var vm = require('vm');
 var browserify = require('browserify');
+var jsdom = require('jsdom').jsdom;
 
 module.exports = {
   basic: function (test) {
@@ -103,6 +104,21 @@ module.exports = {
 
   },
 
+  shim: function (test) {
+    test.expect(2);
+
+    var context = getIncludedModules('tmp/shim.js', domWindow());
+
+    test.ok(moduleExported(context, './fixtures/shim/a.js'));
+
+    //jquery is defined on the window
+    test.ok(context.window.$);
+
+
+    test.done();
+
+  },
+
   sourceMaps: function (test) {
     test.expect(1);
 
@@ -131,13 +147,30 @@ function moduleNotExported (context, modulePath) {
   return !moduleExported(context, modulePath);
 }
 
-function getIncludedModules (file) {
+function getIncludedModules (file, context) {
+  var c = context || {};
   var actual = readFile(file);
-  var c = {
-    required: function (exports) {
-      c.exports = exports;
-    }
+  c.required = function (exports) {
+    c.exports = exports;
   };
   vm.runInNewContext(actual, c);
   return c;
+}
+
+function domWindow () {
+  var html = 
+    '<!DOCTYPE html>' +
+    '<html>' +
+      '<head>' + 
+        '<title>Test</title>' + 
+      '</head>' +
+      '<body>' +
+      '</body>' +
+    '</html>';
+  var window =  jsdom(html).createWindow();
+  var context = vm.createContext(window);
+  Object.keys(window).forEach(function (k) {
+    context[k] = window[k];
+  });
+  return context;
 }
