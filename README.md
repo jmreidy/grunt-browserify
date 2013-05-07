@@ -95,6 +95,12 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v0.2.0
   - Add support for Browserify 2
 
+### v0.2.4
+  - Add externalize option, to expose modules to external bundles
+  - Add browserify-shim support
+  - Completely rewrote and significantly improved tests
+  - Various fixes
+
 ## License
 Copyright (c) 2013 Justin Reidy
 Licensed under the MIT license.
