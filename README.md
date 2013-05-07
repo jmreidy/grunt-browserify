@@ -9,7 +9,7 @@ This plugin requires [Grunt](https://gruntjs.com) `~0.4.0` and Node `>=0.10.x`.
 Install this grunt plugin with:
 
 ```shell
-npm install grunt-browserify —-save-dev
+npm install grunt-browserify --save-dev
 ```
 
 Then add this line to your project's `grunt.js` Gruntfile:
@@ -42,7 +42,7 @@ Specifies files to be loaded from a previously loaded, “common” bundle.
 #### externalize
 Type: `[String]`
 
-Specifies modules(s) to be exposed outside of a bundle, which is necessary for building “common” bundles which can be loaded via the `external` option above. Basically, it's a list of files which are supplied to browserify via its `require` or `-r` command.
+Specifies modules(s) to be exposed outside of a bundle, which is necessary for building "common" bundles which can be loaded via the `external` option above. Basically, it's a list of files which are supplied to browserify via its `require` or `-r` command.
 
 #### transform
 Type: `[String || Function]`
