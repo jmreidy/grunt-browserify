@@ -77,18 +77,17 @@ module.exports = {
   },
 
   externalize: function (test) {
-    test.expect(3);
+    test.expect(4);
 
     var actual = readFile('tmp/externalize.js');
     var c = {};
     vm.runInNewContext(actual, c);
 
-    //require should be exposed
-    test.ok(c.require);
 
     var depen = browserify();
     depen.external(__dirname + '/fixtures/externalize/a.js');
     depen.add(__dirname + '/fixtures/externalize/entry.js');
+
     depen.bundle(function (err, src) {
       c.required = function (exports) {
         c.exports = exports;
@@ -97,6 +96,12 @@ module.exports = {
 
       test.ok(moduleExported(c, './fixtures/externalize/a.js'));
       test.ok(moduleExported(c, './fixtures/externalize/b.js'));
+
+      //require should be exposed
+      test.ok(c.require);
+      
+      //common module required
+      test.ok(c.require('events'));
 
       test.done();
     });
@@ -158,11 +163,11 @@ function getIncludedModules (file, context) {
 }
 
 function domWindow () {
-  var html = 
+  var html =
     '<!DOCTYPE html>' +
     '<html>' +
-      '<head>' + 
-        '<title>Test</title>' + 
+      '<head>' +
+        '<title>Test</title>' +
       '</head>' +
       '<body>' +
       '</body>' +

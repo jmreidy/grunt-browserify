@@ -69,10 +69,16 @@ module.exports = function (grunt) {
       }
 
       if (opts.externalize) {
-        grunt.file.expand({filter: 'isFile'}, opts.externalize)
-          .forEach(function (file) {
-            b.require(path.resolve(file), {expose: true});
-          });
+        opts.externalize.forEach(function (lib) {
+          if (/\//.test(lib)) {
+            grunt.file.expand({filter: 'isFile'}, lib).forEach(function (file) {
+              b.require(path.resolve(file));
+            });
+          }
+          else {
+            b.require(lib);
+          }
+        });
       }
 
       if (opts.transform) {
