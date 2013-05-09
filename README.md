@@ -1,7 +1,7 @@
 [![build status](https://secure.travis-ci.org/jmreidy/grunt-browserify.png)](http://travis-ci.org/jmreidy/grunt-browserify)
 # grunt-browserify
 
-Grunt task for node-browserify. Current version: 0.2.x.
+Grunt task for node-browserify. Current version: 1.0.0.
 
 ## Getting Started
 This plugin requires [Grunt](https://gruntjs.com) `~0.4.0` and Node `>=0.10.x`.
@@ -100,9 +100,15 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
   - Add browserify-shim support
   - Completely rewrote and significantly improved tests
   - Various fixes
+### v0.2.5
+  - Update externalize to expose npm modules to external bundles
+
+### v1.0.0
+  - Really should've been released at v0.2, but better late than never!
 
 ## License
 Copyright (c) 2013 Justin Reidy
 Licensed under the MIT license.
+
 
 
