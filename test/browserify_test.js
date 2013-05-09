@@ -5,10 +5,55 @@ var vm = require('vm');
 var browserify = require('browserify');
 var jsdom = require('jsdom').jsdom;
 
+function readFile(path) {
+  return grunt.util.normalizelf(grunt.file.read(path));
+}
+
+function compareOutputs(fn1, fn2) {
+  return (fn1.toString() === fn2.toString());
+}
+
+function moduleExported(context, modulePath) {
+  var module = modulePath.match(/(\w+)\.js/)[1];
+  return compareOutputs(context.exports[module], require(modulePath));
+}
+
+function moduleNotExported(context, modulePath) {
+  return !moduleExported(context, modulePath);
+}
+
+function getIncludedModules(file, context) {
+  var c = context || {};
+  var actual = readFile(file);
+  c.required = function (exports) {
+    c.exports = exports;
+  };
+  vm.runInNewContext(actual, c);
+  return c;
+}
+
+function domWindow() {
+  var html =
+    '<!DOCTYPE html>' +
+    '<html>' +
+      '<head>' +
+        '<title>Test</title>' +
+      '</head>' +
+      '<body>' +
+      '</body>' +
+    '</html>';
+  var window =  jsdom(html).createWindow();
+  var context = vm.createContext(window);
+  Object.keys(window).forEach(function (k) {
+    context[k] = window[k];
+  });
+  return context;
+}
+
 module.exports = {
   basic: function (test) {
     test.expect(2);
-    var context = getIncludedModules('tmp/basic.js')
+    var context = getIncludedModules('tmp/basic.js');
 
     test.ok(moduleExported(context, './fixtures/basic/a.js'));
     test.ok(moduleExported(context, './fixtures/basic/b.js'));
@@ -19,7 +64,7 @@ module.exports = {
   ignores: function (test) {
     test.expect(3);
 
-    var context = getIncludedModules('tmp/ignores.js')
+    var context = getIncludedModules('tmp/ignores.js');
 
     test.ok(moduleExported(context, './fixtures/ignore/a.js'));
     test.ok(moduleExported(context, './fixtures/ignore/b.js'));
@@ -31,7 +76,7 @@ module.exports = {
   alias: function (test) {
     test.expect(1);
 
-    var context = getIncludedModules('tmp/alias.js')
+    var context = getIncludedModules('tmp/alias.js');
     var aliasedFile = require('./fixtures/alias/toBeAliased.js');
 
     test.ok(compareOutputs(context.exports.alias, aliasedFile));
@@ -42,7 +87,7 @@ module.exports = {
   aliasString: function (test) {
     test.expect(1);
 
-    var context = getIncludedModules('tmp/aliasString.js')
+    var context = getIncludedModules('tmp/aliasString.js');
     var aliasedFile = require('./fixtures/alias/toBeAliased.js');
 
     test.ok(compareOutputs(context.exports.alias, aliasedFile));
@@ -91,7 +136,7 @@ module.exports = {
     depen.bundle(function (err, src) {
       c.required = function (exports) {
         c.exports = exports;
-      }
+      };
       vm.runInNewContext(src, c);
 
       test.ok(moduleExported(c, './fixtures/externalize/a.js'));
@@ -99,7 +144,7 @@ module.exports = {
 
       //require should be exposed
       test.ok(c.require);
-      
+
       //common module required
       test.ok(c.require('events'));
 
@@ -135,47 +180,3 @@ module.exports = {
 
 };
 
-function readFile (path) {
-  return grunt.util.normalizelf(grunt.file.read(path));
-}
-
-function compareOutputs (fn1, fn2) {
-  return (fn1.toString() === fn2.toString());
-}
-
-function moduleExported (context, modulePath) {
-  var module = modulePath.match(/(\w+)\.js/)[1]
-  return compareOutputs(context.exports[module], require(modulePath));
-}
-
-function moduleNotExported (context, modulePath) {
-  return !moduleExported(context, modulePath);
-}
-
-function getIncludedModules (file, context) {
-  var c = context || {};
-  var actual = readFile(file);
-  c.required = function (exports) {
-    c.exports = exports;
-  };
-  vm.runInNewContext(actual, c);
-  return c;
-}
-
-function domWindow () {
-  var html =
-    '<!DOCTYPE html>' +
-    '<html>' +
-      '<head>' +
-        '<title>Test</title>' +
-      '</head>' +
-      '<body>' +
-      '</body>' +
-    '</html>';
-  var window =  jsdom(html).createWindow();
-  var context = vm.createContext(window);
-  Object.keys(window).forEach(function (k) {
-    context[k] = window[k];
-  });
-  return context;
-}

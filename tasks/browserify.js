@@ -48,14 +48,14 @@ module.exports = function (grunt) {
             .forEach(function (file) {
               b.require(path.resolve(file), {expose: alias[1]});
             });
-            
+
         });
       }
 
       if (opts.shim) {
         var shims = opts.shim;
         Object.keys(opts.shim)
-          .forEach(function(alias) {
+          .forEach(function (alias) {
             shims[alias].path = path.resolve(shims[alias].path);
           });
         b = shim(b, shims);
