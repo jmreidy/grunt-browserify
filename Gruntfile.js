@@ -41,7 +41,7 @@ module.exports = function (grunt) {
 
       alias: {
         src: ['test/fixtures/alias/*.js'],
-        dest: 'tmp/alias.js', 
+        dest: 'tmp/alias.js',
         options: {
           alias: ['test/fixtures/alias/toBeAliased.js:alias']
         }
@@ -67,7 +67,7 @@ module.exports = function (grunt) {
         src: ['test/fixtures/externalize/b.js'],
         dest: 'tmp/externalize.js',
         options: {
-          externalize: ['test/fixtures/externalize/a.js']
+          externalize: ['test/fixtures/externalize/a.js', 'events']
         }
       },
 
@@ -76,7 +76,7 @@ module.exports = function (grunt) {
         dest: 'tmp/shim.js',
         options: {
           shim: {
-            jquery: { 
+            jquery: {
               path: 'test/fixtures/shim/jquery.js',
               exports: 'jquery'
             }
