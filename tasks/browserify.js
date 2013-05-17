@@ -97,12 +97,11 @@ module.exports = function (grunt) {
         grunt.file.mkdir(destPath);
       }
 
-      bundle
-        .pipe(fs.createWriteStream(file.dest))
-        .on('finish', function () {
-          grunt.log.ok('Bundled ' + file.dest);
-          next();
-        });
+      bundle.pipe(fs.createWriteStream(file.dest));
+      bundle.on('end', function () {
+        grunt.log.ok('Bundled ' + file.dest);
+        next();
+      });
 
     }, this.async());
   });
