@@ -50,13 +50,12 @@ Type: `[String || Function]`
 Specifies a pipeline of functions (or modules) through which the browserified bundle will be run. The [browserify docs themselves](https://github.com/substack/node-browserify#btransformtr) explain transform well, but below is an example of transform used with `grunt-browserify` to automatically compile coffeescript files for use in a bundle:
 
 ```javascript
-    browserify: {
-      src: ['client/scripts/**/*.js', 'client/scripts/**/*.coffee'],
-      dest: ‘build/module.js’,
-      options: {
-        transform: ['coffeeify']
-      }
-    }
+browserify: {
+  'build/module.js': ['client/scripts/**/*.js', 'client/scripts/**/*.coffee'],
+  options: {
+    transform: ['coffeeify']
+  }
+}
 ```
 
 #### debug
@@ -73,10 +72,9 @@ Provide a config object to be used with [browserify-shim](https://github.com/thl
 To get things running, add the following entry to `grunt.initConfig()`:
 
 ```javascript
-    browserify: {
-      src: [‘client/scripts/**/*.js`],
-      dest: ‘build/module.js’
-	}
+browserify: {
+  'build/module.js': ['client/scripts/**/*.js']
+}
 ```
 More complicated use cases can be found within this projects own `Gruntfile`.
 
