@@ -15,7 +15,6 @@ var shim = require('browserify-shim');
 
 module.exports = function (grunt) {
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
-
     var opts = this.options();
 
     grunt.util.async.forEachSeries(this.files, function (file, next) {
@@ -87,18 +86,17 @@ module.exports = function (grunt) {
         });
       }
 
-      var bundle = b.bundle(opts);
-      bundle.on('error', function (err) {
-        grunt.fail.warn(err);
-      });
-
       var destPath = path.dirname(path.resolve(file.dest));
       if (!grunt.file.exists(destPath)) {
         grunt.file.mkdir(destPath);
       }
 
-      bundle.pipe(fs.createWriteStream(file.dest));
-      bundle.on('end', function () {
+      b.bundle(opts, function (err, src) {
+        if (err) {
+          grunt.fail.warn(err);
+        }
+
+        grunt.file.write(file.dest, src);
         grunt.log.ok('Bundled ' + file.dest);
         next();
       });
