@@ -11,10 +11,10 @@ var path = require('path');
  * Licensed under the MIT license.
  */
 var browserify = require('browserify');
+var shim = require('browserify-shim');
 
 module.exports = function (grunt) {
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
-
     var opts = this.options();
 
     grunt.util.async.forEachSeries(this.files, function (file, next) {
@@ -51,11 +51,33 @@ module.exports = function (grunt) {
         });
       }
 
+      if (opts.shim) {
+        var shims = opts.shim;
+        Object.keys(opts.shim)
+          .forEach(function (alias) {
+            shims[alias].path = path.resolve(shims[alias].path);
+          });
+        b = shim(b, shims);
+      }
+
       if (opts.external) {
         grunt.file.expand({filter: 'isFile'}, opts.external)
           .forEach(function (file) {
             b.external(path.resolve(file));
           });
+      }
+
+      if (opts.externalize) {
+        opts.externalize.forEach(function (lib) {
+          if (/\//.test(lib)) {
+            grunt.file.expand({filter: 'isFile'}, lib).forEach(function (file) {
+              b.require(path.resolve(file));
+            });
+          }
+          else {
+            b.require(lib);
+          }
+        });
       }
 
       if (opts.transform) {
@@ -64,22 +86,17 @@ module.exports = function (grunt) {
         });
       }
 
-      var bundle = b.bundle(opts);
-      bundle.on('error', function (err) {
-        grunt.fail.warn(err);
-      });
-
       var destPath = path.dirname(path.resolve(file.dest));
       if (!grunt.file.exists(destPath)) {
         grunt.file.mkdir(destPath);
       }
 
-      bundle
-        .pipe(fs.createWriteStream(file.dest))
-        .on('finish', function () {
-          grunt.log.ok('Bundled ' + file.dest);
-          next();
-        });
+      b.bundle(opts, function(err, src) {
+        if (err) grunt.fail.warn(err);
+        grunt.file.write(file.dest, src);
+        grunt.log.ok('Bundled ' + file.dest);
+        next();
+      });
 
     }, this.async());
   });
