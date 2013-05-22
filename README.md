@@ -104,6 +104,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.0.0
   - Really should've been released at v0.2, but better late than never!
 
+### v1.0.2
+  - Move away from browserify-stream to callback approach
+
 ## License
 Copyright (c) 2013 Justin Reidy
 Licensed under the MIT license.
