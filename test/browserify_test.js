@@ -137,6 +137,32 @@ module.exports = {
     });
   },
 
+  externalDir: function (test) {
+    test.expect(2);
+
+    var actual = readFile('tmp/external-dir.js');
+    var core = browserify();
+    core.require(__dirname + '/fixtures/external-dir/b');
+
+    core.bundle(function (err, src) {
+      var c = {
+        required: function (exports) {
+          c.exports = exports;
+        }
+      };
+
+      vm.runInNewContext(src, c);
+      vm.runInNewContext(actual, c);
+
+      test.ok(moduleExported(c, './fixtures/external-dir/a.js'));
+
+      //make sure b directory contents aren't in the bundle
+      test.ok(!actual.match('this should be a common module require'));
+
+      test.done();
+    });
+  },
+
   externalize: function (test) {
     test.expect(4);
 
