@@ -91,8 +91,11 @@ module.exports = function (grunt) {
         grunt.file.mkdir(destPath);
       }
 
-      b.bundle(opts, function(err, src) {
-        if (err) grunt.fail.warn(err);
+      b.bundle(opts, function (err, src) {
+        if (err) {
+          grunt.fail.warn(err);
+        }
+
         grunt.file.write(file.dest, src);
         grunt.log.ok('Bundled ' + file.dest);
         next();
