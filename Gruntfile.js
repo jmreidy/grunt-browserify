@@ -27,21 +27,21 @@ module.exports = function (grunt) {
 
     browserify: {
       basic: {
-        src: ['test/fixtures/*.js'],
+        src: ['test/fixtures/basic/*.js'],
         dest: 'tmp/basic.js'
       },
 
       ignores: {
-        src: ['test/fixtures/*.js'],
+        src: ['test/fixtures/ignore/*.js'],
         dest: 'tmp/ignores.js',
         options: {
-          ignore: ['test/fixtures/ignore.js']
+          ignore: ['test/fixtures/ignore/ignore.js']
         }
       },
 
       alias: {
         src: ['test/fixtures/alias/*.js'],
-        dest: 'tmp/alias.js', 
+        dest: 'tmp/alias.js',
         options: {
           alias: ['test/fixtures/alias/toBeAliased.js:alias']
         }
@@ -56,15 +56,36 @@ module.exports = function (grunt) {
       },
 
       external: {
-        src: ['test/fixtures/*.js'],
+        src: ['test/fixtures/external/*.js'],
         dest: 'tmp/external.js',
         options: {
-          external: ['test/fixtures/a.js']
+          external: ['test/fixtures/external/a.js']
+        }
+      },
+
+      externalize: {
+        src: ['test/fixtures/externalize/b.js'],
+        dest: 'tmp/externalize.js',
+        options: {
+          externalize: ['test/fixtures/externalize/a.js', 'events']
+        }
+      },
+
+      shim: {
+        src: ['test/fixtures/shim/a.js', 'test/fixtures/shim/shim.js'],
+        dest: 'tmp/shim.js',
+        options: {
+          shim: {
+            jquery: {
+              path: 'test/fixtures/shim/jquery.js',
+              exports: 'jquery'
+            }
+          }
         }
       },
 
       sourceMaps: {
-        src: ['test/fixtures/*.js'],
+        src: ['test/fixtures/basic/*.js'],
         dest: 'tmp/sourceMaps.js',
         options: {
           debug: true
