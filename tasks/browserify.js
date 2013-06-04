@@ -29,10 +29,19 @@ module.exports = function (grunt) {
       });
 
       if (opts.ignore) {
-        grunt.file.expand({filter: 'isFile'}, opts.ignore)
+        grunt.file.expand({nonull: true}, opts.ignore)
           .forEach(function (file) {
+            var ignoreFile = file;
 
-            b.ignore(path.resolve(file));
+            try {
+              if (fs.statSync(file).isFile()) {
+                ignoreFile = path.resolve(file);
+              }
+            } catch (e) {
+              // don't do anything
+            }
+
+            b.ignore(ignoreFile);
           });
       }
 
