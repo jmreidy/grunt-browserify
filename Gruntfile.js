@@ -35,7 +35,7 @@ module.exports = function (grunt) {
         src: ['test/fixtures/ignore/*.js'],
         dest: 'tmp/ignores.js',
         options: {
-          ignore: ['test/fixtures/ignore/ignore.js']
+          ignore: ['test/fixtures/ignore/ignore.js', 'os']
         }
       },
 
