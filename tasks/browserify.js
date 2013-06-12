@@ -51,6 +51,18 @@ module.exports = function (grunt) {
         });
       }
 
+      if (opts.aliasDirectory) {
+        var aliases = opts.aliasDirectory.slice ? opts.aliasDirectory : [opts.aliasDirectory];
+        aliases.forEach(function(alias) {
+          alias.expand = true; // so the user doesn't have to specify
+          grunt.file.expandMapping(alias.src, alias.dest, alias)
+            .forEach(function (file) {
+              var expose = file.dest.substr(0, file.dest.lastIndexOf('.'));
+              b.require(path.resolve(file.src[0]), {expose: expose});
+            });
+        });
+      }
+
       if (opts.shim) {
         var shims = opts.shim;
         Object.keys(opts.shim)
