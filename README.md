@@ -68,6 +68,10 @@ Type: `Object`
 
 Provide a config object to be used with [browserify-shim](https://github.com/thlorenz/browserify-shim)
 
+#### Other Options
+
+Any other options you provide will be passed through to browserify. This is useful for setting things like `standalone` or `ignoreGlobals`.
+
 ###Usage
 To get things running, add the following entry to `grunt.initConfig()`:
 
