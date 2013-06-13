@@ -34,6 +34,13 @@ Type: `[String:String]` or comma-separated `String`
 
 Browserify can alias files to a certain name. For example, `require(‘./foo’)` can be aliased to be used as `require(‘foo’)`. Aliases should be specified as `fileName:alias`.
 
+#### aliasMappings
+Type: `[Object || Array]`
+
+Like the `alias` option described above, but accepts mapping patterns as described in [Building the files object dynamically](http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically) to enable aliasing of entire
+directories and sets of files. Note that the `expand` option is set to `true` for you,
+so you can omit that from your configuration.
+
 #### external
 Type: `[String]`
 

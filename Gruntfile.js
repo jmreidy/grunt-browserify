@@ -51,7 +51,27 @@ module.exports = function (grunt) {
         src: ['test/fixtures/alias/*.js'],
         dest: 'tmp/aliasString.js',
         options: {
-          alias: 'test/fixtures/alias/toBeAliased.js:alias',
+          alias: 'test/fixtures/alias/toBeAliased.js:alias'
+        }
+      },
+
+      aliasMappings: {
+        src: ['test/fixtures/aliasMappings/**/*.js'],
+        dest: 'tmp/aliasMappings.js',
+        options: {
+          aliasMappings: [
+            {
+              cwd: 'test/fixtures/aliasMappings/',
+              src: ['**/*.js'],
+              dest: 'tmp/shortcut/',
+              flatten: true
+            },
+            {
+              cwd: 'test/fixtures/aliasMappings/foo/',
+              src: ['**/*.js'],
+              dest: 'tmp/other/'
+            }
+          ]
         }
       },
 

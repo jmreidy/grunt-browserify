@@ -95,6 +95,22 @@ module.exports = {
     test.done();
   },
 
+  aliasMappings: function (test) {
+    test.expect(4);
+
+    var context = getIncludedModules('tmp/aliasMappings.js');
+    var rootFile = require('./fixtures/aliasMappings/root.js');
+    var fooFile = require('./fixtures/aliasMappings/foo/foo.js');
+    var fooBarFile = require('./fixtures/aliasMappings/foo/bar/foobar.js');
+
+    test.ok(compareOutputs(context.exports.root, rootFile));
+    test.ok(compareOutputs(context.exports.foo, fooFile));
+    test.ok(compareOutputs(context.exports.foobar, fooBarFile));
+    test.ok(compareOutputs(context.exports.otherbar, fooBarFile));
+
+    test.done();
+  },
+
   external: function (test) {
     test.expect(3);
 
