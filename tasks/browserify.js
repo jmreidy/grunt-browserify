@@ -51,8 +51,8 @@ module.exports = function (grunt) {
         });
       }
 
-      if (opts.aliasDirectory) {
-        var aliases = opts.aliasDirectory.slice ? opts.aliasDirectory : [opts.aliasDirectory];
+      if (opts.aliasMappings) {
+        var aliases = opts.aliasMappings.slice ? opts.aliasMappings : [opts.aliasMappings];
         aliases.forEach(function(alias) {
           alias.expand = true; // so the user doesn't have to specify
           grunt.file.expandMapping(alias.src, alias.dest, alias)

@@ -95,13 +95,13 @@ module.exports = {
     test.done();
   },
 
-  aliasDirectory: function (test) {
+  aliasMappings: function (test) {
     test.expect(4);
 
-    var context = getIncludedModules('tmp/aliasDirectory.js');
-    var rootFile = require('./fixtures/aliasDirectory/root.js');
-    var fooFile = require('./fixtures/aliasDirectory/foo/foo.js');
-    var fooBarFile = require('./fixtures/aliasDirectory/foo/bar/foobar.js');
+    var context = getIncludedModules('tmp/aliasMappings.js');
+    var rootFile = require('./fixtures/aliasMappings/root.js');
+    var fooFile = require('./fixtures/aliasMappings/foo/foo.js');
+    var fooBarFile = require('./fixtures/aliasMappings/foo/bar/foobar.js');
 
     test.ok(compareOutputs(context.exports.root, rootFile));
     test.ok(compareOutputs(context.exports.foo, fooFile));

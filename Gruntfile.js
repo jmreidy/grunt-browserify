@@ -55,19 +55,19 @@ module.exports = function (grunt) {
         }
       },
 
-      aliasDirectory: {
-        src: ['test/fixtures/aliasDirectory/**/*.js'],
-        dest: 'tmp/aliasDirectory.js',
+      aliasMappings: {
+        src: ['test/fixtures/aliasMappings/**/*.js'],
+        dest: 'tmp/aliasMappings.js',
         options: {
-          aliasDirectory: [
+          aliasMappings: [
             {
-              cwd: 'test/fixtures/aliasDirectory/',
+              cwd: 'test/fixtures/aliasMappings/',
               src: ['**/*.js'],
               dest: 'tmp/shortcut/',
               flatten: true
             },
             {
-              cwd: 'test/fixtures/aliasDirectory/foo/',
+              cwd: 'test/fixtures/aliasMappings/foo/',
               src: ['**/*.js'],
               dest: 'tmp/other/'
             }
