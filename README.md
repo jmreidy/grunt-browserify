@@ -122,6 +122,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.0.3
   - Add new aliasMappings functionality
 
+### v1.0.4
+  - Adding directory support for `external` parameter
+
 ## Frequent Contributors
   - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
   - Kyle Robinson Young ([@shama](https://github.com/shama))
