@@ -83,6 +83,14 @@ module.exports = function (grunt) {
         }
       },
 
+      'external-dir': {
+        src: ['test/fixtures/external-dir/*.js'],
+        dest: 'tmp/external-dir.js',
+        options: {
+          external: ['test/fixtures/external-dir/b']
+        }
+      },
+
       externalize: {
         src: ['test/fixtures/externalize/b.js'],
         dest: 'tmp/externalize.js',

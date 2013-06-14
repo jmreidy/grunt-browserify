@@ -6,11 +6,11 @@ var browserify = require('browserify');
 var jsdom = require('jsdom').jsdom;
 
 function readFile(path) {
-  return grunt.util.normalizelf(grunt.file.read(path));
+  return grunt.file.read(path);
 }
 
 function compareOutputs(fn1, fn2) {
-  return (fn1.toString() === fn2.toString());
+  return (grunt.util.normalizelf(fn1.toString()) === grunt.util.normalizelf(fn2.toString()));
 }
 
 function moduleExported(context, modulePath) {
@@ -132,6 +132,32 @@ module.exports = {
 
       //make sure a.js contents aren't in the bundle
       test.ok(!actual.match('this should be a common require'));
+
+      test.done();
+    });
+  },
+
+  externalDir: function (test) {
+    test.expect(2);
+
+    var actual = readFile('tmp/external-dir.js');
+    var core = browserify();
+    core.require(__dirname + '/fixtures/external-dir/b');
+
+    core.bundle(function (err, src) {
+      var c = {
+        required: function (exports) {
+          c.exports = exports;
+        }
+      };
+
+      vm.runInNewContext(src, c);
+      vm.runInNewContext(actual, c);
+
+      test.ok(moduleExported(c, './fixtures/external-dir/a.js'));
+
+      //make sure b directory contents aren't in the bundle
+      test.ok(!actual.match('this should be a common module require'));
 
       test.done();
     });

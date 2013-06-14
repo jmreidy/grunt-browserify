@@ -73,10 +73,12 @@ module.exports = function (grunt) {
       }
 
       if (opts.external) {
-        grunt.file.expand({filter: 'isFile'}, opts.external)
-          .forEach(function (file) {
-            b.external(path.resolve(file));
-          });
+        grunt.file.expand({filter: function (src) {
+            return grunt.file.exists(src);
+          }}, opts.external)
+            .forEach(function (file) {
+              b.external(path.resolve(file));
+            });
       }
 
       if (opts.externalize) {
