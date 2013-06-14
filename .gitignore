@@ -1,1 +1,6 @@
-.npmignore
+/node_modules/
+*.DS_Store
+.idea/
+tmp/
+npm-debug.log
+
