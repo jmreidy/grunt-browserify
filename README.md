@@ -117,6 +117,12 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v1.0.2
   - Move away from browserify-stream to callback approach
+### v1.1.3
+  - Add new aliasMappings functionality
+
+## Frequent Contributors
+  - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
+  - Kyle Robinson Young ([@shama](https://github.com/shama))
 
 ## License
 Copyright (c) 2013 Justin Reidy
