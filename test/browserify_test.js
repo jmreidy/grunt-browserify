@@ -6,11 +6,11 @@ var browserify = require('browserify');
 var jsdom = require('jsdom').jsdom;
 
 function readFile(path) {
-  return grunt.util.normalizelf(grunt.file.read(path));
+  return grunt.file.read(path);
 }
 
 function compareOutputs(fn1, fn2) {
-  return (fn1.toString() === fn2.toString());
+  return (grunt.util.normalizelf(fn1.toString()) === grunt.util.normalizelf(fn2.toString()));
 }
 
 function moduleExported(context, modulePath) {
