@@ -117,7 +117,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v1.0.2
   - Move away from browserify-stream to callback approach
-### v1.1.3
+
+### v1.0.3
   - Add new aliasMappings functionality
 
 ## Frequent Contributors
