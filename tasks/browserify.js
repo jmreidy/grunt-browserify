@@ -18,6 +18,7 @@ module.exports = function (grunt) {
     var opts = this.options();
 
     grunt.util.async.forEachSeries(this.files, function (file, next) {
+      var aliases;
 
       var files = grunt.file.expand({filter: 'isFile'}, file.src).map(function (f) {
         return path.resolve(f);
@@ -37,7 +38,7 @@ module.exports = function (grunt) {
       }
 
       if (opts.alias) {
-        var aliases = opts.alias;
+        aliases = opts.alias;
         if (aliases.split) {
           aliases = aliases.split(',');
         }
@@ -52,8 +53,8 @@ module.exports = function (grunt) {
       }
 
       if (opts.aliasMappings) {
-        var aliases = opts.aliasMappings.slice ? opts.aliasMappings : [opts.aliasMappings];
-        aliases.forEach(function(alias) {
+        aliases = opts.aliasMappings.slice ? opts.aliasMappings : [opts.aliasMappings];
+        aliases.forEach(function (alias) {
           alias.expand = true; // so the user doesn't have to specify
           grunt.file.expandMapping(alias.src, alias.dest, alias)
             .forEach(function (file) {
