@@ -125,6 +125,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.0.4
   - Adding directory support for `external` parameter
 
+### v1.0.5
+  - Bumping to latest Browserify (2.18.x)
+
 ## Frequent Contributors
   - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
   - Kyle Robinson Young ([@shama](https://github.com/shama))
