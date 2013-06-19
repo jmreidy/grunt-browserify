@@ -47,6 +47,7 @@ function domWindow() {
   Object.keys(window).forEach(function (k) {
     context[k] = window[k];
   });
+  context.global = {};
   return context;
 }
 
@@ -205,7 +206,6 @@ module.exports = {
 
     //jquery is defined on the window
     test.ok(context.window.$);
-
 
     test.done();
 
