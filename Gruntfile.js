@@ -112,6 +112,11 @@ module.exports = function (grunt) {
         }
       },
 
+      speedTest: {
+        src: ['test/fixtures/speed/*.js'],
+        dest: 'tmp/speed.js',
+      },
+
       sourceMaps: {
         src: ['test/fixtures/basic/*.js'],
         dest: 'tmp/sourceMaps.js',
@@ -123,8 +128,14 @@ module.exports = function (grunt) {
 
     nodeunit: {
       tests: ['test/*_test.js']
-    }
+    },
 
+    watch: {
+      gbWatch: {
+        files: ['test/*.js'],
+        tasks: [],
+      }
+    },
 
   });
 
@@ -132,9 +143,11 @@ module.exports = function (grunt) {
   grunt.loadTasks('tasks');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
   // Default task.
   grunt.registerTask('test', ['clean', 'browserify', 'nodeunit']);
   grunt.registerTask('default', ['jshint', 'test']);
+  grunt.registerTask('watchTest', ['clean', 'browserify', 'watch']);
 };

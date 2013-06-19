@@ -14,10 +14,21 @@ var browserify = require('browserify');
 var shim = require('browserify-shim');
 
 module.exports = function (grunt) {
+  var tasks = [];
+  var taskCache = {};
+
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
     var opts = this.options();
     var ctorOpts = {};
     var shims;
+    var taskName = this.nameArgs;
+    if (!taskCache[taskName]) {
+      tasks.push(taskName);
+      taskCache[taskName] = {};
+      taskCache[taskName].bundlers = [];
+      taskCache[taskName].options = {};
+      taskCache[taskName].depCache = {};
+    }
 
     // parse shims now so they can be added to noParse array
     // files listed in noParse will be skipped by Browserify
@@ -117,6 +128,35 @@ module.exports = function (grunt) {
         grunt.file.mkdir(destPath);
       }
 
+      taskCache[taskName].bundlers.push(b);
+      taskCache[taskName].options = opts;
+      taskCache[taskName].file = file;
+      runBundler(b, opts, taskCache[taskName].depCache, file, next);
+
+
+
+    }, this.async());
+  });
+
+  grunt.event.on('watch', function (action, filepath) {
+    filepath = path.resolve(filepath);
+    tasks.forEach(function (taskName) {
+      var task = taskCache[taskName]
+      delete task.depCache[filepath];
+      task.bundlers.forEach(function (b) {
+        runBundler(b, task.options, task.depCache, task.file);
+      });
+    });
+
+  });
+
+  function runBundler (b, opts, taskCache, file, next) {
+      var depCache = {};
+      b.on('dep', function (dep) {
+        depCache[dep.id] = dep;
+      });
+
+      opts.cache = taskCache;
       b.bundle(opts, function (err, src) {
         if (err) {
           grunt.fail.warn(err);
@@ -124,9 +164,11 @@ module.exports = function (grunt) {
 
         grunt.file.write(file.dest, src);
         grunt.log.ok('Bundled ' + file.dest);
-        next();
+        grunt.util._.defaults(taskCache, depCache);
+        if (next) {
+          next();
+        }
       });
-
-    }, this.async());
-  });
+  }
 };
+
