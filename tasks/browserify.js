@@ -29,7 +29,6 @@ module.exports = function (grunt) {
       Object.keys(shims)
         .forEach(function (alias) {
           shims[alias].path = path.resolve(shims[alias].path);
-          ctorOpts.noParse.push(shims[alias].path);
         });
     }
 
