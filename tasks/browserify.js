@@ -40,7 +40,7 @@ module.exports = function (grunt) {
       Object.keys(shims)
         .forEach(function (alias) {
           shims[alias].path = path.resolve(shims[alias].path);
-          ctorOpts.noParse.push(shims[alias].path);
+          //ctorOpts.noParse.push(shims[alias].path);
         });
     }
 
@@ -138,17 +138,17 @@ module.exports = function (grunt) {
     }, this.async());
   });
 
-  grunt.event.on('watch', function (action, filepath) {
-    filepath = path.resolve(filepath);
-    tasks.forEach(function (taskName) {
-      var task = taskCache[taskName]
-      delete task.depCache[filepath];
-      task.bundlers.forEach(function (b) {
-        runBundler(b, task.options, task.depCache, task.file);
-      });
-    });
+  // grunt.event.on('watch', function (action, filepath) {
+  //   filepath = path.resolve(filepath);
+  //   tasks.forEach(function (taskName) {
+  //     var task = taskCache[taskName]
+  //     delete task.depCache[filepath];
+  //     task.bundlers.forEach(function (b) {
+  //       runBundler(b, task.options, task.depCache, task.file);
+  //     });
+  //   });
 
-  });
+  // });
 
   function runBundler (b, opts, taskCache, file, next) {
       var depCache = {};

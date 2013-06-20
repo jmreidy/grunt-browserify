@@ -132,8 +132,11 @@ module.exports = function (grunt) {
 
     watch: {
       gbWatch: {
-        files: ['test/*.js'],
-        tasks: [],
+        files: ['test/**/*.js'],
+        tasks: ['browserify'],
+        options: {
+          nospawn: true
+        },
       }
     },
 
