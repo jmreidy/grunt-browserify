@@ -16,20 +16,9 @@ var shim = require('browserify-shim');
 module.exports = function (grunt) {
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
     var opts = this.options();
-    var ctorOpts = {noParse: [].concat(opts.noParse)};
+    var ctorOpts = {};
     var shims;
 
-    // parse shims now so they can be added to noParse array
-    // files listed in noParse will be skipped by Browserify
-    // greatly speeding up builds that reference large libs like jQuery
-    if (opts.shim) {
-      shims = opts.shim;
-      Object.keys(shims)
-        .forEach(function (alias) {
-          shims[alias].path = path.resolve(shims[alias].path);
-          ctorOpts.noParse.push(shims[alias].path);
-        });
-    }
 
     grunt.util.async.forEachSeries(this.files, function (file, next) {
       var aliases;
@@ -37,6 +26,13 @@ module.exports = function (grunt) {
       ctorOpts.entries = grunt.file.expand({filter: 'isFile'}, file.src).map(function (f) {
         return path.resolve(f);
       });
+
+      if (opts.noParse) {
+        ctorOpts.noParse = opts.noParse.map(function (filePath) {
+          return path.resolve(filePath);
+        });
+        delete opts.noParse;
+      }
 
       var b = browserify(ctorOpts);
       b.on('error', function (err) {
@@ -78,7 +74,12 @@ module.exports = function (grunt) {
         });
       }
 
-      if (shims) {
+      if (opts.shim) {
+        shims = opts.shim;
+        Object.keys(shims)
+          .forEach(function (alias) {
+            shims[alias].path = path.resolve(shims[alias].path);
+          });
         b = shim(b, shims);
       }
 

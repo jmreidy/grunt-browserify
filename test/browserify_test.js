@@ -207,7 +207,6 @@ module.exports = {
     test.ok(context.window.$);
 
     test.done();
-
   },
 
   shim: function (test) {
@@ -221,7 +220,6 @@ module.exports = {
     test.ok(context.window.jQuery);
 
     test.done();
-
   },
 
   sourceMaps: function (test) {

@@ -7,7 +7,6 @@ Grunt task for node-browserify. Current version: 1.0.0.
 This plugin requires [Grunt](https://gruntjs.com) `~0.4.0` and Node `>=0.10.x`.
 
 Install this grunt plugin with:
-
 ```shell
 npm install grunt-browserify --save-dev
 ```
@@ -28,6 +27,15 @@ Run this task with the `grunt browserify` command. As with other Grunt plugins, 
 Type: `[String]`
 
 Specifies files to be ignored in the browserify bundle.
+
+#### noParse
+Type: `[String]`
+
+Array of file paths that Browserify should not attempt to parse for `require()`
+statements, which should improve compilation time for large library files that
+do not need to be parsed. (The Browserify docs provide the example of jQuery, although I
+think it would probably be more useful to shim such libraries than to compile
+them with noParse).
 
 #### alias
 Type: `[String:String]` or comma-separated `String`
@@ -127,6 +135,14 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v1.0.5
   - Bumping to latest Browserify (2.18.x)
+
+### v1.1.0
+  - Added support for noParse option
+  - Change browserify() call to pass files as opts.entries
+
+### v1.1.1
+  - Fix regression where shimmed modules not being parsed
+
 
 ## Frequent Contributors
   - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
