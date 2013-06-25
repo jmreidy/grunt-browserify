@@ -217,7 +217,7 @@ module.exports = {
     test.ok(moduleExported(context, './fixtures/shim/a.js'));
 
     //jquery is defined on the window
-    test.ok(context.window.jQuery);
+    test.ok(context.window.$);
 
     test.done();
   },

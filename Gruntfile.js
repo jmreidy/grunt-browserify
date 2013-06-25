@@ -115,9 +115,9 @@ module.exports = function (grunt) {
         dest: 'tmp/shim.js',
         options: {
           shim: {
-            jquery: {
+            shimmedJQ: {
               path: 'test/fixtures/shim/jquery.js',
-              exports: 'jQuery'
+              exports: '$'
             }
           }
         }
