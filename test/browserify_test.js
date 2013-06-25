@@ -47,7 +47,6 @@ function domWindow() {
   Object.keys(window).forEach(function (k) {
     context[k] = window[k];
   });
-  context.global = {};
   return context;
 }
 
@@ -197,6 +196,20 @@ module.exports = {
 
   },
 
+  noParse: function (test) {
+    test.expect(2);
+
+    var context = getIncludedModules('tmp/noParse.js', domWindow());
+
+    test.ok(moduleExported(context, './fixtures/noParse/a.js'));
+
+    //jquery is defined on the window
+    test.ok(context.window.$);
+
+    test.done();
+
+  },
+
   shim: function (test) {
     test.expect(2);
 
@@ -205,7 +218,7 @@ module.exports = {
     test.ok(moduleExported(context, './fixtures/shim/a.js'));
 
     //jquery is defined on the window
-    test.ok(context.window.$);
+    test.ok(context.window.jQuery);
 
     test.done();
 

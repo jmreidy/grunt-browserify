@@ -16,7 +16,7 @@ var shim = require('browserify-shim');
 module.exports = function (grunt) {
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
     var opts = this.options();
-    var ctorOpts = {};
+    var ctorOpts = {noParse: [].concat(opts.noParse)};
     var shims;
 
     // parse shims now so they can be added to noParse array
@@ -24,11 +24,10 @@ module.exports = function (grunt) {
     // greatly speeding up builds that reference large libs like jQuery
     if (opts.shim) {
       shims = opts.shim;
-      ctorOpts.noParse = [].concat(opts.noParse);
-      delete opts.noParse;
       Object.keys(shims)
         .forEach(function (alias) {
           shims[alias].path = path.resolve(shims[alias].path);
+          ctorOpts.noParse.push(shims[alias].path);
         });
     }
 

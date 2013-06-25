@@ -99,6 +99,14 @@ module.exports = function (grunt) {
         }
       },
 
+      noParse: {
+        src: ['test/fixtures/noParse/*.js'],
+        dest: 'tmp/noParse.js',
+        options: {
+          noParse: ['test/fixtures/noParse/jquery.js']
+        }
+      },
+
       shim: {
         src: ['test/fixtures/shim/a.js', 'test/fixtures/shim/shim.js'],
         dest: 'tmp/shim.js',
@@ -106,7 +114,7 @@ module.exports = function (grunt) {
           shim: {
             jquery: {
               path: 'test/fixtures/shim/jquery.js',
-              exports: 'jquery'
+              exports: 'jQuery'
             }
           }
         }
