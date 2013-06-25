@@ -54,10 +54,6 @@ Type: `[String]`
 
 Specifies files to be loaded from a previously loaded, “common” bundle.
 
-#### externalize
-Type: `[String]`
-
-Specifies modules(s) to be exposed outside of a bundle, which is necessary for building "common" bundles which can be loaded via the `external` option above. Basically, it's a list of files which are supplied to browserify via its `require` or `-r` command.
 
 #### transform
 Type: `[String || Function]`
@@ -142,6 +138,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v1.1.1
   - Fix regression where shimmed modules not being parsed
+
+### v1.2
+  - `Externalize` has been deprecated in favor of `alias`
 
 
 ## Frequent Contributors

@@ -54,11 +54,22 @@ module.exports = function (grunt) {
         }
         aliases.forEach(function (alias) {
           alias = alias.split(':');
-          grunt.file.expand({filter: 'isFile'}, alias[0])
-            .forEach(function (file) {
-              b.require(path.resolve(file), {expose: alias[1]});
-            });
+          var aliasSrc = alias[0];
+          var aliasDest = alias[1];
 
+          if (/\//.test(aliasSrc)) {
+            aliasSrc = path.resolve(aliasSrc);
+          }
+          //if the alias exists and is a filepath, resolve it
+          if (aliasDest && /\//.test(aliasDest)) {
+            aliasDest = path.resolve(aliasDest);
+          }
+
+          if (!aliasDest) {
+            aliasDest = aliasSrc;
+          }
+
+          b.require(aliasSrc, {expose: aliasDest});
         });
       }
 
@@ -93,6 +104,7 @@ module.exports = function (grunt) {
       }
 
       if (opts.externalize) {
+        grunt.fail.warn('Externalize is deprecated, please use alias instead');
         opts.externalize.forEach(function (lib) {
           if (/\//.test(lib)) {
             grunt.file.expand({filter: 'isFile'}, lib).forEach(function (file) {

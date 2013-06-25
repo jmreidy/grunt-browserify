@@ -95,7 +95,10 @@ module.exports = function (grunt) {
         src: ['test/fixtures/externalize/b.js'],
         dest: 'tmp/externalize.js',
         options: {
-          externalize: ['test/fixtures/externalize/a.js', 'events']
+          alias: [
+            'test/fixtures/externalize/a.js:test/fixtures/externalize/a.js',
+            'events'
+          ]
         }
       },
 
