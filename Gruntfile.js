@@ -79,7 +79,7 @@ module.exports = function (grunt) {
         src: ['test/fixtures/external/*.js'],
         dest: 'tmp/external.js',
         options: {
-          external: ['test/fixtures/external/a.js']
+          external: ['test/fixtures/external/a.js', 'events']
         }
       },
 

@@ -1,4 +1,5 @@
 required({
 	a: require('./a'),
-	b: require('./b')
+	b: require('./b'),
+  events: require('events')
 });

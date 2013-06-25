@@ -95,12 +95,19 @@ module.exports = function (grunt) {
       }
 
       if (opts.external) {
-        grunt.file.expand({filter: function (src) {
-            return grunt.file.exists(src);
-          }}, opts.external)
-            .forEach(function (file) {
-              b.external(path.resolve(file));
-            });
+        opts.external.forEach(function (external) {
+          if (/\//.test(external)) {
+            grunt.file.expand({filter: function (src) {
+                return grunt.file.exists(src);
+              }}, external)
+                .forEach(function (file) {
+                  b.external(path.resolve(file));
+                });
+          } else {
+            b.external(external);
+          }
+
+        });
       }
 
       if (opts.externalize) {
