@@ -10,18 +10,7 @@ module.exports = function (grunt) {
     jshint: {
       all: ['Gruntfile.js', 'tasks/**/*.js', '<%= nodeunit.tests %>'],
       options: {
-        curly: true,
-        eqeqeq: true,
-        es5: true,
-        immed: true,
-        indent: 2,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        node: true,
-        nonew: true,
-        sub: true,
-        undef: true
+        jshintrc: ".jshintrc"
       }
     },
 

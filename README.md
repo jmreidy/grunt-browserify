@@ -17,6 +17,52 @@ Then add this line to your project's `grunt.js` Gruntfile:
 grunt.loadNpmTasks('grunt-browserify');
 ```
 
+## In the Wild
+Most simply, Browserify is a tool for taking your CommonJS-style Javascript
+code and packaging it for use in the browser. Grunt-Browserify provides the
+glue to better integrate Browserify into your development workflow.
+
+For JavaScripters unfamiliar with CJS-style code and the Node ecosystem, moving
+to Browserify can be a bit confusing. Writing your client-side code as CJS
+modules allows for smaller, easier to understand files that perform one task
+well. These modules, because of their simplicity, will be significantly easier
+to use across projects. CJS modules also help to expose the dependency graph
+inherent in your code, allowing you to write cleaner, more-maintainable
+modules. (Note to AMD fans that the benefits above are not unique to the CJS
+style of writing JavaScript modules, but the ease-of-interoperality with
+Node.JS code is a plus of CJS.)
+
+As you begin to write your client-side code in small, reusable modules, you
+start to have a lot more files to manage. At the same time, you need to
+integrate these files with other client-side libraries, some of which do not
+play particularly nicely with a CJS module system. The simplicity provided by
+CJS modules can be lost as build complexity is increased and Browserify
+compilation time gets out of control.
+
+Grunt-Browserify is here to make your life easier. There's a number of examples
+provided in the `examples` directory of different real-world uses of
+Grunt-Browserify. Those examples, plus the example of the project's own
+Gruntfile, should provide clarity into how to get started. This project's
+author and contributors are happy to answer any specific questions on Twitter.
+
+In addition to the examples mentioned above, there are some specific pieces of advice that
+may prove helpful:
+
+* Be careful with entry files. Entry files are any files passed to Browserify's `require` method. Anything
+specified in Grunt-Browserify's `src` will be interpreted as an entry file. Keep in mind that Browserify
+walks a dependency tree, so theoretically a single "main" entry file could be enough for all of your client side
+code. The reason for caution is that entry files are interpretted at *load time*, unlike traditionally required modules,
+which are interpretted as any CJS module - when they are required. Anything in an entry file is run as soon as
+the Browserify module is loaded on a web page. See the inline comments in the `simple` example directory.
+
+* Break vendored libs into their own Browserify build. Libs like jQuery, Angular, D3, etc. are large files that can
+greatly slow down Browserify compilation time. They also aren't changing with any real frequency. By breaking these
+files into their own Grunt-Browserify task, then making them externally available via an alias, you can make build times
+signficantly shorter. See the `complex` example folder for a use case. You can even concat each Browserify task build to a single JS
+file, which should handle any concerns with browser latency.
+
+* Transforms are your friend. You can perform some pretty complex magic with Browserify-transforms. Check out [deamdify](https://github.com/jaredhanson/deamdify)
+and [coffeeify](https://github.com/substack/coffeeify) for some useful examples.
 
 
 ## Documentation
