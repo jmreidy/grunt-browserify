@@ -218,7 +218,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v1.2
   - `Externalize` has been deprecated in favor of `alias` (#69)
-  - Allow `external` to use module names, in addition to file paths (#68)
+  - Allow `external` to use module names, in addition to file paths (#68). Waiting on Browserify changes for this to actually work.
   - Much improved docs (#67)
   - Allow non-files to be ignored (#50), via @joshuarubin
 
