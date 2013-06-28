@@ -10,18 +10,7 @@ module.exports = function (grunt) {
     jshint: {
       all: ['Gruntfile.js', 'tasks/**/*.js', '<%= nodeunit.tests %>'],
       options: {
-        curly: true,
-        eqeqeq: true,
-        es5: true,
-        immed: true,
-        indent: 2,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        node: true,
-        nonew: true,
-        sub: true,
-        undef: true
+        jshintrc: ".jshintrc"
       }
     },
 
@@ -35,7 +24,7 @@ module.exports = function (grunt) {
         src: ['test/fixtures/ignore/*.js'],
         dest: 'tmp/ignores.js',
         options: {
-          ignore: ['test/fixtures/ignore/ignore.js']
+          ignore: ['test/fixtures/ignore/ignore.js', 'os']
         }
       },
 
@@ -79,7 +68,7 @@ module.exports = function (grunt) {
         src: ['test/fixtures/external/*.js'],
         dest: 'tmp/external.js',
         options: {
-          external: ['test/fixtures/external/a.js']
+          external: ['test/fixtures/external/a.js', 'events']
         }
       },
 
@@ -95,7 +84,18 @@ module.exports = function (grunt) {
         src: ['test/fixtures/externalize/b.js'],
         dest: 'tmp/externalize.js',
         options: {
-          externalize: ['test/fixtures/externalize/a.js', 'events']
+          alias: [
+            'test/fixtures/externalize/a.js:test/fixtures/externalize/a.js',
+            'events'
+          ]
+        }
+      },
+
+      noParse: {
+        src: ['test/fixtures/noParse/*.js'],
+        dest: 'tmp/noParse.js',
+        options: {
+          noParse: ['test/fixtures/noParse/jquery.js']
         }
       },
 
@@ -104,9 +104,9 @@ module.exports = function (grunt) {
         dest: 'tmp/shim.js',
         options: {
           shim: {
-            jquery: {
+            shimmedJQ: {
               path: 'test/fixtures/shim/jquery.js',
-              exports: 'jquery'
+              exports: '$'
             }
           }
         }

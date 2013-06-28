@@ -47,7 +47,6 @@ function domWindow() {
   Object.keys(window).forEach(function (k) {
     context[k] = window[k];
   });
-  context.global = {};
   return context;
 }
 
@@ -113,11 +112,12 @@ module.exports = {
   },
 
   external: function (test) {
-    test.expect(3);
+    test.expect(4);
 
     var actual = readFile('tmp/external.js');
     var core = browserify();
     core.require(__dirname + '/fixtures/external/a.js');
+    core.require('events');
 
     core.bundle(function (err, src) {
       var c = {
@@ -133,6 +133,9 @@ module.exports = {
 
       //make sure a.js contents aren't in the bundle
       test.ok(!actual.match('this should be a common require'));
+
+      //make sure events module isn't included
+      test.ok(!actual.match('EventEmitter'));
 
       test.done();
     });
@@ -197,6 +200,19 @@ module.exports = {
 
   },
 
+  noParse: function (test) {
+    test.expect(2);
+
+    var context = getIncludedModules('tmp/noParse.js', domWindow());
+
+    test.ok(moduleExported(context, './fixtures/noParse/a.js'));
+
+    //jquery is defined on the window
+    test.ok(context.window.$);
+
+    test.done();
+  },
+
   shim: function (test) {
     test.expect(2);
 
@@ -208,7 +224,6 @@ module.exports = {
     test.ok(context.window.$);
 
     test.done();
-
   },
 
   sourceMaps: function (test) {

@@ -1,4 +1,4 @@
 required({
 	a: require('./a'),
-	jquery: require('jquery')
+	jquery: require('shimmedJQ')
 });

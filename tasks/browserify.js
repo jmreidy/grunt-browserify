@@ -19,18 +19,6 @@ module.exports = function (grunt) {
     var ctorOpts = {};
     var shims;
 
-    // parse shims now so they can be added to noParse array
-    // files listed in noParse will be skipped by Browserify
-    // greatly speeding up builds that reference large libs like jQuery
-    if (opts.shim) {
-      shims = opts.shim;
-      ctorOpts.noParse = [].concat(opts.noParse);
-      delete opts.noParse;
-      Object.keys(shims)
-        .forEach(function (alias) {
-          shims[alias].path = path.resolve(shims[alias].path);
-        });
-    }
 
     grunt.util.async.forEachSeries(this.files, function (file, next) {
       var aliases;
@@ -39,16 +27,32 @@ module.exports = function (grunt) {
         return path.resolve(f);
       });
 
+      if (opts.noParse) {
+        ctorOpts.noParse = opts.noParse.map(function (filePath) {
+          return path.resolve(filePath);
+        });
+        delete opts.noParse;
+      }
+
       var b = browserify(ctorOpts);
       b.on('error', function (err) {
         grunt.fail.warn(err);
       });
 
       if (opts.ignore) {
-        grunt.file.expand({filter: 'isFile'}, opts.ignore)
+        grunt.file.expand({nonull: true}, opts.ignore)
           .forEach(function (file) {
+            var ignoreFile = file;
 
-            b.ignore(path.resolve(file));
+            try {
+              if (fs.statSync(file).isFile()) {
+                ignoreFile = path.resolve(file);
+              }
+            } catch (e) {
+              // don't do anything
+            }
+
+            b.ignore(ignoreFile);
           });
       }
 
@@ -59,11 +63,22 @@ module.exports = function (grunt) {
         }
         aliases.forEach(function (alias) {
           alias = alias.split(':');
-          grunt.file.expand({filter: 'isFile'}, alias[0])
-            .forEach(function (file) {
-              b.require(path.resolve(file), {expose: alias[1]});
-            });
+          var aliasSrc = alias[0];
+          var aliasDest = alias[1];
 
+          if (/\//.test(aliasSrc)) {
+            aliasSrc = path.resolve(aliasSrc);
+          }
+          //if the alias exists and is a filepath, resolve it
+          if (aliasDest && /\//.test(aliasDest)) {
+            aliasDest = path.resolve(aliasDest);
+          }
+
+          if (!aliasDest) {
+            aliasDest = aliasSrc;
+          }
+
+          b.require(aliasSrc, {expose: aliasDest});
         });
       }
 
@@ -79,20 +94,33 @@ module.exports = function (grunt) {
         });
       }
 
-      if (shims) {
+      if (opts.shim) {
+        shims = opts.shim;
+        Object.keys(shims)
+          .forEach(function (alias) {
+            shims[alias].path = path.resolve(shims[alias].path);
+          });
         b = shim(b, shims);
       }
 
       if (opts.external) {
-        grunt.file.expand({filter: function (src) {
-            return grunt.file.exists(src);
-          }}, opts.external)
-            .forEach(function (file) {
-              b.external(path.resolve(file));
-            });
+        opts.external.forEach(function (external) {
+          if (/\//.test(external)) {
+            grunt.file.expand({filter: function (src) {
+                return grunt.file.exists(src);
+              }}, external)
+                .forEach(function (file) {
+                  b.external(path.resolve(file));
+                });
+          } else {
+            b.external(external);
+          }
+
+        });
       }
 
       if (opts.externalize) {
+        grunt.fail.warn('Externalize is deprecated, please use alias instead');
         opts.externalize.forEach(function (lib) {
           if (/\//.test(lib)) {
             grunt.file.expand({filter: 'isFile'}, lib).forEach(function (file) {

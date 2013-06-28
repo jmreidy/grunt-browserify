@@ -7,7 +7,6 @@ Grunt task for node-browserify. Current version: 1.1.1.
 This plugin requires [Grunt](https://gruntjs.com) `~0.4.0` and Node `>=0.10.x`.
 
 Install this grunt plugin with:
-
 ```shell
 npm install grunt-browserify --save-dev
 ```
@@ -18,6 +17,74 @@ Then add this line to your project's `grunt.js` Gruntfile:
 grunt.loadNpmTasks('grunt-browserify');
 ```
 
+## In the Wild
+Most simply, Browserify is a tool for taking your CommonJS-style Javascript
+code and packaging it for use in the browser. Grunt-Browserify provides the
+glue to better integrate Browserify into your development workflow.
+
+For JavaScripters unfamiliar with CJS-style code and the Node ecosystem, moving
+to Browserify can be a bit confusing. Writing your client-side code as CJS
+modules allows for smaller, easier to understand files that perform one task
+well. These modules, because of their simplicity, will be significantly easier
+to use across projects. CJS modules also help to expose the dependency graph
+inherent in your code, allowing you to write cleaner, more-maintainable
+modules. As [Alex MacCaw writes](http://spinejs.com/docs/commonjs):
+>CommonJS modules are one of the best solutions to JavaScript dependency
+>management.
+
+>CommonJS modules solve JavaScript scope issues by making sure each module is
+>executed in its own namespace. Modules have to explicitly export variables
+>they want to expose to other modules, and explicitly import other modules; in
+>other words, there's no global namespace.
+
+(A note to AMD fans that the benefits above are not unique to the CJS
+style of writing JavaScript modules, but the ease-of-interoperality with
+Node.JS code is a plus of CJS.)
+
+As you begin to write your client-side code in small, reusable modules, you
+start to have a lot more files to manage. At the same time, you need to
+integrate these files with other client-side libraries, some of which do not
+play particularly nicely with a CJS module system. The simplicity provided by
+CJS modules can be lost as build complexity is increased and Browserify
+compilation time gets out of control.
+
+Grunt-Browserify is here to make your life easier. There's a number of examples
+provided in the `examples` directory of different real-world uses of
+Grunt-Browserify. Those examples, plus the example of the project's own
+Gruntfile, should provide clarity into how to get started. This project's
+author and contributors are happy to answer any specific questions on Twitter.
+
+In addition to the examples mentioned above, there are some specific pieces of advice that
+may prove helpful:
+
+* Be careful with entry modules. Entry modules are any files passed directly to Browserify's
+`require` method. Anything specified in Grunt-Browserify's `src` will be interpreted as an entry file.
+Keep in mind that Browserify walks a dependency tree, so theoretically a single
+"main" entry file could be enough for all of your client side code. The reason
+for caution is that entry files are interpretted at *load time*, unlike
+traditionally required modules, which are interpretted like any CJS module -
+when they are required. Anything in an entry file is run as soon as the
+Browserified bundle is loaded on a web page. See the inline comments in the
+`simple` example directory for further details.
+
+* Break vendored libs into their own Browserify build. Libs like jQuery, Angular, D3, etc. are large files that can
+greatly slow down Browserify compilation time. They also aren't changing with the same frequency
+as your own client source code. By breaking these vendored files into their own Grunt-Browserify
+task, then making them externally available via an alias, you can make build
+times signficantly shorter. See the `complex` example folder for a use case.
+You can concatenate each Browserified bundled to a single JS file, which
+should handle any concerns with browser latency.
+
+* Transforms are your friend. You can perform some pretty complex magic with
+Browserify-transforms. Check out [deamdify](https://github.com/jaredhanson/deamdify)
+and [coffeeify](https://github.com/substack/coffeeify) for some useful
+examples.
+
+* The more modular the code, the more likely you are to share modules across
+client and server. Grunt-Browserify can help you manage the complexity around
+keeping your client-side code in different folder paths. (For example,
+`client/script` and `shared`.) Take a look at the `aliasMappings` capability,
+which also has a corresponding setup in the examples folder.
 
 
 ## Documentation
@@ -29,10 +96,28 @@ Type: `[String]`
 
 Specifies files to be ignored in the browserify bundle.
 
+#### noParse
+Type: `[String]`
+
+Array of file paths that Browserify should not attempt to parse for `require()`
+statements, which should improve compilation time for large library files that
+do not need to be parsed. (The Browserify docs provide the example of jQuery, although I
+think it would probably be more useful to shim such libraries than to compile
+them with noParse).
+
 #### alias
 Type: `[String:String]` or comma-separated `String`
 
-Browserify can alias files to a certain name. For example, `require(‘./foo’)` can be aliased to be used as `require(‘foo’)`. Aliases should be specified as `fileName:alias`.
+Browserify can alias files or modules to a certain name. For example, `require(‘./foo’)`
+can be aliased to be used as `require(‘foo’)`. Aliases should be specified as
+`fileName:alias`.  A couple notes:
+
+* fileNames are parsed into their full paths with `path.resolve`.
+
+* Any aliases are automatically externalized by Browserify. That means an alias in one bundle is requireable from another.
+
+* If you leave the second half of an alias blank, it will just externalize the target. For example: `alias: ['events:']` will
+alias the events module as 'events' inside and outside of the bundle.
 
 #### aliasMappings
 Type: `[Object || Array]`
@@ -46,10 +131,6 @@ Type: `[String]`
 
 Specifies files to be loaded from a previously loaded, “common” bundle.
 
-#### externalize
-Type: `[String]`
-
-Specifies modules(s) to be exposed outside of a bundle, which is necessary for building "common" bundles which can be loaded via the `external` option above. Basically, it's a list of files which are supplied to browserify via its `require` or `-r` command.
 
 #### transform
 Type: `[String || Function]`
@@ -127,6 +208,21 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v1.0.5
   - Bumping to latest Browserify (2.18.x)
+
+### v1.1.0
+  - Added support for noParse option
+  - Change browserify() call to pass files as opts.entries
+
+### v1.1.1
+  - Fix regression where shimmed modules not being parsed
+
+### v1.2
+  - `Externalize` has been deprecated in favor of `alias` (#69)
+  - Allow `external` to use module names, in addition to file paths (#68). Waiting on Browserify changes for this to actually work.
+  - Much improved docs (#67)
+  - Allow non-files to be ignored (#50), via @joshuarubin
+
+
 
 ## Frequent Contributors
   - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
