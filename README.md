@@ -222,6 +222,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
   - Much improved docs (#67)
   - Allow non-files to be ignored (#50), via @joshuarubin
 
+### v1.2.1
+  - Bump browserify to ~2.25.0, browserify-shim to ~2.0.7
+
 
 
 ## Frequent Contributors
