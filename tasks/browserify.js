@@ -221,13 +221,21 @@ module.exports = function (grunt) {
       }
 
       b.bundle(opts, function (err, src) {
-        if (err) {
-          grunt.fail.warn(err);
+        var handle = function (err) {
+          if (err) {
+            grunt.fail.warn(err)
+          }
         }
 
-        grunt.file.write(file.dest, src);
-        grunt.log.ok('Bundled ' + file.dest);
-        next();
+        handle(err)
+        opts.post = opts.post || function(err, src, done){done()}
+        opts.post.call(null, err, src, function(err){
+          handle(err)
+
+          grunt.file.write(file.dest, src);
+          grunt.log.ok('Bundled ' + file.dest);
+          next();
+        })
       });
 
     }, this.async());

@@ -277,6 +277,15 @@ module.exports = {
     test.ok(actual.match(/\/\/@ sourceMappingURL=/));
 
     test.done();
+  },
+
+  postCallback: function(test) {
+    test.expect(1);
+
+    var actual = readFile('tmp/post.txt');
+    test.ok(actual === 'Hello World!');
+
+    test.done();
   }
 
 };

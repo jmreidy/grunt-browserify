@@ -154,6 +154,17 @@ module.exports = function (grunt) {
         options: {
           debug: true
         }
+      },
+
+      post: {
+        src: ['test/fixtures/basic/*.js'],
+        dest: 'tmp/post.js',
+        options: {
+          post: function(err, src, done) {
+            require('fs').appendFileSync('tmp/post.txt', 'Hello World!')
+            done()
+          }
+        }
       }
     },
 
