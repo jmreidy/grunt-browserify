@@ -139,7 +139,9 @@ Specifies a pipeline of functions (or modules) through which the browserified bu
 
 ```javascript
 browserify: {
-  'build/module.js': ['client/scripts/**/*.js', 'client/scripts/**/*.coffee'],
+  files: {
+    'build/module.js': ['client/scripts/**/*.js', 'client/scripts/**/*.coffee'],
+  },
   options: {
     transform: ['coffeeify']
   }
@@ -165,7 +167,9 @@ To get things running, add the following entry to `grunt.initConfig()`:
 
 ```javascript
 browserify: {
-  'build/module.js': ['client/scripts/**/*.js']
+  files: {
+    'build/module.js': ['client/scripts/**/*.js']
+  }
 }
 ```
 More complicated use cases can be found within this projects own `Gruntfile`.
