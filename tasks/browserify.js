@@ -65,13 +65,15 @@ module.exports = function (grunt) {
           alias = alias.split(':');
           var aliasSrc = alias[0];
           var aliasDest = alias[1];
+          var aliasDestResolved;
 
           if (/\//.test(aliasSrc)) {
             aliasSrc = path.resolve(aliasSrc);
           }
-          //if the alias exists and is a filepath, resolve it
+          //if the alias exists and is a filepath, resolve it if it's a valid path
           if (aliasDest && /\//.test(aliasDest)) {
-            aliasDest = path.resolve(aliasDest);
+            aliasDestResolved = path.resolve(aliasDest)
+            aliasDest = grunt.file.exists(aliasDestResolved) && grunt.file.isFile(aliasDestResolved) ? aliasDestResolved : aliasDest;
           }
 
           if (!aliasDest) {
