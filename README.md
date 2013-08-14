@@ -226,6 +226,13 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
   - Much improved docs (#67)
   - Allow non-files to be ignored (#50), via @joshuarubin
 
+### v1.2.1
+  - Bumping dependency versions
+
+### v1.2.2
+  - Change `alias` destination behavior to only treat the destination as a
+    filepath if it exists
+
 
 
 ## Frequent Contributors
