@@ -17,8 +17,7 @@ module.exports = function (grunt) {
         src: ['client/**/*.js'],
         dest: 'public/app.js',
         options: {
-          alias: ["vendor/client/jQuery.js:jQuery"], //for every ref to vendor/client/jQuery, replace with require('jQuery')
-          external: ["vendor/client/jQuery.js"] //don't actually include vendor/client/jQuery in the bundle
+          external: ["jQuery"]
         }
       },
     },

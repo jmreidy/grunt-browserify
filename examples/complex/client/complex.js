@@ -1,4 +1,4 @@
-var $ = require('../vendor/client/jQuery');
+var $ = require('jQuery');
 var test = require('./test');
 
 $().ready(function () {

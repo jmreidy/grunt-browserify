@@ -112,11 +112,12 @@ module.exports = {
   },
 
   external: function (test) {
-    test.expect(4);
+    test.expect(5);
 
     var actual = readFile('tmp/external.js');
     var core = browserify();
     core.require(__dirname + '/fixtures/external/a.js');
+    core.require(__dirname + '/fixtures/external/alias.js', {expose: 'vendor/alias'});
     core.require('events');
 
     core.bundle(function (err, src) {
@@ -134,8 +135,12 @@ module.exports = {
       //make sure a.js contents aren't in the bundle
       test.ok(!actual.match('this should be a common require'));
 
+      //make sure vendor/alias contents aren't in the bundle
+      test.ok(!actual.match('vendor/alias should be a common require'));
+
       //make sure events module isn't included
       test.ok(!actual.match('EventEmitter'));
+
 
       test.done();
     });

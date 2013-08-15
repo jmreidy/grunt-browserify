@@ -29,7 +29,7 @@ module.exports = function (grunt) {
       },
 
       alias: {
-        src: ['test/fixtures/alias/*.js'],
+        src: ['test/fixtures/alias/entry.js'],
         dest: 'tmp/alias.js',
         options: {
           alias: ['test/fixtures/alias/toBeAliased.js:alias']
@@ -37,7 +37,7 @@ module.exports = function (grunt) {
       },
 
       aliasString: {
-        src: ['test/fixtures/alias/*.js'],
+        src: ['test/fixtures/alias/entry.js'],
         dest: 'tmp/aliasString.js',
         options: {
           alias: 'test/fixtures/alias/toBeAliased.js:alias'
@@ -65,10 +65,10 @@ module.exports = function (grunt) {
       },
 
       external: {
-        src: ['test/fixtures/external/*.js'],
+        src: ['test/fixtures/external/entry.js', 'text/fixtures/external/b.js'],
         dest: 'tmp/external.js',
         options: {
-          external: ['test/fixtures/external/a.js', 'events']
+          external: ['test/fixtures/external/a.js', 'events', 'vendor/alias']
         }
       },
 

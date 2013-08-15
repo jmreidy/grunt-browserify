@@ -5,14 +5,14 @@ module.exports = function (grunt) {
         src: ['client/foo/*.js'],
         dest: 'public/common.js',
         options: {
-          alias: 'client/foo/bar.js'
+          alias: 'client/foo/bar.js:common/bar'
         }
       },
       client: {
         src: ['client/externals.js'],
         dest: 'public/app.js',
         options: {
-          external: ["client/foo/bar.js"]
+          external: ["common/bar"]
         }
       },
     },

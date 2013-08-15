@@ -1,4 +1,4 @@
-var bar = require('./foo/bar');
+var bar = require('common/bar');
 var test = require('./test');
 
 test();

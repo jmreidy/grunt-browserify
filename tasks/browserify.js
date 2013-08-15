@@ -106,19 +106,51 @@ module.exports = function (grunt) {
       }
 
       if (opts.external) {
+        var externalFiles = [];
+        var externalModules = [];
         opts.external.forEach(function (external) {
           if (/\//.test(external)) {
-            grunt.file.expand({filter: function (src) {
-                return grunt.file.exists(src);
-              }}, external)
-                .forEach(function (file) {
-                  b.external(path.resolve(file));
-                });
-          } else {
-            b.external(external);
+            var expandedExternals = grunt.file.expand(external);
+            if (expandedExternals.length > 0) {
+              expandedExternals.forEach(function (dest) {
+                var externalResolved = path.resolve(dest)
+                if (grunt.file.exists(externalResolved)) {
+                  externalFiles.push(externalResolved);
+                }
+                else {
+                  externalModules.push(dest);
+                }
+              });
+            }
+            else {
+              externalModules.push(external);
+            }
           }
-
+          else {
+            externalModules.push(external);
+          }
         });
+
+        //treat existing files as normal
+        externalFiles.forEach(function (external) {
+          b.external(external);
+        });
+
+        //filter arbitrary external ids from normal browserify behavior
+        if (externalModules.length > 0) {
+          var _filter;
+          externalModules.forEach(function (external) {
+            b.external(external);
+          });
+          if (opts.filter) {
+            _filter = opts.filter;
+          }
+          opts.filter = function (id) {
+            var included = externalModules.indexOf(id) < 0;
+            if (_filter) { return _filter(id) && included; }
+            else { return included; }
+          }
+        }
       }
 
       if (opts.externalize) {
