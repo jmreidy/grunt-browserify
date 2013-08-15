@@ -40,7 +40,7 @@ module.exports = function (grunt) {
       });
 
       if (opts.ignore) {
-        grunt.file.expand({nonull: true}, opts.ignore)
+        grunt.file.expand({nonull: true}, grunt.util._.flatten(opts.ignore))
           .forEach(function (file) {
             var ignoreFile = file;
 
@@ -61,6 +61,9 @@ module.exports = function (grunt) {
         if (aliases.split) {
           aliases = aliases.split(',');
         }
+
+        aliases = grunt.util._.flatten(aliases)
+
         aliases.forEach(function (alias) {
           alias = alias.split(':');
           var aliasSrc = alias[0];
@@ -85,7 +88,7 @@ module.exports = function (grunt) {
       }
 
       if (opts.aliasMappings) {
-        aliases = opts.aliasMappings.slice ? opts.aliasMappings : [opts.aliasMappings];
+        aliases = grunt.util._.isArray(opts.aliasMappings) ? opts.aliasMappings : [opts.aliasMappings];
         aliases.forEach(function (alias) {
           alias.expand = true; // so the user doesn't have to specify
           grunt.file.expandMapping(alias.src, alias.dest, alias)
@@ -108,7 +111,8 @@ module.exports = function (grunt) {
       if (opts.external) {
         var externalFiles = [];
         var externalModules = [];
-        opts.external.forEach(function (external) {
+
+        grunt.util._.flatten(opts.external).forEach(function (external) {
           if (/\//.test(external)) {
             var expandedExternals = grunt.file.expand(external);
             if (expandedExternals.length > 0) {
