@@ -156,7 +156,10 @@ Enable source map support.
 #### shim
 Type: `Object`
 
-Provide a config object to be used with [browserify-shim](https://github.com/thlorenz/browserify-shim)
+Provide a config object to be used with
+[browserify-shim](https://github.com/thlorenz/browserify-shim). Note that
+shimmed modules are essentially `alias`ed as well (with the alias being
+the Object key of the shim).
 
 #### Other Options
 
