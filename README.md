@@ -1,7 +1,7 @@
 [![build status](https://secure.travis-ci.org/jmreidy/grunt-browserify.png)](http://travis-ci.org/jmreidy/grunt-browserify)
 # grunt-browserify
 
-Grunt task for node-browserify. Current version: 1.2.0.
+Grunt task for node-browserify. Current version: 1.2.3.
 
 ## Getting Started
 This plugin requires [Grunt](https://gruntjs.com) `~0.4.0` and Node `>=0.10.x`.
@@ -235,6 +235,10 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.2.2
   - Change `alias` destination behavior to only treat the destination as a
     filepath if it exists
+
+### v1.2.3
+  - Allow aliasing with arbitrary ids. For example, you could alias `./vendor/client/jquery/jquery.js` to `/vendor/jquery`
+  for consumption by other bundles. See the updated `complex` and `externals` examples
 
 
 
