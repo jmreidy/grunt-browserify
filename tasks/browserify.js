@@ -72,7 +72,7 @@ module.exports = function (grunt) {
           }
           //if the alias exists and is a filepath, resolve it if it's a valid path
           if (aliasDest && /\//.test(aliasDest)) {
-            aliasDestResolved = path.resolve(aliasDest)
+            aliasDestResolved = path.resolve(aliasDest);
             aliasDest = grunt.file.exists(aliasDestResolved) && grunt.file.isFile(aliasDestResolved) ? aliasDestResolved : aliasDest;
           }
 
@@ -113,7 +113,7 @@ module.exports = function (grunt) {
             var expandedExternals = grunt.file.expand(external);
             if (expandedExternals.length > 0) {
               expandedExternals.forEach(function (dest) {
-                var externalResolved = path.resolve(dest)
+                var externalResolved = path.resolve(dest);
                 if (grunt.file.exists(externalResolved)) {
                   externalFiles.push(externalResolved);
                 }
@@ -149,7 +149,7 @@ module.exports = function (grunt) {
             var included = externalModules.indexOf(id) < 0;
             if (_filter) { return _filter(id) && included; }
             else { return included; }
-          }
+          };
         }
       }
 
