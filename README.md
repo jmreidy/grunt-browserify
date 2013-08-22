@@ -1,7 +1,7 @@
 [![build status](https://secure.travis-ci.org/jmreidy/grunt-browserify.png)](http://travis-ci.org/jmreidy/grunt-browserify)
 # grunt-browserify
 
-Grunt task for node-browserify. Current version: 1.2.3.
+Grunt task for node-browserify. Current version: [![NPM version](https://badge.fury.io/js/grunt-browserify.png)](http://badge.fury.io/js/grunt-browserify)
 
 ## Getting Started
 This plugin requires [Grunt](https://gruntjs.com) `~0.4.0` and Node `>=0.10.x`.
