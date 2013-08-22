@@ -240,6 +240,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
   - Allow aliasing with arbitrary ids. For example, you could alias `./vendor/client/jquery/jquery.js` to `/vendor/jquery`
   for consumption by other bundles. See the updated `complex` and `externals` examples
 
+### v1.2.4
+  - Flatten options arrays, to prevent any weird behavior (via @joeybaker)
+
 
 
 ## Frequent Contributors
