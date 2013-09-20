@@ -15,13 +15,15 @@ var shim = require('browserify-shim');
 
 module.exports = function (grunt) {
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
-    var opts = this.options();
+    var task = this;
+    var opts;
     var ctorOpts = {};
     var shims;
 
 
     grunt.util.async.forEachSeries(this.files, function (file, next) {
       var aliases;
+      opts = task.options();
 
       ctorOpts.entries = grunt.file.expand({filter: 'isFile'}, file.src).map(function (f) {
         return path.resolve(f);
@@ -62,7 +64,7 @@ module.exports = function (grunt) {
           aliases = aliases.split(',');
         }
 
-        aliases = grunt.util._.flatten(aliases)
+        aliases = grunt.util._.flatten(aliases);
 
         aliases.forEach(function (alias) {
           alias = alias.split(':');
