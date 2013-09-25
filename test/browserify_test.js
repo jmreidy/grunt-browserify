@@ -246,6 +246,19 @@ module.exports = {
     test.done();
   },
 
+  shimNoParse: function (test) {
+    test.expect(2);
+
+    var context = getIncludedModules('tmp/shimNoParse.js', domWindow());
+
+    test.ok(moduleExported(context, './fixtures/shim/a.js'));
+
+    //jquery is defined on the window
+    test.ok(context.window.$);
+
+    test.done();
+  },
+
   sourceMaps: function (test) {
     test.expect(1);
 
