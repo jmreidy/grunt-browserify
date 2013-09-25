@@ -231,6 +231,21 @@ module.exports = {
     test.done();
   },
 
+  shimMulti: function (test) {
+    test.expect(4);
+
+    ['tmp/shim-a.js', 'tmp/shim-b.js'].forEach(function (file) {
+      var context = getIncludedModules(file, domWindow());
+
+      test.ok(moduleExported(context, './fixtures/shim/a.js'));
+
+      //jquery is defined on the window
+      test.ok(context.window.$);
+    });
+
+    test.done();
+  },
+
   sourceMaps: function (test) {
     test.expect(1);
 

@@ -112,6 +112,21 @@ module.exports = function (grunt) {
         }
       },
 
+      shimMulti: {
+        files: {
+          'tmp/shim-a.js': ['test/fixtures/shim/a.js', 'test/fixtures/shim/shim.js'],
+          'tmp/shim-b.js': ['test/fixtures/shim/a.js', 'test/fixtures/shim/shim.js']
+        },
+        options: {
+          shim: {
+            shimmedJQ: {
+              path: 'test/fixtures/shim/jquery.js',
+              exports: '$'
+            }
+          }
+        }
+      },
+
       sourceMaps: {
         src: ['test/fixtures/basic/*.js'],
         dest: 'tmp/sourceMaps.js',
