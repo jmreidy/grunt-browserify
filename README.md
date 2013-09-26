@@ -247,6 +247,11 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.2.4
   - Flatten options arrays, to prevent any weird behavior (via @joeybaker)
 
+### v1.2.5
+  - Documentation fix (via @alanshaw)
+  - Allow aliasing inner modules (via @bananushka)
+  - Fix multitask shim bug (via @byronmwong)
+
 
 
 ## Frequent Contributors
