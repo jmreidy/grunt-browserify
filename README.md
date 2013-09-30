@@ -163,6 +163,14 @@ Provide a config object to be used with
 shimmed modules are essentially `alias`ed as well (with the alias being
 the Object key of the shim).
 
+#### postBundleCB
+Type: `Function (err, src, next)`
+
+An optional callback function, which will be called after bundle completion and
+before writing of the bundle. The `err` and `src` arguments are provided
+directly from browserify. The `next` callback should be called with `(err,
+modifiedSrc)`; the `modifiedSrc` is what will be written to the output file.
+
 #### Other Options
 
 Any other options you provide will be passed through to browserify. This is useful for setting things like `standalone` or `ignoreGlobals`.
@@ -258,6 +266,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v1.2.7
   - Fix bug in sharing shimmed files across bundles (#89)
+
+### v1.2.8
+  - Add postBundle callback support (via @Bockit)
 
 
 ## Frequent Contributors
