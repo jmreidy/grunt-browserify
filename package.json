@@ -30,7 +30,8 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "browserify-shim": "~2.0.8"
+    "browserify-shim": "~2.0.8",
+    "through": "~2.3.4"
   },
   "devDependencies": {
     "browserify": "~2.33",

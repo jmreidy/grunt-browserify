@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var path = require('path');
+var through = require('through');
 
 /*
  * grunt-browserify
@@ -112,11 +113,37 @@ module.exports = function (grunt) {
 
       if (opts.shim) {
         shims = opts.shim;
-        Object.keys(shims)
-          .forEach(function (alias) {
-            shims[alias].path = path.resolve(shims[alias].path);
+        var noParseShimExists = false;
+        var shimPaths = Object.keys(shims)
+          .map(function (alias) {
+            var shimPath = path.resolve(shims[alias].path);
+            shims[alias].path = shimPath;
+            if (!noParseShimExists) {
+              noParseShimExists = ctorOpts.noParse && ctorOpts.noParse.indexOf(shimPath) > -1;
+            }
+            return shimPath;
           });
         b = shim(b, shims);
+        if (noParseShimExists) {
+          var shimmed = [];
+          b.transform(function (file) {
+            if (shimmed.indexOf(file) < 0 &&
+                ctorOpts.noParse.indexOf(file) > -1 &&
+                shimPaths.indexOf(file) > -1) {
+              shimmed.push(file);
+              var data = 'var global=self;';
+              var write = function (buffer) {
+                return data += buffer;
+              };
+              var end = function () {
+                this.queue(data);
+                this.queue(null);
+              };
+              return through(write, end);
+            }
+            return through();
+          });
+        }
       }
 
       if (opts.external) {
