@@ -13,7 +13,7 @@ function compareOutputs(fn1, fn2) {
   return (grunt.util.normalizelf(fn1.toString()) === grunt.util.normalizelf(fn2.toString()));
 }
 
-function moduleExported(context, modulePath) {
+function moduleExported(context, modulePath, extension) {
   var module = modulePath.match(/(\w+)\.js/)[1];
   return compareOutputs(context.exports[module], require(modulePath));
 }
@@ -203,6 +203,17 @@ module.exports = {
     });
 
 
+  },
+
+  extensions: function (test) {
+    test.expect(2);
+    var context = getIncludedModules('tmp/extensions.js');
+
+    test.ok(moduleExported(context, './fixtures/extensions/a.js'));
+    var bPath = './fixtures/extensions/b.fjs';
+    test.ok(compareOutputs(context.exports['b'], require(bPath)));
+
+    test.done();
   },
 
   noParse: function (test) {

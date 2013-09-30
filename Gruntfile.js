@@ -91,6 +91,14 @@ module.exports = function (grunt) {
         }
       },
 
+      extentions: {
+        src: ['test/fixtures/extensions/extension.js'],
+        dest: 'tmp/extensions.js',
+        options: {
+          extensions: ['.js', '.fjs']
+        }
+      },
+
       noParse: {
         src: ['test/fixtures/noParse/*.js'],
         dest: 'tmp/noParse.js',

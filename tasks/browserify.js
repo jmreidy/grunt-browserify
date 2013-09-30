@@ -29,6 +29,11 @@ module.exports = function (grunt) {
         return path.resolve(f);
       });
 
+      if (opts.extensions) {
+        ctorOpts.extensions = opts.extensions;
+        delete opts.extensions;
+      }
+
       if (opts.noParse) {
         ctorOpts.noParse = opts.noParse.map(function (filePath) {
           return path.resolve(filePath);
