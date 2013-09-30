@@ -252,6 +252,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
   - Allow aliasing inner modules (via @bananushka)
   - Fix multitask shim bug (via @byronmwong)
 
+### v1.2.6
+  - Move browserify to a peer dependency, to allow custom versions (via @nrn)
+  - Add support for browserify extension flag (from browserify v2.31)
 
 
 ## Frequent Contributors
