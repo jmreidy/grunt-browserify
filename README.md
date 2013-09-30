@@ -256,6 +256,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
   - Move browserify to a peer dependency, to allow custom versions (via @nrn)
   - Add support for browserify extension flag (from browserify v2.31)
 
+### v1.2.7
+  - Fix bug in sharing shimmed files across bundles (#89)
+
 
 ## Frequent Contributors
   - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
