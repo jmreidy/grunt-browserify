@@ -220,24 +220,26 @@ module.exports = function (grunt) {
         grunt.file.mkdir(destPath);
       }
 
-      b.bundle(opts, function (err, src) {
-        var handle = function (err) {
-          if (err) {
-            grunt.fail.warn(err)
-          }
+      var onBundleComplete = function (err, src) {
+        if (err) {
+          grunt.fail.warn(err);
         }
 
-        handle(err)
-        opts.post = opts.post || function(err, src, done){done()}
-        opts.post.call(null, err, src, function(err){
-          handle(err)
+        grunt.file.write(file.dest, src);
+        grunt.log.ok('Bundled ' + file.dest);
+        next();
+      };
 
-          grunt.file.write(file.dest, src);
-          grunt.log.ok('Bundled ' + file.dest);
-          next();
-        })
+      b.bundle(opts, function (err, src) {
+        if (opts.postBundleCB) {
+          opts.postBundleCB(err, src, onBundleComplete);
+        }
+        else {
+          onBundleComplete(err, src);
+        }
       });
 
     }, this.async());
   });
 };
+
