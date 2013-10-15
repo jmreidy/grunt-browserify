@@ -270,6 +270,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.2.8
   - Add postBundle callback support (via @Bockit)
 
+### v1.2.9
+  - Fix peerDependency version requirements
+
 
 ## Frequent Contributors
   - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
