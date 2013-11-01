@@ -222,7 +222,8 @@ module.exports = function (grunt) {
 
       var onBundleComplete = function (err, src) {
         if (err) {
-          grunt.fail.warn(err);
+          grunt.log.error(err);
+          grunt.fail.warn('Error running grunt-browserify.');
         }
 
         grunt.file.write(file.dest, src);

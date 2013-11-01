@@ -273,6 +273,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.2.9
   - Fix peerDependency version requirements
 
+### v1.2.10
+  - Fix #106
+
 
 ## Frequent Contributors
   - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
