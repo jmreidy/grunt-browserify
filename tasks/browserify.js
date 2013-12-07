@@ -220,6 +220,10 @@ module.exports = function (grunt) {
         grunt.file.mkdir(destPath);
       }
 
+      if (opts.preBundleCB) {
+        opts.preBundleCB(b);
+      }
+
       var onBundleComplete = function (err, src) {
         if (err) {
           grunt.log.error(err);

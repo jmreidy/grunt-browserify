@@ -286,7 +286,16 @@ module.exports = {
     test.ok(actual === 'Hello World!');
 
     test.done();
-  }
+  },
 
+  preCallback: function (test) {
+    test.expect(1);
+
+    var context = getIncludedModules('tmp/ignores-pre.js');
+
+    test.ok(moduleNotExported(context, './fixtures/ignore/ignore.js'));
+
+    test.done();
+  }
 };
 

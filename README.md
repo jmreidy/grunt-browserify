@@ -163,6 +163,12 @@ Provide a config object to be used with
 shimmed modules are essentially `alias`ed as well (with the alias being
 the Object key of the shim).
 
+#### preBundleCB
+Type: `Function (b)`
+
+An optional callback function, that will be called before bundle completion.
+`b` is the `browerify` instance that will output the bundle.
+
 #### postBundleCB
 Type: `Function (err, src, next)`
 
