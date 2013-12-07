@@ -32,7 +32,8 @@
   "dependencies": {
     "browserify-shim": "~2.0.8",
     "through": "~2.3.4",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "async": "~0.2.9"
   },
   "devDependencies": {
     "browserify": "~2.35",

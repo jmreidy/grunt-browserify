@@ -4,6 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var through = require('through');
 var _ = require('lodash');
+var async = require('async');
 
 /*
  * grunt-browserify
@@ -23,7 +24,7 @@ module.exports = function (grunt) {
     var shims;
 
 
-    grunt.util.async.forEachSeries(this.files, function (file, next) {
+    async.forEachSeries(this.files, function (file, next) {
       var aliases;
       opts = task.options();
 
