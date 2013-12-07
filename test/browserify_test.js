@@ -279,7 +279,7 @@ module.exports = {
     test.done();
   },
 
-  postCallback: function(test) {
+  postCallback: function (test) {
     test.expect(1);
 
     var actual = readFile('tmp/post.txt');

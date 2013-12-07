@@ -160,8 +160,8 @@ module.exports = function (grunt) {
         src: ['test/fixtures/basic/*.js'],
         dest: 'tmp/post.js',
         options: {
-          postBundleCB: function(err, src, done) {
-            require('fs').appendFileSync('tmp/post.txt', 'Hello World!')
+          postBundleCB: function (err, src, done) {
+            require('fs').appendFileSync('tmp/post.txt', 'Hello World!');
             done();
           }
         }
