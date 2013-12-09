@@ -156,12 +156,23 @@ module.exports = function (grunt) {
         }
       },
 
+      preBundleCb: {
+        src: ['test/fixtures/ignore/*.js'],
+        dest: 'tmp/ignores-pre.js',
+        options: {
+          preBundleCB: function (bundle) {
+            var file = require('path').resolve('test/fixtures/ignore/ignore.js');
+            bundle.ignore(file);
+          }
+        }
+      },
+
       postBundleCB: {
         src: ['test/fixtures/basic/*.js'],
         dest: 'tmp/post.js',
         options: {
-          postBundleCB: function(err, src, done) {
-            require('fs').appendFileSync('tmp/post.txt', 'Hello World!')
+          postBundleCB: function (err, src, done) {
+            require('fs').appendFileSync('tmp/post.txt', 'Hello World!');
             done();
           }
         }
