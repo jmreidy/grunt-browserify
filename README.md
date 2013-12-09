@@ -285,6 +285,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.2.11
   - Move to browserify 2.35 for upstream dedupe fix
 
+### v1.2.12
+  - Add `preBundleCB` option (via @alexstrat)
+
 
 ## Frequent Contributors
   - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
