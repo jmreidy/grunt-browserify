@@ -3,6 +3,8 @@
 var fs = require('fs');
 var path = require('path');
 var through = require('through');
+var _ = require('lodash');
+var async = require('async');
 
 /*
  * grunt-browserify
@@ -22,7 +24,7 @@ module.exports = function (grunt) {
     var shims;
 
 
-    grunt.util.async.forEachSeries(this.files, function (file, next) {
+    async.forEachSeries(this.files, function (file, next) {
       var aliases;
       opts = task.options();
 
@@ -48,7 +50,7 @@ module.exports = function (grunt) {
       });
 
       if (opts.ignore) {
-        grunt.file.expand({nonull: true}, grunt.util._.flatten(opts.ignore))
+        grunt.file.expand({nonull: true}, _.flatten(opts.ignore))
           .forEach(function (file) {
             var ignoreFile = file;
 
@@ -70,7 +72,7 @@ module.exports = function (grunt) {
           aliases = aliases.split(',');
         }
 
-        aliases = grunt.util._.flatten(aliases);
+        aliases = _.flatten(aliases);
 
         aliases.forEach(function (alias) {
           alias = alias.split(':');
@@ -100,7 +102,7 @@ module.exports = function (grunt) {
       }
 
       if (opts.aliasMappings) {
-        aliases = grunt.util._.isArray(opts.aliasMappings) ? opts.aliasMappings : [opts.aliasMappings];
+        aliases = _.isArray(opts.aliasMappings) ? opts.aliasMappings : [opts.aliasMappings];
         aliases.forEach(function (alias) {
           alias.expand = true; // so the user doesn't have to specify
           grunt.file.expandMapping(alias.src, alias.dest, alias)
@@ -150,7 +152,7 @@ module.exports = function (grunt) {
         var externalFiles = [];
         var externalModules = [];
 
-        grunt.util._.flatten(opts.external).forEach(function (external) {
+        _.flatten(opts.external).forEach(function (external) {
           if (/\//.test(external)) {
             var expandedExternals = grunt.file.expand(external);
             if (expandedExternals.length > 0) {
