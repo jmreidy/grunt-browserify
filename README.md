@@ -288,6 +288,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.2.12
   - Add `preBundleCB` option (via @alexstrat)
 
+### v1.3.0
+  - Bump to Browserify v3
+
 
 ## Frequent Contributors
   - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
