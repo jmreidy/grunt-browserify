@@ -59,12 +59,15 @@ module.exports = function (grunt) {
 
       doBundle(b, opts, bundleComplete);
 
-      b.on('update', function (ids) {
-        ids.forEach(function (id) {
-          grunt.log.ok(id + ' changed, updating browserify bundle.');
+      if (opts.watch) {
+        var bundleUpdate = onBundleComplete(file.dest, keepAliveFn);
+        b.on('update', function (ids) {
+          ids.forEach(function (id) {
+            grunt.log.ok(id + ' changed, updating browserify bundle.');
+          });
+          doBundle(b, opts, bundleUpdate);
         });
-        doBundle(b, opts, keepAliveFn);
-      });
+      }
 
     }, done);
   });
