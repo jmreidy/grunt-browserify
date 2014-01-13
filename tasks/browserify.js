@@ -5,6 +5,7 @@ var path = require('path');
 var through = require('through');
 var _ = require('lodash');
 var browserify = require('browserify');
+var watchify = require('watchify');
 var shim = require('browserify-shim');
 var async = require('async');
 
@@ -18,14 +19,25 @@ var async = require('async');
 module.exports = function (grunt) {
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
     var shims;
+    var done = this.async();
     var aliases = [];
     var task = this;
+    var taskOpts = this.options();
     var browserifyConstructorOpts = {};
+    if (taskOpts.watch && taskOpts.keepAlive) {
+      delete taskOpts.keepAlive;
+      done = function () {
+        grunt.log.ok('Watchifying...');
+      };
+    }
 
     async.forEachSeries(this.files, function (file, next) {
-      var opts = configureOptions(task.options(), file, browserifyConstructorOpts);
+      var opts = configureOptions(task.options(), browserifyConstructorOpts);
+      browserifyConstructorOpts.entries = grunt.file.expand({filter: 'isFile'}, file.src).map(function (f) {
+        return path.resolve(f);
+      });
 
-      var b = browserify(browserifyConstructorOpts);
+      var b = opts.watch? watchify(browserifyConstructorOpts) : browserify(browserifyConstructorOpts);
       b.on('error', function (err) {
         grunt.fail.warn(err);
       });
@@ -42,31 +54,24 @@ module.exports = function (grunt) {
       var destPath = createDestDir(file.dest);
       var bundleComplete = onBundleComplete(file.dest, next);
 
-      if (opts.preBundleCB) {
-        opts.preBundleCB(b);
-      }
+      doBundle(b, opts, bundleComplete);
 
-      b.bundle(opts, function (err, src) {
-        if (opts.postBundleCB) {
-          opts.postBundleCB(err, src, bundleComplete);
-        }
-        else {
-          bundleComplete(err, src);
-        }
+      b.on('update', function (ids) {
+        ids.forEach(function (id) {
+          grunt.log.ok(id + ' changed, updating browserify bundle.');
+        });
+        doBundle(b, opts, bundleComplete);
       });
 
-    }, this.async());
+    }, done);
   });
 
   /**
   * Parse the supplied task options, splitting out configuration options
   * from the browserify constructor opts
   */
-  var configureOptions = function(taskOpts, currentFile, browserifyConstructorOpts) {
+  var configureOptions = function(taskOpts, browserifyConstructorOpts) {
     _.defaults(taskOpts, {transform: []});
-    browserifyConstructorOpts.entries = grunt.file.expand({filter: 'isFile'}, currentFile.src).map(function (f) {
-      return path.resolve(f);
-    });
 
     if (taskOpts.extensions) {
       browserifyConstructorOpts.extensions = taskOpts.extensions;
@@ -302,6 +307,21 @@ module.exports = function (grunt) {
       grunt.log.ok('Bundled ' + destination);
       next();
     };
+  };
+
+  var doBundle = function (browserifyInstance, opts, bundleComplete) {
+    if (opts.preBundleCB) {
+      opts.preBundleCB(browserifyInstance);
+    }
+
+    browserifyInstance.bundle(opts, function (err, src) {
+      if (opts.postBundleCB) {
+        opts.postBundleCB(err, src, bundleComplete);
+      }
+      else {
+        bundleComplete(err, src);
+      }
+    });
   };
 };
 

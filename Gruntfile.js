@@ -168,11 +168,11 @@ module.exports = function (grunt) {
         }
       },
 
-      paths: {
-        src: ['test/fixtures/paths/paths.js'],
-        dest: 'tmp/paths.js',
+      watch: {
+        src: ['test/fixtures/watch/*.js'],
+        dest: 'tmp/watch.js',
         options: {
-          paths: ['test/fixtures', 'test/fixtures/basic']
+          watch: true
         }
       }
     },

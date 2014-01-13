@@ -265,12 +265,12 @@ module.exports = {
     test.done();
   },
 
-  paths: function (test) {
+  watch: function (test) {
     test.expect(2);
-    var context = getIncludedModules('tmp/paths.js');
+    var context = getIncludedModules('tmp/watch.js');
 
-    test.ok(moduleExported(context, './fixtures/basic/a.js'));
-    test.ok(moduleExported(context, './fixtures/basic/b.js'));
+    test.ok(moduleExported(context, './fixtures/watch/a.js'));
+    test.ok(moduleExported(context, './fixtures/watch/b.js'));
 
     test.done();
   }
