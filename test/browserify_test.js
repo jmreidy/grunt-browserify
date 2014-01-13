@@ -172,39 +172,6 @@ module.exports = {
     });
   },
 
-  externalize: function (test) {
-    test.expect(4);
-
-    var actual = readFile('tmp/externalize.js');
-    var c = {};
-    vm.runInNewContext(actual, c);
-
-
-    var depen = browserify();
-    depen.external(__dirname + '/fixtures/externalize/a.js');
-    depen.add(__dirname + '/fixtures/externalize/entry.js');
-
-    depen.bundle(function (err, src) {
-      c.required = function (exports) {
-        c.exports = exports;
-      };
-      vm.runInNewContext(src, c);
-
-      test.ok(moduleExported(c, './fixtures/externalize/a.js'));
-      test.ok(moduleExported(c, './fixtures/externalize/b.js'));
-
-      //require should be exposed
-      test.ok(c.require);
-
-      //common module required
-      test.ok(c.require('events'));
-
-      test.done();
-    });
-
-
-  },
-
   extensions: function (test) {
     test.expect(2);
     var context = getIncludedModules('tmp/extensions.js');
