@@ -165,7 +165,15 @@ module.exports = function (grunt) {
             done();
           }
         }
-      }
+      },
+
+      watch: {
+        src: ['test/fixtures/watch/*.js'],
+        dest: 'tmp/watch.js',
+        options: {
+          watch: true
+        }
+      },
     },
 
     nodeunit: {

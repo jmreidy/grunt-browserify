@@ -263,6 +263,16 @@ module.exports = {
     test.ok(moduleNotExported(context, './fixtures/ignore/ignore.js'));
 
     test.done();
-  }
+  },
+
+  watch: function (test) {
+    test.expect(2);
+    var context = getIncludedModules('tmp/watch.js');
+
+    test.ok(moduleExported(context, './fixtures/watch/a.js'));
+    test.ok(moduleExported(context, './fixtures/watch/b.js'));
+
+    test.done();
+  },
 };
 
