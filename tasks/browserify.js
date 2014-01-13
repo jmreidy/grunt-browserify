@@ -24,11 +24,13 @@ module.exports = function (grunt) {
     var task = this;
     var taskOpts = this.options();
     var browserifyConstructorOpts = {};
+    var keepAliveFn = function () {
+      grunt.log.ok('Watchifying...');
+    };
+
     if (taskOpts.watch && taskOpts.keepAlive) {
       delete taskOpts.keepAlive;
-      done = function () {
-        grunt.log.ok('Watchifying...');
-      };
+      done = keepAliveFn;
     }
 
     async.forEachSeries(this.files, function (file, next) {
@@ -61,7 +63,7 @@ module.exports = function (grunt) {
         ids.forEach(function (id) {
           grunt.log.ok(id + ' changed, updating browserify bundle.');
         });
-        doBundle(b, opts, bundleComplete);
+        doBundle(b, opts, keepAliveFn);
       });
 
     }, done);
