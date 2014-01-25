@@ -159,9 +159,9 @@ Enable source map support.
 Type: `Object`
 
 Provide a config object to be used with
-[browserify-shim](https://github.com/thlorenz/browserify-shim). Note that
-shimmed modules are essentially `alias`ed as well (with the alias being
-the Object key of the shim).
+[browserify-shim v2.0](https://github.com/thlorenz/browserify-shim/tree/v2.0.10).
+Note that shimmed modules are essentially `alias`ed as well (with the alias
+being the Object key of the shim).
 
 #### preBundleCB
 Type: `Function (b)`
