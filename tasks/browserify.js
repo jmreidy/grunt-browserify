@@ -32,9 +32,10 @@ module.exports = function (grunt) {
         return path.resolve(f);
       });
 
-      if (opts.extensions) {
-        ctorOpts.extensions = opts.extensions;
+      if (opts.extensions || opts.extension) {
+        ctorOpts.extensions = opts.extensions || opts.extension;
         delete opts.extensions;
+        delete opts.extension;
       }
 
       if (opts.noParse) {
