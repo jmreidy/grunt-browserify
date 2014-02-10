@@ -44,6 +44,11 @@ module.exports = function (grunt) {
         delete opts.noParse;
       }
 
+      if (opts.paths) {
+        ctorOpts.paths = opts.paths;
+        delete opts.paths;
+      }
+
       var b = browserify(ctorOpts);
       b.on('error', function (err) {
         grunt.fail.warn(err);
