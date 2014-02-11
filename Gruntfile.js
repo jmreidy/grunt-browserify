@@ -176,6 +176,14 @@ module.exports = function (grunt) {
             done();
           }
         }
+      },
+
+      paths: {
+        src: ['test/fixtures/paths/paths.js'],
+        dest: 'tmp/paths.js',
+        options: {
+          paths: ['test/fixtures', 'test/fixtures/basic']
+        }
       }
     },
 
