@@ -291,6 +291,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.3.0
   - Bump to Browserify v3
 
+### v1.3.1
+  - Adding support for Browserify 3.2 paths (via @trevordixon)
+
 
 ## Frequent Contributors
   - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
