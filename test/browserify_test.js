@@ -296,6 +296,16 @@ module.exports = {
     test.ok(moduleNotExported(context, './fixtures/ignore/ignore.js'));
 
     test.done();
+  },
+
+  paths: function (test) {
+    test.expect(2);
+    var context = getIncludedModules('tmp/paths.js');
+
+    test.ok(moduleExported(context, './fixtures/basic/a.js'));
+    test.ok(moduleExported(context, './fixtures/basic/b.js'));
+
+    test.done();
   }
 };
 
