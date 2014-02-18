@@ -126,6 +126,11 @@ Like the `alias` option described above, but accepts mapping patterns as describ
 directories and sets of files. Note that the `expand` option is set to `true` for you,
 so you can omit that from your configuration.
 
+#### paths
+Type: `[String]`
+
+Specifies paths to look in for required files
+
 #### external
 Type: `[String]`
 

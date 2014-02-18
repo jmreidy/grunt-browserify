@@ -111,6 +111,16 @@ module.exports = {
     test.done();
   },
 
+  paths: function (test) {
+    test.expect(2);
+    var context = getIncludedModules('tmp/paths.js');
+
+    test.ok(moduleExported(context, './fixtures/basic/a.js'));
+    test.ok(moduleExported(context, './fixtures/basic/b.js'));
+
+    test.done();
+  },
+
   external: function (test) {
     test.expect(5);
 
@@ -241,7 +251,7 @@ module.exports = {
     test.expect(1);
 
     var actual = readFile('tmp/sourceMaps.js');
-    test.ok(actual.match(/\/\/@ sourceMappingURL=/));
+    test.ok(actual.match(/\/\/# sourceMappingURL=/));
 
     test.done();
   },
