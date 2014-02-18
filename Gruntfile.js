@@ -64,6 +64,14 @@ module.exports = function (grunt) {
         }
       },
 
+      paths: {
+        src: ['test/fixtures/paths/paths.js'],
+        dest: 'tmp/paths.js',
+        options: {
+          paths: ['test/fixtures', 'test/fixtures/basic']
+        }
+      },
+
       external: {
         src: ['test/fixtures/external/entry.js', 'text/fixtures/external/b.js'],
         dest: 'tmp/external.js',

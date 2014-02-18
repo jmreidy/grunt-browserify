@@ -90,6 +90,11 @@ module.exports = function (grunt) {
       delete taskOpts.noParse;
     }
 
+    if (taskOpts.paths) {
+      browserifyConstructorOpts.paths = taskOpts.paths;
+      delete taskOpts.paths;
+    }
+
     return taskOpts;
   };
 
