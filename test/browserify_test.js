@@ -205,12 +205,12 @@ module.exports = {
 
   },
 
-  extensions: function (test) {
+  extension: function (test) {
     test.expect(2);
-    var context = getIncludedModules('tmp/extensions.js');
+    var context = getIncludedModules('tmp/extension.js');
 
-    test.ok(moduleExported(context, './fixtures/extensions/a.js'));
-    var bPath = './fixtures/extensions/b.fjs';
+    test.ok(moduleExported(context, './fixtures/extension/a.js'));
+    var bPath = './fixtures/extension/b.fjs';
     test.ok(compareOutputs(context.exports['b'], require(bPath)));
 
     test.done();

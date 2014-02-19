@@ -105,6 +105,19 @@ do not need to be parsed. (The Browserify docs provide the example of jQuery, al
 think it would probably be more useful to shim such libraries than to compile
 them with noParse).
 
+#### extension
+Type: `[String]`
+
+Array of file extensions to consider EXTENSION as modules. 
+
+##### example
+```
+extension: [ '.coffee', '.js' ]
+```
+
+The `require` function will now look for any files with either of those 2 extensions and treat them as modules if found.
+
+
 #### alias
 Type: `[String:String]` or comma-separated `String`
 

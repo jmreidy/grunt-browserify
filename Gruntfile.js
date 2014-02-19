@@ -91,11 +91,11 @@ module.exports = function (grunt) {
         }
       },
 
-      extentions: {
-        src: ['test/fixtures/extensions/extension.js'],
-        dest: 'tmp/extensions.js',
+      extension: {
+        src: ['test/fixtures/extension/extension.js'],
+        dest: 'tmp/extension.js',
         options: {
-          extensions: ['.js', '.fjs']
+          extension: ['.js', '.fjs']
         }
       },
 
