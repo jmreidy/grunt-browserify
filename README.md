@@ -117,6 +117,15 @@ extension: [ '.coffee', '.js' ]
 
 The `require` function will now look for any files with either of those 2 extensions and treat them as modules if found.
 
+#### require
+Type: `[String]`
+
+Array of module names or files to bundle.require()
+
+#### example
+```
+require: ['foo', './bar']
+```
 
 #### alias
 Type: `[String:String]` or comma-separated `String`

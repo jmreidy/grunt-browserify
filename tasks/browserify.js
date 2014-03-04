@@ -223,6 +223,12 @@ module.exports = function (grunt) {
         });
       }
 
+      if(opts.require) {
+        opts.require.forEach(function(lib) {
+          b.require(lib)
+        })
+      }
+
       var destPath = path.dirname(path.resolve(file.dest));
       if (!grunt.file.exists(destPath)) {
         grunt.file.mkdir(destPath);
