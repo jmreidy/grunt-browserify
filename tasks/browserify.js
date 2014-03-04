@@ -219,7 +219,11 @@ module.exports = function (grunt) {
 
       if (opts.transform) {
         opts.transform.forEach(function (transform) {
-          b.transform(transform);
+          if (_.isArray(transform)) {
+            b.transform(transform[1], transform[0]);
+          } else {
+            b.transform(transform);
+          }
         });
       }
 
