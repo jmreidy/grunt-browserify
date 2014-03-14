@@ -27,27 +27,23 @@
     "node": ">= 0.8.x"
   },
   "scripts": {
-    "test": "tap ./test/*test.js"
+    "test": "mocha -R spec --timeout 5000"
   },
   "dependencies": {
     "browserify-shim": "~2.0.10",
-    "through": "~2.3.4",
     "lodash": "~2.4.1",
     "async": "~0.2.9",
     "watchify": "~0.5.0"
   },
   "devDependencies": {
-    "browserify": ">=3.21.1 <4.0.0",
+    "browserify": "~3.32.1",
     "grunt-contrib-jshint": "0.1.x",
     "grunt-contrib-clean": "~0.4.0",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "jsdom": "~0.6.0",
-    "tap": "~0.4.8",
     "sinon": "~1.9.0",
     "mocha": "~1.18.0"
   },
   "peerDependencies": {
-    "browserify": ">=2.35 < 4.0.0",
+    "browserify": "< 4.0.0",
     "grunt": "~0.4.0"
   },
   "keywords": [
