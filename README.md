@@ -108,7 +108,7 @@ them with noParse).
 #### extension
 Type: `[String]`
 
-Array of file extensions to consider EXTENSION as modules. 
+Array of file extensions to consider EXTENSION as modules.
 
 ##### example
 ```
@@ -315,6 +315,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v1.3.1
   - Adding support for Browserify 3.2 paths (via @trevordixon)
+
+### v1.3.2
+  - Adding `require` and global `transform` options.
 
 
 ## Frequent Contributors
