@@ -37,6 +37,18 @@ describe('grunt-browserify-runner', function () {
     });
   });
 
+  context('when bundle options are provided', function () {
+    it('passes browserifyBundleOptions to bundle', function (done) {
+      var b = stubBrowserify('bundle');
+      var opts = {};
+      var runner = createRunner(b);
+      runner.run([], dest, {browserifyBundleOptions: opts}, function () {
+        assert.ok(b().bundle.calledWith(opts));
+        done();
+      });
+    });
+  });
+
   it('writes the bundle to the provided dest', function (done) {
     var b = spyBrowserify();
     var runner = createRunner(b);
