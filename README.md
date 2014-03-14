@@ -20,7 +20,7 @@ grunt.loadNpmTasks('grunt-browserify');
 ## In the Wild
 Most simply, Browserify is a tool for taking your CommonJS-style Javascript
 code and packaging it for use in the browser. Grunt-Browserify provides the
-glue to better integrate Browserify into your development workflow.
+glue to better integrate Browserify into your Grunt-based development workflow.
 
 For JavaScripters unfamiliar with CJS-style code and the Node ecosystem, moving
 to Browserify can be a bit confusing. Writing your client-side code as CJS
@@ -48,99 +48,45 @@ play particularly nicely with a CJS module system. The simplicity provided by
 CJS modules can be lost as build complexity is increased and Browserify
 compilation time gets out of control.
 
-Grunt-Browserify is here to make your life easier. There's a number of examples
-provided in the `examples` directory of different real-world uses of
-Grunt-Browserify. Those examples, plus the example of the project's own
-Gruntfile, should provide clarity into how to get started. This project's
-author and contributors are happy to answer any specific questions on Twitter.
-
-In addition to the examples mentioned above, there are some specific pieces of advice that
-may prove helpful:
-
-* Be careful with entry modules. Entry modules are any files passed directly to Browserify's
-`require` method. Anything specified in Grunt-Browserify's `src` will be interpreted as an entry file.
-Keep in mind that Browserify walks a dependency tree, so theoretically a single
-"main" entry file could be enough for all of your client side code. The reason
-for caution is that entry files are interpretted at *load time*, unlike
-traditionally required modules, which are interpretted like any CJS module -
-when they are required. Anything in an entry file is run as soon as the
-Browserified bundle is loaded on a web page. See the inline comments in the
-`simple` example directory for further details.
-
-* Break vendored libs into their own Browserify build. Libs like jQuery, Angular, D3, etc. are large files that can
-greatly slow down Browserify compilation time. They also aren't changing with the same frequency
-as your own client source code. By breaking these vendored files into their own Grunt-Browserify
-task, then making them externally available via an alias, you can make build
-times signficantly shorter. See the `complex` example folder for a use case.
-You can concatenate each Browserified bundled to a single JS file, which
-should handle any concerns with browser latency.
-
-* Transforms are your friend. You can perform some pretty complex magic with
-Browserify-transforms. Check out [deamdify](https://github.com/jaredhanson/deamdify)
-and [coffeeify](https://github.com/substack/coffeeify) for some useful
-examples.
-
-* The more modular the code, the more likely you are to share modules across
-client and server. Grunt-Browserify can help you manage the complexity around
-keeping your client-side code in different folder paths. (For example,
-`client/script` and `shared`.) Take a look at the `aliasMappings` capability,
-which also has a corresponding setup in the examples folder.
-
 
 ## Documentation
 Run this task with the `grunt browserify` command. As with other Grunt plugins, the `src` and `dest` properties are most important: `src` will use the Grunt glob pattern to specify files for inclusion in the browserified package, and `dest` will specify the outfile for the compiled module.
 
+The current version of grunt-browserify sticks as close to the core browserify API as possible. Additional functionality can be added via the rich ecosystem of browserify transforms and plugins.
+
+The following task options are supported:
+
 ### Options
+#### alias
+Type: `[String:String]`
+
+Browserify can alias files or modules to a certain name. For example, `require(‘./foo’)` can be aliased to be used as `require(‘foo’)`. Aliases should be specified as `fileName:alias`.  Filenames are parsed into their full paths with `path.resolve`.
+
+#### require
+Type: `[String]`
+
+Specifies files to be required in the browserify bundle. String filenames are parsed into their full paths with `path.resolve`.
+
 #### ignore
 Type: `[String]`
 
-Specifies files to be ignored in the browserify bundle.
+Specifies files to be ignored in the browserify bundle. String filenames are parsed into their full paths with `path.resolve`.
 
-#### noParse
+#### exclude
 Type: `[String]`
 
-Array of file paths that Browserify should not attempt to parse for `require()`
-statements, which should improve compilation time for large library files that
-do not need to be parsed. (The Browserify docs provide the example of jQuery, although I
-think it would probably be more useful to shim such libraries than to compile
-them with noParse).
-
-#### alias
-Type: `[String:String]` or comma-separated `String`
-
-Browserify can alias files or modules to a certain name. For example, `require(‘./foo’)`
-can be aliased to be used as `require(‘foo’)`. Aliases should be specified as
-`fileName:alias`.  A couple notes:
-
-* fileNames are parsed into their full paths with `path.resolve`.
-
-* Any aliases are automatically externalized by Browserify. That means an alias in one bundle is requireable from another.
-
-* If you leave the second half of an alias blank, it will just externalize the target. For example: `alias: ['events:']` will
-alias the events module as 'events' inside and outside of the bundle.
-
-#### aliasMappings
-Type: `[Object || Array]`
-
-Like the `alias` option described above, but accepts mapping patterns as described in [Building the files object dynamically](http://gruntjs.com/configuring-tasks#building-the-files-object-dynamically) to enable aliasing of entire
-directories and sets of files. Note that the `expand` option is set to `true` for you,
-so you can omit that from your configuration.
-
-#### paths
-Type: `[String]`
-
-Specifies paths to look in for required files
+Specifies files to be excluded in the browserify bundle. String filenames are parsed into their full paths with `path.resolve`.
 
 #### external
-Type: `[String]`
+Type: `[String]` or `[String:String]`.
 
-Specifies files to be loaded from a previously loaded, “common” bundle.
+Specifies id strings which will be loaded from a previously loaded, “common” bundle. That is to say, files in the bundle that require the target String will assume that the target is provided externally. The secondary form of this option follows the format of `alias` above, and will externalise the ids specified in the alias array. This second form allows for the declaration of a single alias array which can be supplied to one bundle's `alias` option and another option's `external` option.
 
 
 #### transform
-Type: `[String || Function]`
+Type: `[String || Function]` or `[[String || Function,  Object]]`
 
-Specifies a pipeline of functions (or modules) through which the browserified bundle will be run. The [browserify docs themselves](https://github.com/substack/node-browserify#btransformtr) explain transform well, but below is an example of transform used with `grunt-browserify` to automatically compile coffeescript files for use in a bundle:
+Specifies a pipeline of functions (or modules) through which the browserified bundle will be run. The transform can either be a literal function, or a string referring to a NPM module. The [browserify docs themselves](https://github.com/substack/node-browserify#btransformtr) explain transform well, but below is an example of transform used with `grunt-browserify` to automatically compile coffeescript files for use in a bundle:
 
 ```javascript
 browserify: {
@@ -155,18 +101,27 @@ browserify: {
 }
 ```
 
-#### debug
-Type: `Boolean`
+Transforms can also be provided with an options hash; in this case, the transform should be specified as an array of `[transformStringOrFn, optionsHash]`.
 
-Enable source map support.
+#### plugin
+Type: `[String || Function]`
+Register a browserify plugin with the bundle. As with transforms, plugins are identified with either their NPM name (String) or a function literal.
 
-#### shim
-Type: `Object`
+#### browserifyConstructorOptions
+Type: Object
+A hash of options that are passed to browserify during instantiation.
 
-Provide a config object to be used with
-[browserify-shim](https://github.com/thlorenz/browserify-shim). Note that
-shimmed modules are essentially `alias`ed as well (with the alias being
-the Object key of the shim).
+#### browserifyBundleOptions
+Type: Object
+A hash of options that are passed to `browserify. bundle`.
+
+#### watch
+Type: Boolean
+If true, invoke [watchify](https://github.com/substack/watchify) instead of browserify.
+
+#### keepAlive
+Type: Boolean
+If true and if `watch` above is true, keep the Grunt process alive (simulates grunt-watch functionality).
 
 #### preBundleCB
 Type: `Function (b)`
@@ -182,27 +137,9 @@ before writing of the bundle. The `err` and `src` arguments are provided
 directly from browserify. The `next` callback should be called with `(err,
 modifiedSrc)`; the `modifiedSrc` is what will be written to the output file.
 
-#### Other Options
-
-Any other options you provide will be passed through to browserify. This is useful for setting things like `standalone` or `ignoreGlobals`.
-
-###Usage
-To get things running, add the following entry to `grunt.initConfig()`:
-
-```javascript
-browserify: {
-  dist: {
-    files: {
-      'build/module.js': ['client/scripts/**/*.js']
-    }
-  }
-}
-```
-More complicated use cases can be found within this projects own `Gruntfile`.
-
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using `grunt`.
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code.
 
 ## Release History
 
@@ -296,13 +233,12 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.3.0
   - Bump to Browserify v3
 
+### v2.0.0
+- Complete rewrite
 
-## Frequent Contributors
-  - Ben Clinkinbeard ([@bclinkinbeard](https://github.com/bclinkinbeard))
-  - Kyle Robinson Young ([@shama](https://github.com/shama))
 
 ## License
-Copyright (c) 2013 Justin Reidy
+Copyright (c) 2013-2014 Justin Reidy
 Licensed under the MIT license.
 
 
