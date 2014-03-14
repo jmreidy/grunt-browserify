@@ -10,14 +10,21 @@ var Runner = require('../lib/runner');
 var path = require('path');
 var async = require('async');
 
-module.exports = function (grunt) {
+module.exports = Task;
+
+function Task (grunt) {
+  var task = this;
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
     async.forEachSeries(this.files, function (file, next) {
-      var runner = new Runner();
-      var files = grunt.file.expand({filter: 'isFile'}, file.src).map(function (f) {
-        return path.resolve(f);
-      });
-      runner.run(files, this.options(), next);
+      Task.runTask(grunt, task.options(), file, next);
     });
   });
+}
+
+Task.runTask = function (grunt, options, file, next) {
+  var runner = new Runner({writer: grunt.file, logger: grunt});
+  var files = grunt.file.expand({filter: 'isFile'}, file.src).map(function (f) {
+    return path.resolve(f);
+  });
+  runner.run(files, options, next);
 };
