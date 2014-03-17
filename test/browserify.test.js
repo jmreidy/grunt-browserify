@@ -42,7 +42,7 @@ describe('grunt-browserify-runner', function () {
       var b = stubBrowserify('bundle');
       var opts = {};
       var runner = createRunner(b);
-      runner.run([], dest, {browserifyBundleOptions: opts}, function () {
+      runner.run([], dest, {bundleOptions: opts}, function () {
         assert.ok(b().bundle.calledWith(opts));
         done();
       });

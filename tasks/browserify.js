@@ -13,11 +13,11 @@ var async = require('async');
 module.exports = Task;
 
 function Task (grunt) {
-  var task = this;
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
+    var task = this;
     async.forEachSeries(this.files, function (file, next) {
       Task.runTask(grunt, task.options(), file, next);
-    });
+    }, this.async());
   });
 }
 
@@ -26,5 +26,5 @@ Task.runTask = function (grunt, options, file, next) {
   var files = grunt.file.expand({filter: 'isFile'}, file.src).map(function (f) {
     return path.resolve(f);
   });
-  runner.run(files, options, next);
+  runner.run(files, file.dest, options, next);
 };
