@@ -3,6 +3,7 @@
 var Sinon = require('sinon');
 var assert = require('assert');
 var path = require('path');
+var browserify = require('browserify');
 var Runner = require('../lib/runner');
 var _ = require('lodash');
 
@@ -20,7 +21,7 @@ describe('grunt-browserify-runner', function () {
 
   it('assigns source files as bundle entries', function (done) {
     var b = spyBrowserify();
-    var files = [path.resolve('./test/browserify.test.js')];
+    var files = [path.resolve('./package.json')];
     var runner = createRunner(b);
     runner.run(files, dest, {}, function () {
       assert.ok(b.calledWith({entries: files}));
@@ -85,15 +86,12 @@ describe('grunt-browserify-runner', function () {
   });
 
   describe('when passing option of require', function () {
-    it('requires the resolved filename of each item in the array', function (done) {
+    it('requires each item in the array', function (done) {
       var b = stubBrowserify('require');
-      var requireList = ['./test/browserify.test.js'];
-      var files = _.map(requireList, function (file) {
-        return path.resolve(file);
-      });
+      var requireList = ['./package.json'];
       var runner = createRunner(b);
       runner.run([], dest, {require: requireList}, function () {
-        assert.ok(b().require.calledWith(files[0]));
+        assert.ok(b().require.calledWith(requireList[0]));
         done();
       });
     });
@@ -102,7 +100,7 @@ describe('grunt-browserify-runner', function () {
   describe('when passing option of exclude', function () {
     it('excludes the resolved filename of each item in the array', function (done) {
       var b = stubBrowserify('exclude');
-      var excludeList = ['./test/browserify.test.js'];
+      var excludeList = ['./package.json'];
       var files = _.map(excludeList, function (file) {
         return path.resolve(file);
       });
@@ -117,7 +115,7 @@ describe('grunt-browserify-runner', function () {
   describe('when passing option of ignore', function () {
     it('ignores the resolved filename of each item in the array', function (done) {
       var b = stubBrowserify('ignore');
-      var ignoreList = ['./test/browserify.test.js'];
+      var ignoreList = ['./package.json'];
       var files = _.map(ignoreList, function (file) {
         return path.resolve(file);
       });
@@ -131,7 +129,7 @@ describe('grunt-browserify-runner', function () {
 
   describe('when passing option of alias', function () {
     var b, runner;
-    var aliasList = ['./test/browserify.test.js:alias'];
+    var aliasList = ['./package.json:alias'];
     var files = _.map(aliasList, function (file) {
       return path.resolve(file.split(':')[0]);
     });
@@ -153,14 +151,13 @@ describe('grunt-browserify-runner', function () {
         assert.ok(b().require.calledWith(files[0], {expose: 'alias'}));
         done();
       });
-
     });
   });
 
   describe('when passing option of external', function () {
     it('marks each array element as external', function (done) {
       var b = stubBrowserify('external');
-      var externalList = ['./test/browserify.test.js', 'foobar'];
+      var externalList = ['./package.json', 'foobar'];
       var runner = createRunner(b);
       runner.run([], dest, {external: externalList}, function () {
         assert.ok(b().external.calledWith(externalList[0]));
@@ -173,7 +170,7 @@ describe('grunt-browserify-runner', function () {
       it('marks the aliases as external', function (done) {
         var b = stubBrowserify('external');
         var runner = createRunner(b);
-        var aliasList = ['./test/browserify.test.js:alias'];
+        var aliasList = ['./package.json:alias'];
         runner.run([], dest, {external: aliasList}, function () {
           assert.ok(b().external.calledWith('alias'));
           done();
@@ -305,13 +302,15 @@ function stubLogger() {
 }
 
 function spyBrowserify() {
-  return Sinon.spy(require('browserify'));
+  return Sinon.spy(browserify);
 }
 
 function stubBrowserify(spyMethod) {
-  var browserify = require('browserify')();
-  Sinon.spy(browserify, spyMethod);
-  return Sinon.stub().returns(browserify);
+  var b = browserify();
+  if (spyMethod) {
+    Sinon.spy(b, spyMethod);
+  }
+  return Sinon.stub().returns(b);
 }
 
 function spyWatchify() {
