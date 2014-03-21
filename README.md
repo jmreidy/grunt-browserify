@@ -239,11 +239,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v1.3.2
   - Adding `require` and global `transform` options.
 
-### v2.0.0
-- Complete rewrite
-
 ### v2.0.1
-- Inconsequential version to deal with weird NPM tag issues
+- Complete rewrite of grunt-browserify internals, and update of the API.
+(2.0.0 was mis-published to NPM and removed).
 
 
 ## License
