@@ -2,7 +2,7 @@
 [![NPM version](https://badge.fury.io/js/grunt-browserify.png)](http://badge.fury.io/js/grunt-browserify)
 # grunt-browserify
 
-Grunt task for node-browserify. Current version: [![NPM version](https://badge.fury.io/js/grunt-browserify.png)](http://badge.fury.io/js/grunt-browserify)
+Grunt task for node-browserify.
 
 ## Getting Started
 This plugin requires [Grunt](https://gruntjs.com) `~0.4.0` and Node `>=0.10.x`.
