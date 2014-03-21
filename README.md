@@ -5,7 +5,7 @@
 Grunt task for node-browserify.
 
 ## Getting Started
-This plugin requires [Grunt](https://gruntjs.com) `~0.4.0` and Node `>=0.10.x`.
+This plugin requires [Grunt](https://gruntjs.com) `~0.4.0`.
 
 Install this grunt plugin with:
 ```shell
