@@ -1,4 +1,5 @@
 [![build status](https://secure.travis-ci.org/jmreidy/grunt-browserify.png)](http://travis-ci.org/jmreidy/grunt-browserify)
+[![NPM version](https://badge.fury.io/js/grunt-browserify.png)](http://badge.fury.io/js/grunt-browserify)
 # grunt-browserify
 
 Grunt task for node-browserify. Current version: [![NPM version](https://badge.fury.io/js/grunt-browserify.png)](http://badge.fury.io/js/grunt-browserify)
@@ -240,6 +241,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v2.0.0
 - Complete rewrite
+
+### v2.0.1
+- Inconsequential version to deal with weird NPM tag issues
 
 
 ## License
