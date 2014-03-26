@@ -113,7 +113,9 @@ A hash of options that are passed to browserify during instantiation.
 
 #### bundleOptions
 Type: Object
-A hash of options that are passed to `browserify. bundle`.
+A hash of options that are passed to `browserify. bundle`. If you are interested in generating
+source maps, you can pass `debug: true` here. Other `bundleOptions` can be found on the
+[Browserify Github README](https://github.com/substack/node-browserify#bbundleopts-cb).
 
 #### watch
 Type: Boolean
