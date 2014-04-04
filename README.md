@@ -243,6 +243,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 - Complete rewrite of grunt-browserify internals, and update of the API.
 (2.0.0 was mis-published to NPM and removed).
 
+### v2.0.2
+- Remove browserify-shim dependency, since it's now an optional transform
 
 ## License
 Copyright (c) 2013-2014 Justin Reidy
