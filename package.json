@@ -30,7 +30,6 @@
     "test": "mocha -R spec --timeout 5000"
   },
   "dependencies": {
-    "browserify-shim": "~2.0.10",
     "lodash": "~2.4.1",
     "async": "~0.2.9",
     "watchify": "~0.5.0"
