@@ -248,6 +248,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v2.0.2
 - Remove browserify-shim dependency, since it's now an optional transform
 
+### v2.0.3
+- Restore keepAlive and watch support.
+
 ## License
 Copyright (c) 2013-2014 Justin Reidy
 Licensed under the MIT license.
