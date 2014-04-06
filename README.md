@@ -60,7 +60,7 @@ The following task options are supported:
 #### alias
 Type: `[String:String]`
 
-Browserify can alias files or modules to a certain name. For example, `require(‘./foo’)` can be aliased to be used as `require(‘foo’)`. Aliases should be specified as `fileName:alias`.  Filenames are parsed into their full paths with `path.resolve`.
+Browserify can alias files or modules to a certain name. For example, `require(‘./foo’)` can be aliased to be used as `require(‘foo’)`. Aliases should be specified as `fileName:alias`.  Filenames are parsed into their full paths with `path.resolve`. Module names will be required directly.
 
 #### require
 Type: `[String]`

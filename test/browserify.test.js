@@ -129,26 +129,40 @@ describe('grunt-browserify-runner', function () {
 
   describe('when passing option of alias', function () {
     var b, runner;
-    var aliasList = ['./package.json:alias'];
-    var files = _.map(aliasList, function (file) {
+    var pathAliasList = ['./package.json:alias'];
+    var files = _.map(pathAliasList, function (file) {
       return path.resolve(file.split(':')[0]);
     });
+    var moduleAliasList = ['path:pathAlias'];
+    var modules = _.map(moduleAliasList, function(module) {
+      return module.split(':')[0];
+    });
+    var aliasList = pathAliasList.concat(moduleAliasList);
+    var aliases = files.concat(modules);
 
     beforeEach(function () {
       b = stubBrowserify('require');
       runner = createRunner(b);
     });
 
-    it('requires the resolved filename of each item in the array', function (done) {
-      runner.run([], dest, {alias: aliasList}, function () {
+    it('tries the resolved filename of each item in the array', function (done) {
+      runner.run([], dest, {alias: pathAliasList}, function () {
         assert.ok(b().require.calledWith(files[0]));
+        done();
+      });
+    });
+
+    it('tries the module name of each item in the array', function (done) {
+      runner.run([], dest, {alias: moduleAliasList}, function () {
+        assert.ok(b().require.calledWith(modules[0]));
         done();
       });
     });
 
     it('specifies the provided alias for each item in the array', function (done) {
       runner.run([], dest, {alias: aliasList}, function () {
-        assert.ok(b().require.calledWith(files[0], {expose: 'alias'}));
+        assert.ok(b().require.calledWith(aliases[0], {expose: 'alias'}));
+        assert.ok(b().require.calledWith(aliases[1], {expose: 'pathAlias'}));
         done();
       });
     });

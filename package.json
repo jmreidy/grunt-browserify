@@ -39,7 +39,8 @@
     "grunt-contrib-jshint": "0.1.x",
     "grunt-contrib-clean": "~0.4.0",
     "sinon": "~1.9.0",
-    "mocha": "~1.18.0"
+    "mocha": "~1.18.0",
+    "resolve": "^0.6.2"
   },
   "peerDependencies": {
     "browserify": "< 4.0.0",
