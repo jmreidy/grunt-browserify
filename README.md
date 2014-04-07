@@ -251,6 +251,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v2.0.3
 - Restore keepAlive and watch support.
 
+### v2.0.4
+- Allow `alias` to work with modules. (via @daviwil)
+
 ## License
 Copyright (c) 2013-2014 Justin Reidy
 Licensed under the MIT license.
