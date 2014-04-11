@@ -110,6 +110,18 @@ describe('grunt-browserify-runner', function () {
         done();
       });
     });
+    it('excludes globbed file results', function (done) {
+      var b = stubBrowserify('exclude');
+      var excludeList = ['./*.json'];
+      var files = _.map(['./package.json'], function (file) {
+        return path.resolve(file);
+      });
+      var runner = createRunner(b);
+      runner.run([], dest, {exclude: excludeList}, function () {
+        assert.ok(b().exclude.calledWith(files[0]));
+        done();
+      });
+    });
   });
 
   describe('when passing option of ignore', function () {
@@ -117,6 +129,18 @@ describe('grunt-browserify-runner', function () {
       var b = stubBrowserify('ignore');
       var ignoreList = ['./package.json'];
       var files = _.map(ignoreList, function (file) {
+        return path.resolve(file);
+      });
+      var runner = createRunner(b);
+      runner.run([], dest, {ignore: ignoreList}, function () {
+        assert.ok(b().ignore.calledWith(files[0]));
+        done();
+      });
+    });
+    it('ignores globbed file results', function (done) {
+      var b = stubBrowserify('ignore');
+      var ignoreList = ['./*.json'];
+      var files = _.map(['./package.json'], function (file) {
         return path.resolve(file);
       });
       var runner = createRunner(b);
@@ -187,6 +211,19 @@ describe('grunt-browserify-runner', function () {
         var aliasList = ['./package.json:alias'];
         runner.run([], dest, {external: aliasList}, function () {
           assert.ok(b().external.calledWith('alias'));
+          done();
+        });
+      });
+    });
+
+    context('when provided with a glob', function () {
+      it('marks each glob result as external', function (done) {
+        var b = stubBrowserify('external');
+        var externalList = ['./*.json', 'foobar'];
+        var runner = createRunner(b);
+        runner.run([], dest, {external: externalList}, function () {
+          assert.ok(b().external.calledWith(path.resolve('./package.json')));
+          assert.ok(b().external.calledWith(externalList[1]));
           done();
         });
       });
