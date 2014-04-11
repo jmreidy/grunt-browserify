@@ -70,17 +70,31 @@ Specifies files to be required in the browserify bundle. String filenames are pa
 #### ignore
 Type: `[String]`
 
-Specifies files to be ignored in the browserify bundle. String filenames are parsed into their full paths with `path.resolve`.
+Specifies files to be ignored in the browserify bundle.
+String filenames are parsed into their full paths with `path.resolve`.
+Globbing patterns are supported.
 
 #### exclude
 Type: `[String]`
 
-Specifies files to be excluded in the browserify bundle. String filenames are parsed into their full paths with `path.resolve`.
+Specifies files to be excluded in the browserify bundle.
+String filenames are parsed into their full paths with `path.resolve`.
+Globbing patterns are supported.
 
 #### external
 Type: `[String]` or `[String:String]`.
 
-Specifies id strings which will be loaded from a previously loaded, “common” bundle. That is to say, files in the bundle that require the target String will assume that the target is provided externally. The secondary form of this option follows the format of `alias` above, and will externalise the ids specified in the alias array. This second form allows for the declaration of a single alias array which can be supplied to one bundle's `alias` option and another option's `external` option.
+Specifies id strings which will be loaded from a previously loaded, “common” bundle.
+That is to say, files in the bundle that require the target String will assume
+that the target is provided externally.
+
+The secondary form of this option
+follows the format of `alias` above, and will externalise the ids specified in
+the alias array. This second form allows for the declaration of a single alias
+array which can be supplied to one bundle's `alias` option and another option's
+`external` option.
+
+In either case, globbing patterns are supported.
 
 
 #### transform
@@ -256,6 +270,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v2.0.5
 - Update deps
+
+### v2.0.6
+- Add support for globbing patterns for ignore, exclude, and external
 
 ## License
 Copyright (c) 2013-2014 Justin Reidy
