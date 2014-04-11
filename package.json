@@ -31,8 +31,8 @@
   },
   "dependencies": {
     "lodash": "~2.4.1",
-    "async": "~0.2.9",
-    "watchify": "~0.5.0",
+    "async": "~0.7.0",
+    "watchify": "~0.6.4",
     "resolve": "~0.6.2"
   },
   "devDependencies": {
