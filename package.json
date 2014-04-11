@@ -33,7 +33,8 @@
     "lodash": "~2.4.1",
     "async": "~0.7.0",
     "watchify": "~0.6.4",
-    "resolve": "~0.6.2"
+    "resolve": "~0.6.2",
+    "glob": "^3.2.9"
   },
   "devDependencies": {
     "browserify": "~3.32.1",
