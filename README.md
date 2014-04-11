@@ -274,6 +274,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v2.0.6
 - Add support for globbing patterns for ignore, exclude, and external
 
+### v2.0.7
+- Allow watchify bundle updates to fail without killing grunt
+
 ## License
 Copyright (c) 2013-2014 Justin Reidy
 Licensed under the MIT license.
