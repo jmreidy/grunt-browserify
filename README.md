@@ -77,9 +77,8 @@ Globbing patterns are supported.
 #### exclude
 Type: `[String]`
 
-Specifies files to be excluded in the browserify bundle.
-String filenames are parsed into their full paths with `path.resolve`.
-Globbing patterns are supported.
+Specifies files or modules to be excluded in the browserify bundle.
+Globbing patterns are supported; globbed filenames are parsed into their full paths.
 
 #### external
 Type: `[String]` or `[String:String]`.
@@ -276,6 +275,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### v2.0.7
 - Allow watchify bundle updates to fail without killing grunt
+
+### v2.0.8
+- Exclude should only resolve filenames for glob patterns.
 
 ## License
 Copyright (c) 2013-2014 Justin Reidy

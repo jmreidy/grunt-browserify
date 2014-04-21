@@ -98,15 +98,13 @@ describe('grunt-browserify-runner', function () {
   });
 
   describe('when passing option of exclude', function () {
-    it('excludes the resolved filename of each item in the array', function (done) {
+    it('excludes each item in the array', function (done) {
       var b = stubBrowserify('exclude');
-      var excludeList = ['./package.json'];
-      var files = _.map(excludeList, function (file) {
-        return path.resolve(file);
-      });
+      var excludeList = ['./package.json', 'lodash'];
       var runner = createRunner(b);
       runner.run([], dest, {exclude: excludeList}, function () {
-        assert.ok(b().exclude.calledWith(files[0]));
+        assert.ok(b().exclude.calledWith(excludeList[0]));
+        assert.ok(b().exclude.calledWith(excludeList[1]));
         done();
       });
     });
