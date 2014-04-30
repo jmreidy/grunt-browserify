@@ -76,7 +76,8 @@ grunt.initConfig({
             src: './client/views/**/*.js', // glob for the files to remap
             expose: 'views' // this will expose `__dirname + /client/views/home.js` as `views/home.js`
           }
-       }
+        ]);
+      }
     }
     // targets here
   }
