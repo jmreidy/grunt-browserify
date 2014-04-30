@@ -62,6 +62,28 @@ Type: `[String:String]`
 
 Browserify can alias files or modules to a certain name. For example, `require(‘./foo’)` can be aliased to be used as `require(‘foo’)`. Aliases should be specified as `fileName:alias`.  Filenames are parsed into their full paths with `path.resolve`. Module names will be required directly.
 
+A note on alias mappings, which was a functionality pre 2.0 that was removed: its behavior can be reproduced with @joeybaker's [remapify plugin](https://github.com/joeybaker/remapify), as demonstrated in the code below:
+
+```js
+var remapify = require('remapify')
+
+grunt.initConfig({
+  browserify: {
+    options: {
+      preBundleCB: function (b) {
+        b.plugin(remapify, [
+          {
+            src: './client/views/**/*.js', // glob for the files to remap
+            expose: 'views' // this will expose `__dirname + /client/views/home.js` as `views/home.js`
+          }
+       }
+    }
+    // targets here
+  }
+})
+```
+
+
 #### require
 Type: `[String]`
 
