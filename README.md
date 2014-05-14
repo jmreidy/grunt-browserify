@@ -302,6 +302,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v2.0.8
 - Exclude should only resolve filenames for glob patterns.
 
+### v2.0.9
+- Update to Browserify 4.x
+
 ## License
 Copyright (c) 2013-2014 Justin Reidy
 Licensed under the MIT license.
