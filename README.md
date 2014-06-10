@@ -39,7 +39,7 @@ modules. As [Alex MacCaw writes](http://spinejs.com/docs/commonjs):
 >other words, there's no global namespace.
 
 (A note to AMD fans that the benefits above are not unique to the CJS
-style of writing JavaScript modules, but the ease-of-interoperality with
+style of writing JavaScript modules, but the ease-of-interoperability with
 Node.JS code is a plus of CJS.)
 
 As you begin to write your client-side code in small, reusable modules, you
