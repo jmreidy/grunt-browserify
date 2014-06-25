@@ -305,6 +305,11 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v2.1.0
 - Update to Browserify 4.x
 
+### v2.1.1
+- Update dependencies layout
+- Only write bundle if src exists
+- Properly append semicolons to bundle output
+
 ## License
 Copyright (c) 2013-2014 Justin Reidy
 Licensed under the MIT license.
