@@ -111,9 +111,7 @@ describe('grunt-browserify-runner', function () {
     it('excludes globbed file results', function (done) {
       var b = stubBrowserify('exclude');
       var excludeList = ['./*.json'];
-      var files = _.map(['./package.json'], function (file) {
-        return path.resolve(file);
-      });
+      var files = ['./package.json'];
       var runner = createRunner(b);
       runner.run([], dest, {exclude: excludeList}, function () {
         assert.ok(b().exclude.calledWith(files[0]));
@@ -125,22 +123,18 @@ describe('grunt-browserify-runner', function () {
   describe('when passing option of ignore', function () {
     it('ignores the resolved filename of each item in the array', function (done) {
       var b = stubBrowserify('ignore');
-      var ignoreList = ['./package.json'];
-      var files = _.map(ignoreList, function (file) {
-        return path.resolve(file);
-      });
+      var ignoreList = ['./package.json', 'os'];
       var runner = createRunner(b);
       runner.run([], dest, {ignore: ignoreList}, function () {
-        assert.ok(b().ignore.calledWith(files[0]));
+        assert.ok(b().ignore.calledWith(ignoreList[0]));
+        assert.ok(b().ignore.calledWith(ignoreList[1]));
         done();
       });
     });
     it('ignores globbed file results', function (done) {
       var b = stubBrowserify('ignore');
       var ignoreList = ['./*.json'];
-      var files = _.map(['./package.json'], function (file) {
-        return path.resolve(file);
-      });
+      var files = ['./package.json'];
       var runner = createRunner(b);
       runner.run([], dest, {ignore: ignoreList}, function () {
         assert.ok(b().ignore.calledWith(files[0]));
@@ -220,7 +214,7 @@ describe('grunt-browserify-runner', function () {
         var externalList = ['./*.json', 'foobar'];
         var runner = createRunner(b);
         runner.run([], dest, {external: externalList}, function () {
-          assert.ok(b().external.calledWith(path.resolve('./package.json')));
+          assert.ok(b().external.calledWith('./package.json'));
           assert.ok(b().external.calledWith(externalList[1]));
           done();
         });
