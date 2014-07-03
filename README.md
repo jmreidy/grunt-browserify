@@ -313,6 +313,10 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v2.1.2
 - Fix onBundleComplete regression
 
+### v2.1.3
+- Fix ignore/exclude behavior
+
+
 ## License
 Copyright (c) 2013-2014 Justin Reidy
 Licensed under the MIT license.
