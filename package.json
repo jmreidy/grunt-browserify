@@ -35,7 +35,7 @@
     "watchify": "^0.10",
     "resolve": "^0.6",
     "glob": "^3.2",
-    "browserify": "^4.1"
+    "browserify": "^4.2.1"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "0.1.x",

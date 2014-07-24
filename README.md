@@ -316,6 +316,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v2.1.3
 - Fix ignore/exclude behavior
 
+### v2.1.4
+- Update browserify to deal with security vulnerability
+
 
 ## License
 Copyright (c) 2013-2014 Justin Reidy
