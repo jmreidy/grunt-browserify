@@ -38,18 +38,6 @@ describe('grunt-browserify-runner', function () {
     });
   });
 
-  context('when bundle options are provided', function () {
-    it('passes browserifyBundleOptions to bundle', function (done) {
-      var b = stubBrowserify('bundle');
-      var opts = {};
-      var runner = createRunner(b);
-      runner.run([], dest, {bundleOptions: opts}, function () {
-        assert.ok(b().bundle.calledWith(opts));
-        done();
-      });
-    });
-  });
-
   it('writes the bundle to the provided dest', function (done) {
     var b = spyBrowserify();
     var runner = createRunner(b);
@@ -64,7 +52,7 @@ describe('grunt-browserify-runner', function () {
     var baseOpts = {watch:true};
     it('invokes watchify instead of browserify', function (done) {
       var watchify = spyWatchify();
-      var runner = createRunner(undefined, watchify);
+      var runner = createRunner(spyBrowserify(), watchify);
       runner.run([], dest, baseOpts, function () {
         assert.equal(watchify.callCount, 1);
         done();
@@ -147,7 +135,7 @@ describe('grunt-browserify-runner', function () {
     var b, runner;
     var pathAliasList = ['./package.json:alias'];
     var files = _.map(pathAliasList, function (file) {
-      return path.resolve(file.split(':')[0]);
+      return file.split(':')[0];
     });
     var moduleAliasList = ['path:pathAlias'];
     var modules = _.map(moduleAliasList, function(module) {
@@ -161,14 +149,14 @@ describe('grunt-browserify-runner', function () {
       runner = createRunner(b);
     });
 
-    it('tries the resolved filename of each item in the array', function (done) {
+    it('tries to require the filename of each item in the array', function (done) {
       runner.run([], dest, {alias: pathAliasList}, function () {
         assert.ok(b().require.calledWith(files[0]));
         done();
       });
     });
 
-    it('tries the module name of each item in the array', function (done) {
+    it('tries to require the module name of each item in the array', function (done) {
       runner.run([], dest, {alias: moduleAliasList}, function () {
         assert.ok(b().require.calledWith(modules[0]));
         done();
