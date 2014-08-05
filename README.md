@@ -314,6 +314,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v2.1.4
 - Update browserify to deal with security vulnerability
 
+### v2.2
+- Update browserify to v5 and watchify to v1
+
 
 ## License
 Copyright (c) 2013-2014 Justin Reidy
