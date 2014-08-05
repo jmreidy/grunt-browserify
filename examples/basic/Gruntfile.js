@@ -6,18 +6,14 @@ module.exports = function (grunt) {
         dest: 'public/vendor.js',
         options: {
           require: ['jquery'],
-          alias: ['./lib/moments.js:momentWrapper'],
-          bundleOptions: {
-            debug: true
-          }
-
+          alias: ['./lib/moments.js:momentWrapper']
         }
       },
       client: {
         src: ['client/**/*.js'],
         dest: 'public/app.js',
         options: {
-          external: ['jQuery', 'momentWrapper']
+          external: ['jquery', 'momentWrapper'],
         }
       }
     },
