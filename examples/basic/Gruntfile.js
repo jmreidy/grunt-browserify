@@ -6,7 +6,10 @@ module.exports = function (grunt) {
         dest: 'public/vendor.js',
         options: {
           require: ['jquery'],
-          alias: ['./lib/moments.js:momentWrapper']
+          alias: [
+            './lib/moments.js:momentWrapper', //can alias file names
+            'events:evt' //can alias modules
+          ]
         }
       },
       client: {
