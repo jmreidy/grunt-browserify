@@ -18,6 +18,12 @@ Then add this line to your project's `grunt.js` Gruntfile:
 grunt.loadNpmTasks('grunt-browserify');
 ```
 
+## 3.0 Release
+An important note for those running the latest release of grunt-browserify:
+the newest version (>3.0) incorporates breaking changes from Browserify
+which REMOVED BUNDLE OPTIONS. All options to browserify must now be passed
+in the `browserifyOptions` hash.
+
 ## In the Wild
 Most simply, Browserify is a tool for taking your CommonJS-style Javascript
 code and packaging it for use in the browser. Grunt-Browserify provides the
@@ -314,9 +320,12 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### v2.1.4
 - Update browserify to deal with security vulnerability
 
-### v2.2
+### 2.2-beta
 - Update browserify to v5 and watchify to v1
 
+### 3.0
+- Release of 2.2-beta
+- Actually moving to semver from this point forward
 
 ## License
 Copyright (c) 2013-2014 Justin Reidy
