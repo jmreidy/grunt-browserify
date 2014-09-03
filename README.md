@@ -327,6 +327,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 - Release of 2.2-beta
 - Actually moving to semver from this point forward
 
+### 3.0.1
+- Fix regression #227: keep failed process alive
+
 ## License
 Copyright (c) 2013-2014 Justin Reidy
 Licensed under the MIT license.
