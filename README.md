@@ -330,6 +330,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ### 3.0.1
 - Fix regression #227: keep failed process alive
 
+### 3.1.0
+- Update dependencies. Browserify to v6.
+
 ## License
 Copyright (c) 2013-2014 Justin Reidy
 Licensed under the MIT license.
