@@ -16,9 +16,14 @@ module.exports = Task;
 
 function Task (grunt) {
   grunt.registerMultiTask('browserify', 'Grunt task for browserify.', function () {
-    var task = this;
+
+    // set default options
+    var options = this.options({
+      banner: ''
+    });
+
     async.forEachSeries(this.files, function (file, next) {
-      Task.runTask(grunt, task.options(), file, next);
+      Task.runTask(grunt, options, file, next);
     }, this.async());
   });
 }
