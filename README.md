@@ -91,7 +91,7 @@ grunt.initConfig({
 ```
 
 #### banner
-Type: `String`  
+Type: `String`
 Default: empty string
 
 The string will be prepended to the output. Template strings (e.g. `<%= config.value %>` will be expanded automatically.
@@ -337,6 +337,11 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ### 3.1.0
 - Update dependencies. Browserify to v6.
+
+### 3.2.0
+- New: Add support for browserify entries option (@JoshuaToenyes)
+- New: Add Banner option (@tleunen)
+- Fix: Merge options.alias with options.require (@tleunen)
 
 ## License
 Copyright (c) 2013-2014 Justin Reidy
