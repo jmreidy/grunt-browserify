@@ -90,6 +90,11 @@ grunt.initConfig({
 })
 ```
 
+#### banner
+Type: `String`  
+Default: empty string
+
+The string will be prepended to the output. Template strings (e.g. `<%= config.value %>` will be expanded automatically.
 
 #### require
 Type: `[String]`
