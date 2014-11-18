@@ -67,7 +67,7 @@ describe('grunt-browserify-runner', function () {
       var bOpts = {foo: 'bar'};
       var runner = createRunner(browserify);
       runner.run([], dest, {browserifyOptions: bOpts}, function () {
-        assert.ok(browserify.calledWith(bOpts));
+        assert.ok(browserify.calledWithMatch(bOpts));
         done();
       });
     });
