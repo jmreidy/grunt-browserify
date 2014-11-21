@@ -343,6 +343,10 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 - New: Add Banner option (@tleunen)
 - Fix: Merge options.alias with options.require (@tleunen)
 
+### 3.2.1
+- Fix: Remove errant console.log (#257 via @tleunen)
+- Fix: Deep clone browserify options to prevent dupes (#261 via @wgcrouch)
+
 ## License
 Copyright (c) 2013-2014 Justin Reidy
 Licensed under the MIT license.
