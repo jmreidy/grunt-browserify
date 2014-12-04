@@ -79,7 +79,8 @@ grunt.initConfig({
       preBundleCB: function (b) {
         b.plugin(remapify, [
           {
-            src: './client/views/**/*.js', // glob for the files to remap
+            cwd: './client/views/', // set the directory to look in
+            src: '**/*.js', // glob for the files to remap
             expose: 'views' // this will expose `__dirname + /client/views/home.js` as `views/home.js`
           }
         ]);
