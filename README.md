@@ -348,6 +348,9 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 - Fix: Remove errant console.log (#257 via @tleunen)
 - Fix: Deep clone browserify options to prevent dupes (#261 via @wgcrouch)
 
+### 3.3.0
+- Update dependencies. Browserify to v8.
+
 ## License
 Copyright (c) 2013-2014 Justin Reidy
 Licensed under the MIT license.
