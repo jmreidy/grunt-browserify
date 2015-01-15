@@ -1,7 +1,7 @@
 {
   "name": "grunt-browserify",
   "description": "Grunt task for node-browserify",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "homepage": "https://github.com/jmreidy/grunt-browserify",
   "contributors": [
     {
