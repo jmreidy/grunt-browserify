@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "factor-bundle": "^2.3.3",
+    "grunt": "~0.4.1"
+  }
+}
