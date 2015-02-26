@@ -60,6 +60,20 @@ describe('grunt-browserify-runner', function () {
     });
   });
 
+  context('when passing option of watch:true with hash of watchifyOptions', function () {
+    var browserify = spyBrowserify();
+    var watchifyOpts = {chokidar: {usePolling: true}};
+    var baseOpts = {watch:true, watchifyOptions: watchifyOpts};
+    it('invokes watchify instead of browserify', function (done) {
+      var watchify = spyWatchify();
+      var runner = createRunner(browserify, watchify);
+      runner.run([], dest, baseOpts, function () {
+        assert.equal(watchify.callCount, 1);
+        assert.ok(watchify.calledWithMatch(browserify, watchifyOpts));
+        done();
+      });
+    });
+  });
 
   describe('when passing hash of browserifyOptions', function () {
     it('instantiates browserify with those options', function (done) {
