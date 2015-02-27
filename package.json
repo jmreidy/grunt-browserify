@@ -27,7 +27,7 @@
     "node": ">= 0.8.x"
   },
   "scripts": {
-    "test": "mocha -R spec --timeout 5000"
+    "test": "grunt && mocha -R spec --timeout 5000"
   },
   "dependencies": {
     "async": "^0.9.0",
@@ -38,13 +38,11 @@
     "watchify": "^2.4.0"
   },
   "devDependencies": {
+    "grunt": "^0.4.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jshint": "^0.11.0",
     "mocha": "^2.1.0",
     "sinon": "^1.12.2"
-  },
-  "peerDependencies": {
-    "grunt": "^0.4.0"
   },
   "keywords": [
     "gruntplugin",
