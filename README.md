@@ -168,6 +168,11 @@ If true, invoke [watchify](https://github.com/substack/watchify) instead of brow
 Type: Boolean
 If true and if `watch` above is true, keep the Grunt process alive (simulates grunt-watch functionality).
 
+#### watchifyOptions
+Type: Object
+A hash of options that are passed to watchify during instantiation.
+[Watchify Github README](https://github.com/substack/watchify#var-w--watchifyb-opts)
+
 #### preBundleCB
 Type: `Function (b)`
 
