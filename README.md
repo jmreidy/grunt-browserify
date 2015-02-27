@@ -175,11 +175,19 @@ Type: Object
 A hash of options that are passed to watchify during instantiation.
 [Watchify Github README](https://github.com/substack/watchify#var-w--watchifyb-opts)
 
+#### configure
+Type: `Function (b)`
+
+An optional callback function that is invoked once before the bundle runs. This can be used for programatically configuring browserify using it's API.
+`b` is the `browserify` instance for the bundle.
+
 #### preBundleCB
 Type: `Function (b)`
 
 An optional callback function, that will be called before bundle completion.
 `b` is the `browerify` instance that will output the bundle.
+
+__NB:__ This callback will be invoked every time the bundle is built so when used with the `watch` option set to true it will be called multiple times. Do not register transforms in this callback or they will end up being registered multiple times.
 
 #### postBundleCB
 Type: `Function (err, src, next)`
@@ -188,6 +196,8 @@ An optional callback function, which will be called after bundle completion and
 before writing of the bundle. The `err` and `src` arguments are provided
 directly from browserify. The `next` callback should be called with `(err,
 modifiedSrc)`; the `modifiedSrc` is what will be written to the output file.
+
+__NB:__ This callback will be invoked every time the bundle is built so when used with the `watch` option set to true it will be called multiple times.
 
 
 ## Contributing

@@ -264,6 +264,19 @@ describe('grunt-browserify-runner', function () {
     });
   });
 
+  describe('when passing option of configure', function () {
+    it('calls the provided callback before bundling', function (done) {
+      var cb = Sinon.stub();
+      var b = stubBrowserify('bundle');
+      var runner = createRunner(b);
+      runner.run([], dest, {configure: cb}, function () {
+        assert.ok(cb.calledOnce);
+        assert.ok(cb.calledBefore(b().bundle));
+        done();
+      });
+    });
+  });
+
   describe('when passing option of preBundleCB', function () {
     it('calls the provided callback before bundling', function (done) {
       var cb = Sinon.stub();
