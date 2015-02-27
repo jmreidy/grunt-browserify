@@ -97,6 +97,20 @@ describe('grunt-browserify-runner', function () {
         done();
       });
     });
+
+    context('if an options hash is provided', function () {
+      it('passes the options directly to require()', function (done) {
+        var b = stubBrowserify('require');
+        var requireList = [['./package.json', {entry: true, expose: 'expose-name'}]];
+        var runner = createRunner(b);
+        runner.run([], dest, {require: requireList}, function () {
+          var args = b().require.getCall(0).args;
+          assert.deepEqual(args, requireList[0]);
+          done();
+        });
+      });
+    });
+
   });
 
   describe('when passing option of exclude', function () {

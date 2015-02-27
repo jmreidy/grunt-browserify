@@ -98,9 +98,11 @@ Default: empty string
 The string will be prepended to the output. Template strings (e.g. `<%= config.value %>` will be expanded automatically.
 
 #### require
-Type: `[String]`
+Type: `[String]` or `[String:String]` or `[[String, Object]]`
 
-Specifies files to be required in the browserify bundle. String filenames are parsed into their full paths with `path.resolve`.
+Specifies files to be required in the browserify bundle. String filenames are parsed into their full paths with `path.resolve`. Aliases can be provided by using the `filePathString:aliasName` format.
+
+Each require can also be provided with an options hash; in this case, the require should be specified as an array of `[filePathString, optionsHash]`.
 
 #### ignore
 Type: `[String]`
