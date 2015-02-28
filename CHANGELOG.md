@@ -1,4 +1,10 @@
 
+### 3.5.0
+- New: Support for passing options to watchify (watchifyOptions) (#299 via @nfvs)
+- New: JSHint in Travis (#300 via @jonbretman)
+- New: require option can now takes options hash (#302 via @jonbretman)
+- New: configure option to be able to configure the bundle using the browserify api. (#303 via @oliverwoodings)
+
 ### 3.4.0
 - Update dependencies. Browserify to v9.
 - Fix: Update require to expose as per browserify (#292 via @justinjmoses)
