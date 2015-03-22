@@ -1,4 +1,8 @@
 
+### 3.5.1
+- Update dependencies.
+- Update watchify to fix an issue with *.json files ([watchify#160](https://github.com/substack/watchify/pull/160) with #308 (@Pleochism))
+
 ### 3.5.0
 - New: Support for passing options to watchify (watchifyOptions) (#299 via @nfvs)
 - New: JSHint in Travis (#300 via @jonbretman)
