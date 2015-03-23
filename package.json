@@ -22,9 +22,7 @@
   },
   "files": [
     "lib/",
-    "tasks/",
-    "package.json",
-    "README.md"
+    "tasks/"
   ],
   "licenses": [
     {
