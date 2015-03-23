@@ -22,7 +22,7 @@ function Task (grunt) {
       banner: ''
     });
 
-    async.forEachSeries(this.files, function (file, next) {
+    async.each(this.files, function (file, next) {
       Task.runTask(grunt, options, file, next);
     }, this.async());
   });
