@@ -159,7 +159,9 @@ Register a browserify plugin with the bundle. As with transforms, plugins are id
 
 #### browserifyOptions
 Type: Object
-A hash of options that are passed to browserify during instantiation.
+
+A hash of options that are passed to browserify during instantiation. Task-level `browserifyOptions` are not merged into target-level options.
+If a target overrides task-level `browserifyOptions`, it overrides all of it.
 [Browserify Github README](https://github.com/substack/node-browserify#var-b--browserifyfiles-or-opts)
 
 #### watch
