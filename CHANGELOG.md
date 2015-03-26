@@ -1,3 +1,7 @@
+### 3.6.0
+- New: List only the required files in package.json
+- New: Added node 0.12 for Travis.
+- Fix: Run tasks in parallel instead of in series to fix [#199](/grunt-browserify/issues/199).
 
 ### 3.5.1
 - Update dependencies.
