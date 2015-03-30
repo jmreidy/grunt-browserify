@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "dependencies": {
+    "browserify": "^9.0.3",
+    "browserify-shim": "^3.8.3"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browser": {
+    "MyAliasLib": "./lib/customLib.js"
+  },
+  "browserify-shim": {
+    "MyAliasLib": "CustomLib",
+    "./lib/anotherCustomLib.js": "AnotherCustomLib"
+  }
+}
