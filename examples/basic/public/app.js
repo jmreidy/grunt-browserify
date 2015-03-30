@@ -6,16 +6,16 @@ $().ready(function () {
   test();
 });
 
-},{"./test":2,"jquery":undefined}],2:[function(require,module,exports){
+},{"./test":2,"jquery":"jquery"}],2:[function(require,module,exports){
 var moments = require('momentWrapper');
-var evt = require('evt');
+var evt = require('events');
 
 module.exports = function () {
   console.log(evt);
   console.log(moments.createMoment());
 };
 
-},{"evt":3,"momentWrapper":undefined}],3:[function(require,module,exports){
+},{"events":3,"momentWrapper":"momentWrapper"}],3:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -75,10 +75,8 @@ EventEmitter.prototype.emit = function(type) {
       er = arguments[1];
       if (er instanceof Error) {
         throw er; // Unhandled 'error' event
-      } else {
-        throw TypeError('Uncaught, unspecified "error" event.');
       }
-      return false;
+      throw TypeError('Uncaught, unspecified "error" event.');
     }
   }
 

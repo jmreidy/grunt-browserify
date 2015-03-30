@@ -64,31 +64,30 @@ The current version of grunt-browserify sticks as close to the core browserify A
 The following task options are supported:
 
 #### alias
-Type: `[String:String]`
+Type: `Object{alias:path}`
 
-Browserify can alias files or modules to a certain name. For example, `require(‘./foo’)` can be aliased to be used as `require(‘foo’)`. Aliases should be specified as `fileName:alias`.  Filenames are parsed into their full paths with `path.resolve`. Module names will be required directly.
+Browserify can alias files or modules to a certain name. For example, `require('./foo')` can be aliased to be used as `require('foo')`.
+```js
+options: {
+  alias: {
+    'foo': './foo.js'
+  }
+}
+```
 
-A note on alias mappings, which was a functionality pre 2.0 that was removed: its behavior can be reproduced with @joeybaker's [remapify plugin](https://github.com/joeybaker/remapify), as demonstrated in the code below:
+If you need alias mappings, you can use @joeybaker's [remapify plugin](https://github.com/joeybaker/remapify), as demonstrated in the code below:
 
 ```js
-var remapify = require('remapify')
-
-grunt.initConfig({
-  browserify: {
-    options: {
-      preBundleCB: function (b) {
-        b.plugin(remapify, [
-          {
-            cwd: './client/views/', // set the directory to look in
-            src: '**/*.js', // glob for the files to remap
-            expose: 'views' // this will expose `__dirname + /client/views/home.js` as `views/home.js`
-          }
-        ]);
-      }
+options: {
+  plugin: [
+  ['remapify', [
+    {
+      src: './client/views/**/*.js',  // glob for the files to remap
+      expose: 'views', // this will expose `__dirname + /client/views/home.js` as `views/home.js`
+      cwd: __dirname  // defaults to process.cwd()
     }
-    // targets here
-  }
-})
+  ]
+}
 ```
 
 #### banner
@@ -118,7 +117,7 @@ Specifies files or modules to be excluded in the browserify bundle.
 Globbing patterns are supported; globbed filenames are parsed into their full paths.
 
 #### external
-Type: `[String]` or `[String:String]`.
+Type: `[String]` or `Object{alias:path}`.
 
 Specifies id strings which will be loaded from a previously loaded, “common” bundle.
 That is to say, files in the bundle that require the target String will assume
@@ -126,8 +125,8 @@ that the target is provided externally.
 
 The secondary form of this option
 follows the format of `alias` above, and will externalise the ids specified in
-the alias array. This second form allows for the declaration of a single alias
-array which can be supplied to one bundle's `alias` option and another option's
+the alias object. This second form allows for the declaration of a single alias
+object which can be supplied to one bundle's `alias` option and another option's
 `external` option.
 
 In either case, globbing patterns are supported.

@@ -1,5 +1,5 @@
 var moments = require('momentWrapper');
-var evt = require('evt');
+var evt = require('events');
 
 module.exports = function () {
   console.log(evt);
