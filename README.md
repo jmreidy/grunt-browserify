@@ -153,6 +153,8 @@ browserify: {
 
 Transforms can also be provided with an options hash; in this case, the transform should be specified as an array of `[transformStringOrFn, optionsHash]`.
 
+Note for [browserify-shim](https://github.com/thlorenz/browserify-shim), the configuration of this transformation has to be inside `package.json`. Please see documentation of `browserify-shim` and [our example](/examples/browserify-shim).
+
 #### plugin
 Type: `[String || Function]`
 Register a browserify plugin with the bundle. As with transforms, plugins are identified with either their NPM name (String) or a function literal.
