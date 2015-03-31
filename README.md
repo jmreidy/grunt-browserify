@@ -170,6 +170,8 @@ If a target overrides task-level `browserifyOptions`, it overrides all of it.
 Type: Boolean
 If true, invoke [watchify](https://github.com/substack/watchify) instead of browserify.
 
+For watchify to work properly, you have to keep the process running. The option `keepAlive` can help you do that, or you can use another `grunt-watch` task.
+
 #### keepAlive
 Type: Boolean
 If true and if `watch` above is true, keep the Grunt process alive (simulates grunt-watch functionality).
