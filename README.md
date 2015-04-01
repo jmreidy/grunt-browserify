@@ -75,6 +75,8 @@ options: {
 }
 ```
 
+The `alias` option is just a shortcut to require a file and expose a different name for it. You could do exactly the same thing using `require` instead of `alias`. It's equivalent to `require: [ ['./foo.js', {expose: 'foo'} ] ]`
+
 If you need alias mappings, you can use @joeybaker's [remapify plugin](https://github.com/joeybaker/remapify), as demonstrated in the code below:
 
 ```js
