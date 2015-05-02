@@ -172,6 +172,11 @@ describe('grunt-browserify-runner', function () {
     var aliasList = pathAliasList.concat(moduleAliasList);
     var aliases = files.concat(modules);
 
+    var aliasObj = {
+      'alias': './package.json',
+      'pathAlias': 'path'
+    };
+
     beforeEach(function () {
       b = stubBrowserify('require');
       runner = createRunner(b);
@@ -195,6 +200,15 @@ describe('grunt-browserify-runner', function () {
       runner.run([], dest, {alias: aliasList}, function () {
         assert.ok(b().require.calledWith(aliases[0], {expose: 'alias'}));
         assert.ok(b().require.calledWith(aliases[1], {expose: 'pathAlias'}));
+        done();
+      });
+    });
+
+    it('specifies the provided alias for each item in the object', function (done) {
+      console.log(Object.keys(aliasObj));
+      runner.run([], dest, {alias: aliasObj}, function () {
+        assert.ok(b().require.calledWith(aliasObj['alias'], {expose: 'alias'}));
+        assert.ok(b().require.calledWith(aliasObj['pathAlias'], {expose: 'pathAlias'}));
         done();
       });
     });
