@@ -1,3 +1,13 @@
+### 3.8.0
+- Update dependencies. Browserify 10.0
+- New: Users can specify the alias with {alias: path} [#316](/grunt-browserify/316)
+
+### 3.7.0
+- Update dependencies.
+- Update to Watchify 3.0 (#314 via @jonbretman)
+- New: browserify-shim example
+- Fix: [#289](/grunt-browserify/issues/289) with #317 by adding more details in readme for watchify.
+
 ### 3.6.0
 - New: List only the required files in package.json
 - New: Added node 0.12 for Travis.
