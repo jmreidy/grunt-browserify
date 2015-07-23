@@ -82,12 +82,14 @@ If you need alias mappings, you can use @joeybaker's [remapify plugin](https://g
 ```js
 options: {
   plugin: [
-  ['remapify', [
-    {
-      src: './client/views/**/*.js',  // glob for the files to remap
-      expose: 'views', // this will expose `__dirname + /client/views/home.js` as `views/home.js`
-      cwd: __dirname  // defaults to process.cwd()
-    }
+    [
+      'remapify', [{
+          src: './client/views/**/*.js',  // glob for the files to remap
+          expose: 'views', // this will expose `__dirname + /client/views/home.js` as `views/home.js`
+          cwd: __dirname  // defaults to process.cwd()
+        }
+      ]
+    ]
   ]
 }
 ```
