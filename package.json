@@ -39,11 +39,11 @@
   },
   "dependencies": {
     "async": "^0.9.0",
-    "browserify": "^10.0.0",
+    "browserify": "^11.0.1",
     "glob": "^5.0.5",
     "lodash": "^3.8.0",
     "resolve": "^1.1.6",
-    "watchify": "^3.2.2"
+    "watchify": "^3.3.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
