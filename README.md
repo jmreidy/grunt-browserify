@@ -145,7 +145,7 @@ Specifies a pipeline of functions (or modules) through which the browserified bu
 browserify: {
   dist: {
     files: {
-      'build/module.js': ['client/scripts/**/*.js', 'client/scripts/**/*.coffee'],
+      'build/module.js': ['client/scripts/**/*.js', 'client/scripts/**/*.coffee']
     },
     options: {
       transform: ['coffeeify']
