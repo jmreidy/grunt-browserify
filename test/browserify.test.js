@@ -1,5 +1,4 @@
 /* global beforeEach, describe, context, it */
-'use strict';
 var Sinon = require('sinon');
 var assert = require('assert');
 var path = require('path');

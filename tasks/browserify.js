@@ -5,7 +5,6 @@
 * Copyright (c) 2013 Justin Reidy
 * Licensed under the MIT license.
 */
-'use strict';
 var Runner = require('../lib/runner');
 var path = require('path');
 var async = require('async');
