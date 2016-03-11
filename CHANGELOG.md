@@ -1,6 +1,11 @@
+### 5.0.0
+- Update dependencies. Browserify 13.0
+- Fix Watchify on MacOS [#358](/grunt-browserify/issues/358)
+- BC: the order of transform arguments is now consistent with the browserify API [#319](/grunt-browserify/issues/319)
+
 ### 3.8.0
 - Update dependencies. Browserify 10.0
-- New: Users can specify the alias with {alias: path} [#316](/grunt-browserify/316)
+- New: Users can specify the alias with {alias: path} [#316](/grunt-browserify/issues/316)
 
 ### 3.7.0
 - Update dependencies.
