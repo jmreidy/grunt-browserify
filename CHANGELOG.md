@@ -1,22 +1,22 @@
 ### 5.0.0
 - Update dependencies. Browserify 13.0
-- Fix Watchify on MacOS [#358](/grunt-browserify/issues/358)
-- BC: the order of transform arguments is now consistent with the browserify API [#319](/grunt-browserify/issues/319)
+- Fix Watchify on MacOS [#358](https://github.com/jmreidy/grunt-browserify/issues/358)
+- BC: the order of transform arguments is now consistent with the browserify API [#319](https://github.com/jmreidy/grunt-browserify/issues/319)
 
 ### 3.8.0
 - Update dependencies. Browserify 10.0
-- New: Users can specify the alias with {alias: path} [#316](/grunt-browserify/issues/316)
+- New: Users can specify the alias with {alias: path} [#316](https://github.com/jmreidy/grunt-browserify/issues/316)
 
 ### 3.7.0
 - Update dependencies.
 - Update to Watchify 3.0 (#314 via @jonbretman)
 - New: browserify-shim example
-- Fix: [#289](/grunt-browserify/issues/289) with #317 by adding more details in readme for watchify.
+- Fix: [#289](https://github.com/jmreidy/grunt-browserify/issues/289) with #317 by adding more details in readme for watchify.
 
 ### 3.6.0
 - New: List only the required files in package.json
 - New: Added node 0.12 for Travis.
-- Fix: Run tasks in parallel instead of in series to fix [#199](/grunt-browserify/issues/199).
+- Fix: Run tasks in parallel instead of in series to fix [#199](https://github.com/jmreidy/grunt-browserify/issues/199).
 
 ### 3.5.1
 - Update dependencies.
