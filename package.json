@@ -35,7 +35,7 @@
     "node": ">= 0.8.x"
   },
   "scripts": {
-    "test": "grunt && mocha -R spec --timeout 5000"
+    "test": "mocha -R spec --timeout 5000"
   },
   "dependencies": {
     "async": "^1.5.0",
@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "grunt": "^0.4.5",
+	"grunt-cli": "^0.1.13",
     "grunt-contrib-clean": "^0.7.0",
     "grunt-contrib-jshint": "^0.11.3",
     "mocha": "^2.3.4",
