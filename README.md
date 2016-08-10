@@ -4,8 +4,6 @@
 
 Grunt task for node-browserify.
 
-**grunt-browserify is looking for a new maintainer. If you are interested in taking over, please message [jmreidy](https://github.com/jmreidy) or [tleunen](https://github.com/tleunen). Thanks!**
-
 ## Getting Started
 This plugin requires [Grunt](https://gruntjs.com) `~0.4.0`.
 
