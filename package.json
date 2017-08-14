@@ -1,7 +1,7 @@
 {
   "name": "grunt-browserify",
   "description": "Grunt task for node-browserify",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "homepage": "https://github.com/jmreidy/grunt-browserify",
   "contributors": [
     {
@@ -24,12 +24,7 @@
     "lib/",
     "tasks/"
   ],
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/jmreidy/grunt-browserify/blob/master/LICENSE-MIT"
-    }
-  ],
+  "license": "MIT",
   "main": "tasks/browserify.js",
   "engines": {
     "node": ">= 0.8.x"
@@ -39,7 +34,8 @@
   },
   "dependencies": {
     "async": "^2.5.0",
-    "browserify": "^14.1.0",
+    "browserify": "^14.4.0",
+    "browserify-incremental": "^3.1.1",
     "glob": "^7.1.2",
     "lodash": "^4.17.4",
     "resolve": "^1.1.6",

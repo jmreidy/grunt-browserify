@@ -175,6 +175,14 @@ If true, invoke [watchify](https://github.com/substack/watchify) instead of brow
 
 For watchify to work properly, you have to keep the process running. The option `keepAlive` can help you do that, or you can use another `grunt-watch` task.
 
+#### cacheFile
+
+Type: String
+
+Set to location of [browserify-incremental](https://github.com/jsdf/browserify-incremental) cache file and enable incremental builds via `browserify-incremental`. Mutually exclusive with `watchify`.
+
+Note that unlike `watchify`, this setting is fully compatible with `grunt-contrib-watch` and should be used together with it.
+
 #### keepAlive
 Type: Boolean
 If true and if `watch` above is true, keep the Grunt process alive (simulates grunt-watch functionality).
