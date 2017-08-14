@@ -217,5 +217,5 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 See the [CHANGELOG](https://github.com/jmreidy/grunt-browserify/blob/master/CHANGELOG.md).
 
 ## License
-Copyright (c) 2013-2015 `grunt-browserify` contributors
+Copyright (c) 2013-2017 `grunt-browserify` contributors
 Licensed under the MIT license.
