@@ -1,3 +1,6 @@
+### 5.1.0
+- Update dependencies. Browserify 14.0
+
 ### 5.0.0
 - Update dependencies. Browserify 13.0
 - Fix Watchify on MacOS [#358](https://github.com/jmreidy/grunt-browserify/issues/358)
