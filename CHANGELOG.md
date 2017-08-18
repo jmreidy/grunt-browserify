@@ -1,6 +1,6 @@
 ### 5.2.0
 - New: Added `cacheFile` option for [browserify-incremental](https://github.com/jsdf/browserify-incremental) support
-- Update dependencies and added package-lock.json (for npm 5+)
+- Update dependencie.
 
 ### 5.1.0
 - Update dependencies. Browserify 14.0
