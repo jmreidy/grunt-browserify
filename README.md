@@ -161,6 +161,18 @@ Note for [browserify-shim](https://github.com/thlorenz/browserify-shim), the con
 #### plugin
 Type: `[String || Function]`
 Register a browserify plugin with the bundle. As with transforms, plugins are identified with either their NPM name (String) or a function literal.
+```javascript
+browserify: {
+  dev: {
+    options: {
+      plugin: [
+        'coffeeify', // register plugin by name
+        ['browserify-hmr', { noServe : true }] // register plugin with name and options
+      ]
+    }
+  }
+}
+```
 
 #### browserifyOptions
 Type: Object
