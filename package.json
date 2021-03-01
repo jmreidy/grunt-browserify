@@ -1,7 +1,7 @@
 {
   "name": "grunt-browserify",
   "description": "Grunt task for node-browserify",
-  "version": "5.3.0",
+  "version": "6.0.0",
   "homepage": "https://github.com/jmreidy/grunt-browserify",
   "contributors": [
     {
@@ -27,14 +27,14 @@
   "license": "MIT",
   "main": "tasks/browserify.js",
   "engines": {
-    "node": ">= 0.8.x"
+    "node": ">= 8.10.x"
   },
   "scripts": {
     "test": "mocha -R spec --timeout 5000"
   },
   "dependencies": {
     "async": "^2.5.0",
-    "browserify": "^16.0.0",
+    "browserify": "^17.0.0",
     "browserify-incremental": "^3.1.1",
     "glob": "^7.1.2",
     "lodash": "^4.17.4",

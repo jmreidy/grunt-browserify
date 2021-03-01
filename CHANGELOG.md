@@ -1,3 +1,11 @@
+### 6.0.0
+- Update watchify to 4.0.0
+- Update browserify to 17.0.0
+- Bump minimum node version to 8.10 to keep up with with watchify and chokidar
+
+### 5.3.0
+- Update browserify to 16.0.0
+
 ### 5.2.0
 - New: Added `cacheFile` option for [browserify-incremental](https://github.com/jsdf/browserify-incremental) support
   (contributed by Greg Slepak)
